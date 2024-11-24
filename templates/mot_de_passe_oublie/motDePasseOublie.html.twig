@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié site de rencontre sérieux des célibataires - Futulove{% endblock %}
+
+{% block body %}
+<body style="background-color: #161a2d;">
+    <!-- login section start -->
+    <section class="mt-5 pt-5 login_section mb-3">
+        <div class="container">
+            <div class="main_heading text-center mt-3 mb-3">
+                <h3 class="text-white">{% trans %}Mot de passe oublié{% endtrans %}</h3>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-10">
+                    <div class="login_box">
+                        <div id="route" data-path="{{ path ('compte_actif')}}">
+                            <div class="form-group" id="test" style="display:none;">
+                                <h3 style="color:black;">{% trans %}Activez votre compte !{% endtrans %}</h3>
+                            </div>
+                        </div>
+                        <form class="account-form" method="post" action="{{ path('envoi_email') }}">
+                            <div class="mb-2">
+                                <label for="Email">Envoyez-nous votre email <span>*</span></label>
+                                <input type="email" class="form-control" name="email" placeholder="mail@website.com" required>
+                            </div>
+                            
+                            <button class="border-0 w-100 login_btn mt-2"> {% trans %}Envoyer{% endtrans %} <i class="fa-solid fa-paper-plane me-2"></i></button>
+                        </form>
+                        <div class="no-account text-center mt-3">{% trans %}Vous avez déjà un compte ?{% endtrans %} 
+                            <a class="tf-color" href="{{ path('login') }}">{% trans %}Connectez-vous{% endtrans %}</a>
+                        </div>
+                        <div class="no-account text-center">{% trans %}Vous n'avez pas de compte ?{% endtrans %} 
+                            <a class="tf-color" href="{{ path('register') }}">{% trans %}Créer un compte{% endtrans %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- login section end -->
+{% endblock %}

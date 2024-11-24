@@ -1,0 +1,84 @@
+ <!-- ***** Header Area Start ***** -->
+  <header class="header-area">
+    <!-- Main Header Start -->
+    <div class="main-header-area">
+        <div class="classy-nav-container breakpoint-off">
+            <!-- Classy Menu -->
+            <nav class="classy-navbar justify-content-between" id="webNav">
+
+            <!-- Background Curve -->
+            <div class="bg-curve" style="background-image: url({{ asset ('assets/img/core-img/curve.png')}});"></div>
+
+            <!-- Logo -->
+            <a class="nav-brand" href="{{ path('accueil') }}"><img src="{{ asset ('assets/img/logo/logo.png')}}" alt="futulove"></a>
+
+            <!-- Navbar Toggler -->
+            <div class="classy-navbar-toggler">
+                <span class="navbarToggler"><span></span><span></span><span></span></span>
+            </div>
+
+            <!-- Menu -->
+            <div class="classy-menu">
+                <!-- Menu Close Button -->
+                <div class="classycloseIcon">
+                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                </div>
+
+                <!-- Nav Start -->
+                <div class="classynav">
+                <ul id="nav">
+                    <li><a href="{{ path('accueil') }}">{% trans %}Accueil{% endtrans %}</a></li>
+                    <li><a href="{{ path('liste_membres') }}">{% trans %}Membres{% endtrans %}</a></li>
+                    <li><a href="{{ path('nos_formules') }}">{% trans %}Nos formules{% endtrans %}</a></li>
+                    <li><a href="#">{% trans %}Profil{% endtrans %}</a>
+                    <ul class="dropdown">
+                        {% if app.user %}
+                            <li><a href="{{ path('afficher_profil') }}" class="signup"><i class="icofont-users"></i> <span>{% trans %}Mon profil{% endtrans %}</span> </a></li>
+                            <li><a href="{{ path('app_logout', {'id': app.user.id }) }}" class="login"><i class="icofont-user"></i> <span>{% trans %}Déconnexion{% endtrans %}</span> </a></li>
+                            
+                            {% else %}
+
+                            <li><a href="{{ path('login') }}" class="login"><i class="icofont-user"></i> <span>{% trans %}Connexion{% endtrans %}</span> </a></li>
+                            <li><a href="{{ path('register') }}" class="signup"><i class="icofont-users"></i> <span>{% trans %}Créer un compte{% endtrans %}</span> </a></li>
+                        {% endif %}
+                    </ul>
+                    </li>
+                    <li><a href="{{ path('chat_emoji') }}">Chat</a></li>
+
+                    <li><a href="{{ path('contact') }}">Contact</a></li>
+                </ul>
+
+                <!-- Search Icon -->
+                <div class="search-icon" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="icon_search"></i>
+                </div>
+                </div>
+                <!-- Nav End -->
+
+            </div>
+            </nav>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Top Search Area Start ***** -->
+  <div class="top-search-area">
+    <!-- Search Modal -->
+    <div  class="modal fade" id="exampleModal" tabindex="-1"  aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <!-- Close Button -->
+            <button type="button" class="btn close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+            <!-- Form -->
+            <form action="{{ path('accueil') }}" method="post">
+              <input type="search" name="top-search-bar" class="form-control" placeholder="Search and hit enter...">
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Top Search Area End ***** -->

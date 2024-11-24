@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des invitations site de rencontre sérieux des célibataires - Futulove{% endblock %}
+
+{% block body %}
+       <!-- ==========Page Header Section Start Here========== -->
+    <section class="page-header-section style-1" style="background:url({{ asset ('build/assets/images/page-header.jpg')}}">
+        <div class="container">
+            <div class="page-header-content">
+                <div class="page-header-inner">
+                    <div class="page-title">
+                        <h2>Liste des invitations</h2>
+                        {# <img src="{{ asset ('build/assets/images/2.gif')}}" alt="futulove"> #}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Page Header Section Ends Here========== -->
+
+
+    <!-- ==========Member page Section Start Here========== -->
+    <section class="member-page-section">
+        <div class="container">
+            
+            <div class="member-wrapper">
+                <ul class="member-info mb-4">
+                    <li class="all-member">
+                        <p>All Members </p>
+                        <p>20 365 587</p>
+                    </li>
+                    <li class="member-cat">
+                        <div class="custom-select right w-100">
+                            <select name="member" id="member-cat" class="">
+                                <option value="0">Newest Registerd</option>
+                                <option value="1">Oldest</option>
+                                <option value="2">Popular</option>
+                                <option value="3">Most Active</option>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+                <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center">
+                    {% for membre in membres %}
+                        <div class="col">
+                            <div class="lab-item member-item style-1 style-2">
+                                <div class="lab-inner">
+                                    <div class="lab-thumb">
+                                        <img src="{{ membre.photoProfile ? asset('images/photoProfils/' ~ membre.photoProfile) : asset('build/assetsAzea/images/users/8.jpg')}}" alt="member-img">
+                                    </div>
+                                    <div class="lab-content">
+                                        <h6><a href="{{path('afficher_profil', {'id': membre.id})}}">{{membre.nom}}</a></h6>
+                                        <p>En ligne il y a 1 jour</p>
+                                        <a href="#">
+                                            <span class="badge bg-success mt-2"><i class="icofont-check"></i>Accepter</span>
+                                        </a>
+                                        <a href="#">
+                                            <span class="badge bg-secondary mt-2"> <i class="icofont-close"></i>Refuser</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    
+                    
+                </div>
+                <div class="paginations">
+                    <ul class="lab-ul d-flex flex-wrap justify-content-center mb-1">
+                        <li>
+                            <a href="#"><i class="icofont-rounded-double-left"></i></a>
+                        </li>
+                        <li>
+                            <a href="#">1</a>
+                        </li>
+                        <li class="d-none d-sm-block">
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">...</a>
+                        </li>
+                        <li class="d-none d-sm-block">
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="icofont-rounded-double-right"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Member page Section Ends Here========== -->
+
+{% endblock %}

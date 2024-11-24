@@ -1,0 +1,13 @@
+{% macro comment_form(action_url, commentaire_id, commentaire_temoignage_id) %}
+    <form action="{{ action_url }}" method="post">
+        <div class="mb-3">
+            {# <label class="form-label">{% trans %}Votre commentaire{% endtrans %}</label> #}
+            <input type="hidden" name="parent" value="{{ commentaire_id }}">
+            <textarea class="form-control" id="commentContent-{{ commentaire_id }}" name="commentaire" rows="3" placeholder="{% trans %}Votre commentaire{% endtrans %}" required></textarea>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-danger" data-bs-dismiss="modal" type="button"><i class="fa-solid fa-close me-2"></i>{% trans %}Annuler{% endtrans %}</button>
+            <button type="submit" name="envoyer" class="btn btn-primary"> <i class="fa-solid fa-paper-plane me-2"></i>{% trans %}Envoyer{% endtrans %}</button>
+        </div>
+    </form>
+{% endmacro %}

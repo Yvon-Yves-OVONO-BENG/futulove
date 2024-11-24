@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+
+        <meta charset="UTF-8">
+        <meta name="description" content="Votre site de rencontres">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+			{% block title %}Bienvenue
+			{% endblock %}
+		</title>
+        <!-- x-icon -->
+        <link rel="shortcut icon" href="{{ asset ('assets/img/logo/favicon.ico')}}" type="image/x-icon">
+
+        <!-- Core Stylesheet -->
+        <link rel="stylesheet" href="{{ asset ('assets/style.css')}}">
+
+        
+    </head>
+
+	<body>
+		{# On recupère la session #}
+		{% set mySession = app.session.get('mySession') %}
+		
+        <!-- Preloader -->
+        {# <div id="preloader">
+            <div class="wrapper">
+            <div class="cssload-loader"></div>
+            </div>
+        </div> #}
+
+         <!--cursor Start -->
+        <div class="cursor">
+            <div class="cursor__inner cursor__inner--circle"></div>
+            <div class="cursor__inner cursor__inner--dot"></div>
+        </div>
+        
+        <!--go-top button Start -->
+        <div class="go-top">
+            <i class="fa-solid fa-chevron-up"></i>
+            <i class="fa-solid fa-chevron-up"></i>
+        </div>
+
+
+        <!-- ==========Header Section Starts Here========== -->
+        {% include "includes/_menu.html.twig" %}
+        <!-- ==========Header Section Ends Here========== -->
+                        
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {# {{ encore_entry_link_tags('app') }} #}
+        {% endblock %}
+
+        {% block javascripts %}
+            {# {{ encore_entry_script_tags('app') }} #}
+        {% endblock %}
+
+        {% block body %}{% endblock %}
+        
+        <!-- ================ footer Section start Here =============== -->
+        {% include "includes/_footer.html.twig" %}
+        <!-- ================ footer Section end Here =============== -->
+
+        <!-- ******* All JS ******* -->
+        <!-- jQuery js -->
+        <script src="{{ asset ('assets/js/jquery.min.js') }}"></script>
+        <!-- Popper js -->
+        <script src="{{ asset ('assets/js/popper.min.js') }}"></script>
+        <!-- font-awesome -->
+        <script src="{{ asset ('assets/fonts/font-awesome.js') }}"></script>
+        <!-- Bootstrap js -->
+        <script src="{{ asset ('assets/js/bootstrap.min.js') }}"></script>
+        <!-- All js -->
+        <script src="{{ asset ('assets/js/main.bundle.js') }}"></script>
+        <!-- Active js -->
+        <script src="{{ asset ('assets/js/default-assets/active.js') }}"></script>
+
+        
+        <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+        <script src="{{ asset ('js/axios.min.js') }}"></script> 
+        <script src="{{ asset ('js/demandeAmitie.js') }}"></script> 
+        <script src="{{ asset ('js/favori.js') }}"></script>
+        <script src="{{ asset ('js/accepterAmitie.js') }}"></script>
+        <script src="{{ asset ('js/refuserAmitie.js') }}"></script>
+
+        
+	</body>
+</html>

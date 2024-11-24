@@ -1,19 +1,139 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="fr">
+	<head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <meta name="description" content="Trouvez votre moitié - Futulove Dating">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="rencontre, amour, célibataire, relation sérieuse, relation amoureuse ,flirt, partenaire,amitié, âme sœur, dating, inscription, profil, mariage, couple, engagement, affinité, site de rencontre, dating, love, single, serious relationship, Relationship, flirt, partner, friendship, soulmate, match, sign up, profile, marriage, couple, commitment, compatibility, Dating, Dating site, Liebe, Single, ernste Beziehung, Liebestzienhung, Flirt, Partner, Freundschaft, Seelenverwandter, Übereinstimmung, Anmeldung, Profil, Heirat, Paar, Engagement, Kompatibilität, citas, amor, soltero, relación seria, coqueteo, pareja, amistad, alma gemela, coincidencia, registro, perfil, matrimonio, pareja, compromiso, compatibilidad, namoro, amor, solteiro, relacionamento sério, flerte, parceiro, amizade, alma gêmea, combinação, cadastro, perfil, casamento, casal, compromisso, compatibilidade, incontri, amore, single, relazione seria, flirt, partner, amicizia, anima gemella, compatibilità, iscrizione, profilo, matrimonio, coppia, impegno, affinità">
+        <meta name="robots" content="index, follow">
+    
+        <!-- Balises Open Graph pour le partage sur les réseaux sociaux -->
+        <meta property="og:title" content="https://futulove.com">
+        <meta property="og:description" content="Futulove.com est un site de rencontres en ligne qui facilite la mise en relation entre personnes cherchant des relations amoureuses ou amicales. Il propose des fonctionnalités telles que la création de profils, la messagerie privée, et des outils de recherche pour trouver des correspondances basées sur des critères spécifiques. Le site se distingue par son approche moderne de la rencontre, en mettant l'accent sur la sécurité des utilisateurs et une expérience utilisateur conviviale.">
+        <meta property="og:image" content="{{ asset ('assets/images/home/favicon.png')}}, l'image d'aperçu sur facebook">
+        <meta property="og:url" content="https://www.futulove.com/la-page-préférée-à-référencer">
+        <meta property="og:type" content="website">
+
+        <!-- Balises Twitter Cards -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="https://futulove.com">
+        <meta name="twitter:description" content="Futulove.com est un site de rencontres en ligne qui facilite la mise en relation entre personnes cherchant des relations amoureuses ou amicales. Il propose des fonctionnalités telles que la création de profils, la messagerie privée, et des outils de recherche pour trouver des correspondances basées sur des critères spécifiques. Le site se distingue par son approche moderne de la rencontre, en mettant l'accent sur la sécurité des utilisateurs et une expérience utilisateur conviviale.">
+        <meta name="twitter:image" content="{{ asset ('assets/images/home/favicon.png')}}, l'image d'aperçu sur twitter">
+
+        <link rel="canonical" href="https://www.futulove.com"> 
+        <title>
+			{% block title %}Bienvenue
+			{% endblock %}
+		</title>
+        <!-- x-icon -->
+        <link rel="icon" type="image/png" href="{{ asset ('assets/images/home/favicon.png')}}">
+
+        <!-- bootstrap javascript links -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+        <!-- boostrap css links -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <!-- font awesome cdn links -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+        <!-- goggle font -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kode+Mono:wght@400..700&display=swap"
+            rel="stylesheet">
+
+        <!-- swipper slider cdn links -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+        <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
+
+        <!-- All stylesheet and icons css  -->
+        <link rel="stylesheet" href="{{ asset ('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset ('assets/css/common.css') }}">
+        <link rel="stylesheet" href="{{ asset ('assets/css/responsive.css') }}">
+
+        <!-- INTERNAL Mutipleselect css-->
+		<link rel="stylesheet" href="{{ asset ('assetsAdmin/plugins/multipleselect/multiple-select.css') }}">
+
+
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                "url": "https://www.futulove.com/",
+                "logo": "https://www.futulove.com/assets/images/home/goo.png",
+                "name": "Futulove",
+                "sameAs": [
+                    "https://www.facebook.com/profile.php?id=61563773042239",
+                    "https://x.com/FUTULOVE2024"
+                ]
+            }
+        </script>
+    </head>
+
+	<body>
+		{# On recupère la session #}
+		{% set mySession = app.session.get('mySession') %}
+		
+        <!-- loader section start -->
+        <div class="preloader">
+            <div class="preloader-inner">
+                <span class="loader"></span>
+            </div>
+        </div>
+        <!-- loader section end -->
+
+        <!-- ==========Header Section Starts Here========== -->
+        {% include "includes/_menu.html.twig" %}
+        <!-- ==========Header Section Ends Here========== -->
+                        
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
+            {# {{ encore_entry_link_tags('app') }} #}
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
+            {# {{ encore_entry_script_tags('app') }} #}
         {% endblock %}
-    </head>
-    <body>
+
         {% block body %}{% endblock %}
-    </body>
+        
+        <!-- ================ footer Section start Here =============== -->
+        {% include "includes/_footer.html.twig" %}
+        <!-- ================ footer Section end Here =============== -->
+
+        {# <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+        <script src="{{ asset ('js/axios.min.js') }}"></script> 
+        <script src="{{ asset ('js/demandeAmitie.js') }}"></script> 
+        <script src="{{ asset ('js/favori.js') }}"></script>
+        <script src="{{ asset ('js/accepterAmitie.js') }}"></script>
+        <script src="{{ asset ('js/refuserAmitie.js') }}"></script> #}
+
+        
+        <!-- Show Password -->
+        <script src="{{ asset ('js/bootstrap-show-password.min.js') }}"></script>
+        <script src="{{ asset ('js/verificationPassword.js') }}"></script>
+        <script src="{{ asset ('js/modificationCommentaire.js') }}"></script>
+            
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="{{ asset ('assets/js/script.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
+
+        <script src="{{ asset ('js/compte.js')}}"></script>
+        <script src="{{ asset ('js/remplissageProfil.js')}}"></script>
+        <script src="{{ asset ('js/afficheLangueSelectionneesDansLeChamps.js')}}"></script>
+        <script src="{{ asset ('js/suppressionLangueParlee.js')}}"></script>
+
+        <!-- INTERNAL Multipleselect js -->
+		<script src="{{ asset ('assetsAdmin/plugins/multipleselect/multiple-select.js')}}"></script>
+		<script src="{{ asset ('assetsAdmin/plugins/multipleselect/multi-select.js')}}"></script>
+
+		<!--INTERNAL multi js-->
+		<script src="{{ asset ('assetsAdmin/plugins/multi/multi.min.js')}}"></script>
+        
+        <!--Age sup js-->
+        <script src="{{ asset ('js/agesup.js')}}"></script>
+	</body>
 </html>

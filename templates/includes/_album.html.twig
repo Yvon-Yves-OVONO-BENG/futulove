@@ -1,0 +1,42 @@
+<div class="widget_side mt-3 widget_category">
+    <div class="widget_header">
+        <h6 style="display: flex !important;">
+            
+                <div class="col-10">
+                    <a href="javascript:void(0);" style="color: #FF1182 !important;">
+                        {% if app.user.id == profil.id %}
+                            {% trans %} Mes albums{% endtrans %}
+                            {% else %}
+                            {% trans %} Ses albums{% endtrans %}
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="col-2">
+                    {% if app.user.id == profil.id %}
+                        <a href="{{ path ('ajouter_album') }}" class="btn btn-primary btn-sm">
+                            <i class="fa fa-plus"></i> 
+                        </a>
+                    {% endif %}
+                </div>
+            
+        </h6>
+    </div>
+    <ul class="list-unstyled p-0 m-0">
+        {% if ((amitie is not null) and amitie.statut == 2) or (app.user.id == profil.id) %}
+            {% set albums = profil.albums|filter(album => album.supprime == 0) %}
+            {% for album in albums %}
+                <li>
+                    <a href="{{ path ('afficher_album', {'slug': album.slug }) }}">
+                        <span>{{ album.titreAlbum }}</span>
+                        {% set photos = album.photoAlbums|filter(photo => photo.supprime == 0)  %}
+                        <span>{{ photos|length|number_format }}</span>
+                    </a>
+                    {% if app.user.id == profil.id %}
+                        <a href="{{ path ('supprimer_album', {'id': album.id }) }}"><i class="fa fa-trash" style="color: red !important;"></i></a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        {% endif %}
+        
+    </ul>
+</div>

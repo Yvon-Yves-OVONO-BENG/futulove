@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Nos Termes Et Conditions site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+{% block stylesheets %}
+	<style>
+		.paragraphe {
+			margin-left: 40px;
+		}
+
+		.puce {
+			margin-left: 70px;
+		}
+
+
+		p {
+			color: #000000 ;
+			text-align: justify !important;
+		}
+	</style>
+{% endblock %}
+{% block body %}
+    <!-- breadcrumb section start -->
+    <section class="breadcrumb_section">
+        <div class="container">
+            <div class="row">
+                <div class="breadcrumb_content">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="breadcrumb_heading">
+                                <h2>{% trans %}Nos Termes Et Conditions{% endtrans %}</h2>
+                                <p class="text-white mt-3">{% trans %}Votre engagement, notre transparence.{% endtrans %}</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="breadcrumb_list">
+                                <ul class="d-flex list-unstyled p-0 m-0">
+                                    <li><a href="{{ path ('accueil')}}">{% trans %}Accueil{% endtrans %}</a></li>
+                                    <li>
+                                        <div class="scrolldown-btn">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                x="0px" y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                                xml:space="preserve">
+                                                <path class="first-path" fill="#ff1182"
+                                                d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                </path>
+                                                <path class="second-path" fill="#ff1182"
+                                                d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </li>
+                                    <li>{% trans %}Nos Termes Et Conditions{% endtrans %}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb section end -->
+
+    <!-- pricing plan section start -->
+    <section class="mt-5">
+        <div class="container">
+            <div class="main_heading text-center">
+                <h2>{% trans %}Termes Et Conditions De futulove.com{% endtrans %}</h2>
+                <img src="{{ asset ('assets/images/home/heading-img.png')}}" alt="futulove">
+            </div>
+            <div class="row mt-4">
+
+                <p>{% trans %}Dernière mise à jour : 19 août 2024{% endtrans %}</p>
+                <p><b>{% trans %}1. Acceptation des Termes{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}En accédant et en utilisant le site futulove.com, vous acceptez de vous conformer aux présentes conditions d'utilisation. Si vous n'êtes pas d'accord avec ces termes, veuillez ne pas utiliser notre site.{% endtrans %}</p>
+
+                <p><b>{% trans %}2. Utilisation du Site{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}futulove.com est un site de rencontres en ligne destiné à aider les individus à se connecter les uns avec les autres. Vous acceptez d'utiliser le site de manière responsable et légale, sans intention de tromper, d'escroquer ou de nuire à d'autres utilisateurs.{% endtrans %}</p>
+
+                <p><b>{% trans %}3. Éligibilité{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}En utilisant futulove.com, vous affirmez que vous avez au moins 18 ans et que vous êtes légalement autorisé à vous engager dans un contrat en vertu de la loi applicable. Vous acceptez également de ne pas créer un compte pour toute autre personne que vous-même.{% endtrans %}</p>
+
+                <p><b>{% trans %}4. Création de Compte et Sécurité{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}Pour accéder aux fonctionnalités du site, vous devez créer un compte en fournissant des informations exactes et complètes. Vous êtes responsable de la confidentialité de vos informations de connexion et de toute activité se produisant sous votre compte. Vous acceptez de nous informer immédiatement de toute utilisation non autorisée de votre compte.{% endtrans %}</p>
+
+                <p><b>{% trans %}5. Comportement de l'Utilisateur{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}Vous acceptez de ne pas publier de contenu offensant, inapproprié ou illégal sur futulove.com. Cela inclut, mais n'est pas limité à, des messages haineux, des images explicites, du harcèlement, ou tout autre comportement nuisible. futulove.com se réserve le droit de supprimer tout contenu ou de suspendre des comptes qui enfreignent ces règles.{% endtrans %}</p>
+
+                <p><b>{% trans %}6. Confidentialité{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}futulove.com respecte votre vie privée. Vos informations personnelles seront traitées conformément à notre{% endtrans %} <a href="{{ path ('politiques_de_confidentialite')}}">[Politique de Confidentialité]</a> , {% trans %}qui fait partie intégrante de ces Termes et Conditions.{% endtrans %}</p>
+
+                <p><b>{% trans %}7. Abonnement et Paiement{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}Certains services sur futulove.com peuvent nécessiter un abonnement payant. Les détails des tarifs, ainsi que les méthodes de paiement acceptées, sont clairement indiqués sur le site. Vous acceptez de payer tous les frais associés à votre utilisation du site.{% endtrans %}</p>
+
+                <p><b>{% trans %}8. Résiliation de Compte{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}Vous pouvez résilier votre compte à tout moment en contactant le support client ou en utilisant l'option de suppression de compte disponible sur le site. futulove.com se réserve le droit de résilier ou de suspendre votre compte à sa discrétion, avec ou sans préavis, si vous enfreignez ces Termes et Conditions.{% endtrans %}</p>
+
+                <p><b>{% trans %}9. Limitation de Responsabilité{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}futulove.com ne peut être tenu responsable des actions des utilisateurs sur le site. Nous ne garantissons pas que l'utilisation de notre site sera ininterrompue ou exempte d'erreurs. En aucun cas, futulove.com ne pourra être tenu responsable de dommages directs ou indirects découlant de l'utilisation du site.{% endtrans %}</p>
+
+                <p><b>{% trans %}10. Modification des Termes{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}futulove.com se réserve le droit de modifier ces Termes et Conditions à tout moment. Les modifications seront publiées sur cette page et il est de votre responsabilité de les consulter régulièrement. En continuant à utiliser le site après la publication des modifications, vous acceptez les nouveaux termes.{% endtrans %}</p>
+
+                <p><b>{% trans %}11. Droit Applicable{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}Ces Termes et Conditions sont régis par les lois en vigueur du pays où futulove.com est enregistré. Tout litige sera soumis à la juridiction exclusive des tribunaux compétents de ce pays.{% endtrans %}</p>
+
+                <p><b>{% trans %}12. Contactez-nous{% endtrans %}</b> </p>
+                <p class="paragraphe">{% trans %}Si vous avez des questions ou des préoccupations concernant ces Termes et Conditions, veuillez nous contacter à{% endtrans %} : <a href="{{ path ('contact')}}">[Email du support]</a></p>
+
+            </div>
+        </div>
+    </section>
+    <!-- pricing plan section end -->
+{% endblock %}

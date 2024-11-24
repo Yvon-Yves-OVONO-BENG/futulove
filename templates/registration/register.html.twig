@@ -1,0 +1,182 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {% trans %}Création d'un compte site de rencontre sérieux des célibataires - Futulove{% endtrans %} {% endblock %}
+
+{% block body %}
+<body style="background-color: #161a2d;">
+
+    <!-- login section start -->
+    <section class="mt-5 pt-5 login_section mb-5">
+        <div class="container">
+            <div class="main_heading text-center mt-4 mb-3">
+                <h3 class="text-white">{% trans %}Création de compte{% endtrans %}</h3>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-8 col-lg-8 col-md-10">
+                    <div class="login_box">
+
+                        {{ form_start(registrationForm,{'attr': {'class': 'account-form'}}) }}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="nom">Nom <span>*</span></label>
+                                        {{ form_widget(registrationForm.nom) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Email">Email <span>*</span></label>
+                                        {{ form_widget(registrationForm.email) }}
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pays">Pays <span>*</span></label>
+                                        {{ form_widget(registrationForm.pays) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="sexe">Sexe <span>*</span></label>
+                                        {{ form_widget(registrationForm.sexe) }}
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="password">Password <span>*</span></label>
+                                        {{ form_row(registrationForm.password,{'attr': {'id': 'password'}}) }}
+                                        <small id="password-strength" class="text-danger"></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="confirm-password">Confirm password <span>*</span></label>
+                                        {{ form_row(registrationForm.confirmPassword,{'attr': {'id': 'confirm_password'}}) }}
+                                        <small id="password-match" class="text-danger"></small>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="d-flex justify-content-between flex-wrap pt-sm-2">
+                                    <div class="checkgroup">
+                                        <input type="checkbox" required="true" id="accapte"/>
+                                        <label for="accapte">J'accepte les <a href="{{ path ('termes_et_conditions')}}" class="font-weight-bold">  Termes & Conditions.</a></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" id="submit-btn" class="border-0 w-100 login_btn mt-4">
+                                <i class="fa-solid fa-arrow-trend-up me-2"></i>{% trans %}Je crée mon compte{% endtrans %}
+                            </button>
+                        {{ form_end(registrationForm) }}
+
+                        {# <script>
+                            document.addEvenListener('DOMContentLoaded', function() {
+                                const password = document.getElementById('registration_form_password');
+                                const confirmPassword = document.getElementById('registration_form_confirmPassword');
+                                const submitBtn = document.getElementById('submit-btn');
+                                const passwordStrength = document.getElementById('password-strength');
+                                const passwordMatch = document.getElementById('password-match');
+
+                                function checkPasswordStrength() 
+                                {
+                                    const pass = password.value;
+                                    let strength = 0;
+
+                                    if (pass.length >= 8) strength++;
+                                    if (/[A-Z]/.test(pass)) strength++;
+                                    if (/[a-z]/.test(pass)) strength++;
+                                    if (/[0-9]/.test(pass)) strength++;
+                                    if (/[\W]/.test(pass)) strength++;
+
+                                    switch (strength) 
+                                    {
+                                        case 1:
+
+                                        case 2:
+                                            passwordStrength.textContent = "Faible (utilisez plus de caractères, de majuscules et de chiffres )";
+                                            passwordStrength.classList.add("text-danger");
+                                            passwordStrength.classList.remove("text-warning", "text-success");
+                                        break
+
+                                        case 3:
+                                            passwordStrength.textContent = "Moyenne (ajouter les cactères spéciaux pour plus de sécurité)";
+                                            passwordStrength.classList.add("text-warning");
+                                            passwordStrength.classList.remove("text-danger", "text-success");
+                                        break
+
+                                        case 4:
+                                        case 5:
+                                            passwordStrength.textContent = "Forte";
+                                            passwordStrength.classList.add("text-success");
+                                            passwordStrength.classList.remove("text-danger", "text-warning");
+                                        break
+
+                                        default:
+                                            passwordStrength.textContent = "";
+                                    }
+                                }
+
+                                function validatePasswords() 
+                                {
+                                    if (password.value === confirmPassword.value && password.value !== '')
+                                    {
+                                        passwordMatch.textContent = "Les mots de passes correspondent.";
+                                        passwordMatch.classList.add("text-success");
+                                        passwordMatch.classList.remove("text-danger");
+                                        submitBtn.disabled = false;
+                                    }
+                                    else 
+                                    {
+                                        passwordMatch.textContent = "Les mots de passes ne correspondent pas.";
+                                        passwordMatch.classList.add("text-danger");
+                                        passwordMatch.classList.remove("text-success");
+                                        submitBtn.disabled = true;
+                                    }
+                                }
+
+                                password.addEvenListener('input', function() {
+                                    checkPasswordStrength();
+                                    validatePasswords();
+                                });
+
+                                confirmPassword.addEvenListener('input', validatePasswords);
+
+                            })
+                        </script> #}
+
+                        <div class="other">{% trans %}ou{% endtrans %}</div>
+                        <div class="login-other">
+                            <a class="login-other-item" href="javascript:void(0);">
+                                <img src="{{ asset ('assets/images/members/google.png')}}" alt="futulove">
+                                <span>Google</span>
+                            </a>
+                            <a class="login-other-item" href="javascript:void(0);">
+                                <img src="{{ asset ('assets/images/members/facebook.png')}}" alt="futulove">
+                                <span>Facebook</span>
+                            </a>
+                            <a class="login-other-item" href="javascript:void(0);">
+                                <img src="{{ asset ('assets/images/members/apple.png')}}" alt="futulove">
+                                <span>Apple</span>
+                            </a>
+                        </div>
+                        <div class="no-account text-center">{% trans %}Vous avez déjà un compte ?{% endtrans %} <a class="tf-color" href="{{ path ('login')}}">{% trans %}Connectez-vous{% endtrans %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- login section end -->
+      
+{% endblock %}

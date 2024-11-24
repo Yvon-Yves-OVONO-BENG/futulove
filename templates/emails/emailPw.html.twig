@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% trans %}Vérification du mail site de rencontre sérieux des célibataires - Futulove{% endtrans %}
+		</title>
+		<link rel="stylesheet" href="{{asset('build/assets/css/style.css')}}"/>
+		<link rel="stylesheet" href="{{asset('build/assets/plugins/bootstrap/css/bootstrap.min.css')}}">
+		<link rel="shortcut icon" href="{{asset('build/assets/images/brand/logo2.png')}}" type="image/x-icon">
+	</head>
+	<body>
+		
+		<header class="d-flex align-items-center">
+			<div class="container-fluid d-flex align-items-center">
+				
+			</div>
+		</header>
+		<main class="container container-sm mt-5">
+			<div class="ms-3">
+				<p class="col-md-3 offset-md-1 text-center mb-4 fs-18 fst-italic fw-semibold">
+
+				</p>	
+				<p class="ms-3 fs-16 fw-light">
+					<span class="ms-4"></span>
+					{% trans %}Afin de réinitialiser votre mot de passe sur futulove.com nous avons besoin de vérifier votre adresse email{% endtrans %}
+					<br/>
+					<span class="ms-4"></span>
+				</p>
+				{# {% set user = app.request.session.get('user') %} #}
+				{# <p class="col-md-6 offset-md-2 fs-16 fw-light fw-semibold">
+					{% trans %}veuillez cliquer sur le lien suivant :{% endtrans %}
+					<span class="fw-bold fs-18">
+						<a href="https://futulove.com/email-verifee/{{user.slug}}" class="text-dark fst-italic fw-bold">
+							{% trans %}vérifier-mon-adresse-email{% endtrans %}
+						</a>
+					</span>
+					<br>
+					
+				</p> #}
+				<p class="col-md-6 offset-md-2 fs-16 fw-light fw-semibold">
+					{% trans %}votre code de vérification est :{% endtrans %}
+					<span class="fw-bold fs-25 text-seccess">
+						{{app.request.session.get('code')}}
+					</span>
+					<br>
+					
+				</p>
+				
+				<p class="ms-3 mb-3 fs-16 fw-light">
+					<span class="ms-4"></span>
+					{% trans %}Nous vous remercions pour l'intérêt que vous portez pour notre communauté{% endtrans %}
+					<a href="" class="text-dark fst-italic fw-bold">
+						Futulove
+					</a>
+					{% trans %}et ses différents membres.{% endtrans %}
+				</p>
+				<p class="ms-3 mb-2 fs-16 fw-light">
+					<span class="ms-4"></span>
+					Cordialement,
+				</p>
+				<p class="col-md-3 offset-md-5 text-end me-4 fw-semibold">
+					Futulove
+				</p>
+			</div>
+		</main>
+	</body>
+</html>

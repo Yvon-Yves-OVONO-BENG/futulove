@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'une photo{% endblock %}
+
+{% block body %}
+
+    <!-- ==========Blog Section start Here========== -->
+    <section class="blog-section padding-tb pb-lg-110">
+        <div class="container">
+            <div class="main-blog">
+                <div class="row">
+
+
+
+                {#********************** notification *******************#}
+                        {# <div class="container my-5">
+                        <div class="row">
+
+                            <div class="col-xl-4 mb-5">
+                                {% include 'home/_card.html.twig'
+                                    with {
+                                    'header': 'Coffre-fort',
+                                    'text': 'Le coffre-fort est protégé par un mot de passe',
+                                    'buttonClass': 'safeDepositBoxBtn',
+                                    'buttonText': 'Accéder au coffre-fort'
+                                } %}
+                            </div>
+
+                            <div class="col-xl-4 mb-5">
+                                {% include 'home/_card.html.twig'
+                                    with {
+                                    'header': "S'inscrire",
+                                    'text': 'Inscription gratuite',
+                                    'buttonClass': 'registerBtn',
+                                    'buttonText': "S'inscrire"
+                                } %}
+                            </div>
+
+                            <div class="col-xl-4">
+                                {% include 'home/_card.html.twig'
+                                    with {
+                                    'header': "Changer la couleur de l'arrière-plan",
+                                    'text': "Changer la couleur de l'arrière-plan",
+                                    'buttonClass': 'changeBackgroundColorBtn',
+                                    'buttonText': "Changer la couleur"
+                                } %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {% include 'home/_bg_color_template.html.twig' %} #}
+                {# *********************fin notification*************************** #}
+    
+                    <div class="col-lg-12 col-12">
+                        <div class="blog-wrapper">
+                            <div id="respond" class="comment-respond">
+                                <div class="">
+                                    <div class="widget-title">
+                                        <h3>Ajouter une photo  <img src="{{asset('build/assets/images/x-icon.png')}}" alt="futulove"></h3>
+                                        
+                                    </div>
+                                    
+                                    {{form_start(photoForm, { attr: {'id': 'formPhoto','class': 'comment-form' } }) }}
+                                        <div class="card-body row g-4">
+                                            
+                                            {# <div class="col-md-8" id="photo" data-prototype="{{ form_row(photoFrom.photos.vars.prototype)|e('html_attr') }}"> #}
+                                            <div class="col-md-8 position-relative">
+
+                                                {{ form_row(photoForm.nomPhoto) }}
+                                                
+                                                {# <span></span> #}
+                                            </div>
+                                            <div class="col-md-4 position-relative" style="text-align: center !important; margin-top: 40px !important;">
+                                                <button class="lab-btn" type="submit"><span>Ajouter</span></button>
+                                            </div>
+                                            
+                                        </div>
+                                        
+								        
+                                     {{form_end(photoForm)}}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Blog Section ends Here========== -->
+
+    <script src="{{asset('build/js/photo.js')}}"></script>
+{% endblock %}

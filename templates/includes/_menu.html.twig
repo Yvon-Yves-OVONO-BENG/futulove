@@ -1,0 +1,132 @@
+    <!-- header section start -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light ">
+            <div class="container">
+                <a class='navbar-brand' href='{{ path ('accueil') }}'>
+                    <img src="{{ asset ('assets/images/home/logo.png') }}" alt="futulove">
+                </a>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav align-items-center">
+                        <li class="nav-item">
+                            <a class='nav-link active' href="{{ path ('accueil') }}">{% trans %}Accueil{% endtrans %}</a>
+                        </li>
+                        
+                        {# <li class="nav-item"><a class='nav-link' href="{{ path('apropos') }}">{% trans %}A propos{% endtrans %}</a></li> #}
+                        
+                        <li class="nav-item features_list">
+                            <a class='nav-link' href="javascript:void(0)">{% trans %}Communauté{% endtrans %}</a>
+                            <ul class="sub_menu">
+                                
+                                <li><a href="{{ path ('apropos') }}">A propos</a></li>
+                                <li><a href="{{ path ('communaute')}}">Groupes</a></li>
+                                <li><a href="{{ path ('nos_formules')}}">Nos formules</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li class="nav-item"><a class='nav-link' href="{{ path('liste_membres') }}">{% trans %}Membres{% endtrans %}</a></li>
+                        
+                        <li class="nav-item">
+                            <a class='nav-link' href="{{ path ('chat_emoji') }}">{% trans %}Chat{% endtrans %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class='nav-link' href="{{ path('contact') }}">Contact</a>
+                        </li>
+                        <li class="nav-item features_list">
+                            <a class='nav-link' href="javascript:void(0)">{% trans %}Compte{% endtrans %}</a>
+                            <ul class="sub_menu">
+                                {% if app.user %}
+                                    <li><a href="{{ path('mes_temoignages') }}">Mes témoignages</a></li>
+                                    <li><a href="{{ path('afficher_profil') }}">{% trans %}Mon profil{% endtrans %}</a></li>
+                                    <li><a href="{{ path('app_logout', {'id': app.user.id }) }}">{% trans %}Déconnexion{% endtrans %}</a></li>
+                                    {% else %}
+                                    <li><a href="{{ path('login') }}">{% trans %}Connexion{% endtrans %}</a></li>
+                                    <li><a href="{{ path('register') }}">{% trans %}Créer un compte{% endtrans %}</a></li>
+                                {% endif %}
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:void(0);" class="nav-link"><img src="{{ asset ('assets/images/home/telephone-call.png')}}" alt="futulove">
+                                <div>
+                                    
+                                    {% if app.user %}
+                                        <p class="mb-0 text-white">{% trans %}Vous êtes connectés sous{% endtrans %}</p>
+                                        <h6 class="mb-0">{{ app.user.email }}</h6>
+                                        {% else %}
+                                        <p class="mb-0 text-white">{% trans %}Parlons-en{% endtrans %}</p>
+                                        <h6 class="mb-0">futulove@futulove.com</h6>
+                                    {% endif %}
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- header section end -->
+
+     <!-- header sider bar start -->
+    <div id="wrapper">
+        <aside id="sidebar-wrapper">
+            <div class="sidebar-brand">
+                <a href="{{ path ('accueil') }}">
+                <img src="{{ asset ('assets/images/home/futuloveblanc.png')}}" alt="futulove">
+                </a>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="active">
+                    <a href="{{ path ('accueil') }}">{% trans %}Accueil{% endtrans %}</a>
+                </li>
+                <lic>
+                    {# <a href="{{ path ('apropos') }}">{% trans %}A propos{% endtrans %}</a> #}
+                </li>
+                <li class="nav-item features_list">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% trans %}Communauté{% endtrans %}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path ('apropos') }}">{% trans %}A propos{% endtrans %}</li>
+                        <li><a href="{{ path ('communaute') }}">{% trans %}Groupes{% endtrans %}</a></li>
+                        <li><a href="{{ path ('nos_formules') }}">{% trans %}Nos formules{% endtrans %}</a></li>
+                        
+                    </ul>
+                </li>
+                <li><a href="{{ path ('liste_membres') }}">{% trans %}Membres{% endtrans %}</a></li>
+                
+                <li>
+                    <a href="{{ path ('chat_emoji') }}">{% trans %}Chat{% endtrans %}</a>
+                </li>
+                <li>
+                    <a href="{{ path ('contact') }}">Contact</a>
+                </li>
+                
+                <li class="nav-item features_list">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% trans %}Compte{% endtrans %}
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if app.user %}
+                            <li><a href="{{ path('mes_temoignages') }}">Mes témoignages</a></li>
+                            <li><a href="{{ path('afficher_profil') }}">{% trans %}Mon profil{% endtrans %}</a></li>
+                            <li><a href="{{ path('app_logout', {'id': app.user.id }) }}">{% trans %}Déconnexion{% endtrans %}</a></li>
+                            {% else %}
+                            <li><a href="{{ path('login') }}">{% trans %}Connexion{% endtrans %}</a></li>
+                            <li><a href="{{ path('register') }}">{% trans %}Créer un compte{% endtrans %}</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        <div id="navbar-wrapper">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                <div class="navbar-header">
+                    <a href="#" class="navbar-brand" id="sidebar-toggle">
+                    <i class="fa-solid fa-bars-staggered"></i></a>
+                </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- header sider bar end -->

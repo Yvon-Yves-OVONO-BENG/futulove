@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Préférences site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+
+{% block body %}
+
+    <!-- breadcrumb section start -->
+    <section class="breadcrumb_section">
+        <div class="container">
+            <div class="row">
+                <div class="breadcrumb_content">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="breadcrumb_heading">
+                                <h2>{% trans %}Préférences{% endtrans %}</h2>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="breadcrumb_list">
+                                <ul class="d-flex list-unstyled p-0 m-0">
+                                    <li><a href="{{ path ('accueil')}}">{% trans %}Accueil{% endtrans %}</a></li>
+                                    <li>
+                                        <div class="scrolldown-btn">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px"
+                                                height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                                xml:space="preserve">
+                                                <path class="first-path" fill="#ff1182"
+                                                    d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                </path>
+                                                <path class="second-path" fill="#ff1182"
+                                                    d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </li>
+                                    <li>{% trans %}Modification du profil{% endtrans %}</li>
+                                    <li>
+                                        <div class="scrolldown-btn">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px"
+                                                height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                                xml:space="preserve">
+                                                <path class="first-path" fill="#ff1182"
+                                                    d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                </path>
+                                                <path class="second-path" fill="#ff1182"
+                                                    d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </li>
+                                    <li>{% trans %}Préférences{% endtrans %}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb section end -->
+
+    <!-- blog section start -->
+    <section class="py-5 blog_section">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="blog_wrapper">
+                        <div class="create-post mt-1 pb-4 pt-0">
+                            <div class="info-card-title px-4">
+                                <h6 class="m-0">{% trans %}Enregistrement des mes préférences{% endtrans %}</h6>
+                            </div>
+                            <div class="leave_comment_box px-4 mt-5">
+                                {{ form_start(preferenceForm) }}
+                                
+                                    <!-- Étape 4: Informations physiques -->
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.pays) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.region) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.departement) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.ville) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        
+                                        {# <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.ageMin) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.ageMax) }}
+                                        </div> #}
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            <label>{% trans %}Âge minimum{% endtrans %} </label>
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <div class="banner__inputlist">
+                                                        <select id="agemin" name="ageMinimum" class="form-select">
+                                                            <option value="">{% trans %}Sélectionner{% endtrans %}</option>
+                                                            {% for age in ages %}
+                                                                <option value="{{ age.id }}">{{ age.age }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            <label>{% trans %}Âge limite{% endtrans %} </label>
+                                            <div class="row mt-2" id="agesup" data-path="{{ path ('chercher_age_sup')}}">
+                                                <div class="col-12">
+                                                    <div class="banner__inputlist">
+                                                        <select id="agemax" name="ageLimite" class="form-select">
+                                                            <option value="">{% trans %}Sélectionner{% endtrans %}</option>
+                                                            {% for age in ages %}
+                                                                <option value="{{ age.id }}">{{ age.age }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.genre) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.couleurYeux) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.couleurCheveux) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.teint) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.taille) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.poids) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.corpulance) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.cigarette) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.vin) }}
+                                        </div>
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            {{ form_row(preferenceForm.langue) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                            {{ form_row(preferenceForm.animauxDeCompagnie) }}
+                                        </div>
+
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                        </div>
+                                    
+                                        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+                                            <div class="main_btn mt-4" style="text-align: center !important;">
+                                                <button type="submit" class="main_btn">
+                                                    <i class="fa-solid fa-save me-2"></i> 
+                                                    {% trans %}Soumettre{% endtrans %}
+                                                </button>
+                                                <div class="scrolldown-btn">
+                                                    <svg version="1.1"
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        x="0px" y="0px" width="12px" height="50px"
+                                                        viewBox="0 0 50 80"
+                                                        enable-background="new 0 0 50 80"
+                                                        xml:space="preserve">
+                                                        <path class="first-path" fill="#000"
+                                                            d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                        </path>
+                                                        <path class="second-path" fill="#000"
+                                                            d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            {{ form_end(preferenceForm) }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blog section end -->
+    <script src="{{asset('build/js/remplissageProfil.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,962 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% trans %}Groupe{% endtrans %} - {{ groupe.nomGroupe }} {% trans %}site de rencontre sérieux des célibataires - Futulove{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+    <!-- profile section start -->
+    <section class="profile_section our_customer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-5 main_member_profile">
+                    <div class="profile_name acamic_img">
+                        <div class="profile_img">
+                            <div class="profile_main_border"></div>
+                            <img src="{{ asset ('images/photoGroupes/' ~ groupe.photo) }}" alt="futulove">
+                        </div>
+                        <div class="edite_profile">
+                            <h5><i class="fa-solid fa-camera-retro"></i>{% trans %}Modifier{% endtrans %}</h5>
+                            <input type="file" name="" id="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8 col-md-7 mt-5 ps-md-4">
+                    <div class="profile_content">
+                        <div>
+                            <div class="user_name">
+                                <h3 class="text-white">{{ groupe.nomGroupe }}</h3>
+                                <p class="acitve_time"><i class="fa-solid fa-earth-europe"></i>{{ groupe.typeGroupe.typeGroupe }}</p>
+                            </div>
+                            <div class="user_message_links">
+                                <ul class="nav nav-tabs border-0" id="myTab" role="tablist">
+                                    {% if app.user.id != groupe.createur.id %}
+                                        <li>
+                                            {% if (suisJeDansLeGroupe is not null) and suisJeDansLeGroupe.etatDemande == 0 %}
+                                                <button id="friend-request-btn" class="btn btn-danger"
+                                                    data-groupe-id="{{ groupe.id }}"
+                                                    data-request-status="envoye"
+                                                    data-csrf-token="{{ csrf_token }}">
+                                                    <p class="mb-0 text-white">
+                                                    <i id="icon" class="fa fa-user-times"></i>
+                                                    {% trans %}Annuler la demande{% endtrans %}</p>
+                                                </button>
+                                            {% endif %}
+
+                                            {% if suisJeDansLeGroupe is null %}
+                                                <button id="friend-request-btn" class="btn btn-success"
+                                                    data-groupe-id="{{ groupe.id }}"
+                                                    data-request-status="pasEnvoye"
+                                                    data-csrf-token="{{ csrf_token }}">
+                                                    <p class="mb-0 text-white">
+                                                    <i id="icon" class="fa fa-user-plus"></i>
+                                                    {% trans %}Demande d'ajout{% endtrans %}</p>
+                                                </button>
+                                            {% endif %}
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="main_tab_list_header mt-5">
+                            <ul class="nav nav-tabs border-0" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="activity-tab" data-bs-toggle="tab"
+                                        data-bs-target="#activity-tab-pane" type="button" role="tab"
+                                        aria-controls="activity-tab-pane" aria-selected="true">
+                                        {% trans %}Accueil{% endtrans %}
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="membres-tab" data-bs-toggle="tab"
+                                        data-bs-target="#membres-tab-pane" type="button" role="tab"
+                                        aria-controls="membres-tab-pane" aria-selected="false">
+                                        {% trans %}Membres{% endtrans %} 
+                                        {# {% set membreGroupes = groupe.membreGroupes|filter(membre => membre.supprime == 0) %} #}
+                                        <span>{{ lesMembresDuGroupe|length|number_format }}</span>
+                                        </button>
+                                </li>
+                                {% if app.user.id == groupe.createur.id %}
+                                        <li class="nav-item" role="presentation">
+                                            <button  class="nav-link" id="friends-tab" data-bs-toggle="tab"
+                                        data-bs-target="#friends-tab-pane" type="button" role="tab"
+                                        aria-controls="friends-tab-pane" aria-selected="true">
+                                                <div class="text">
+                                                    <p class="mb-0 text-white">{% trans %}Inviter un membre{% endtrans %}</p>
+                                                </div>
+                                            </button>
+                                        </li>
+                                    {% endif %}
+                                {% if app.user.id == groupe.createur.id %}
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="friends-tab" data-bs-toggle="tab"
+                                            data-bs-target="#friends-demande-tab-pane" type="button" role="tab"
+                                            aria-controls="friends-demande-tab-pane" aria-selected="false">
+                                            {% trans %}Demandes d'adhésion{% endtrans %} 
+                                            {# {% set membreGroupes = groupe.membreGroupes|filter(membre => membre.supprime == 0) %}
+                                            {% set membreGroupes = membreGroupes|filter(membre => membre.etatDemande == 1) %} #}
+                                            <span>{{ demandesAdhesions|length|number_format }}</span>
+                                            </button>
+                                    </li>
+                                {% endif %}
+                                {% if ((suisJeDansLeGroupe is not null) and 
+                                suisJeDansLeGroupe.etatDemande == 1 and 
+                                suisJeDansLeGroupe.supprime == 0) or (app.user.id == groupe.createur.id) %}
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                            data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                            aria-controls="profile-tab-pane" aria-selected="false">Media
+                                            <span>45</span>
+                                        </button>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- profile section end -->
+
+    <!-- tab activity section start -->
+    <section class="pt-5 main_tabs_section">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-7">
+                    <div class="tab_header">
+                        <!-- all tab section start -->
+                        <div class="tab-content" id="myTabContent">
+
+                            <!-- Home tab start -->
+                            <div class="tab-pane fade show active " id="activity-tab-pane" role="tabpanel"
+                                aria-labelledby="activity-tab" tabindex="0">
+                                {# {% if ((suisJeDansLeGroupe is not null) and 
+                                suisJeDansLeGroupe.etatDemande == 1 and 
+                                suisJeDansLeGroupe.supprime == 0) or (app.user.id == groupe.createur.id) %} #}
+                                {% if app.user in groupe.membreGroupes %}
+                                
+                                    <div class="create-post mb-4">
+                                        <div class="lab-inner">
+                                            <div class="thumb-inner d-flex align-items-center gap-3">
+                                                
+                                                <div class="thumb-content">
+                                                    <h5>{% trans %}Créer un sujet{% endtrans %} <span style="color: red !important;">*</span></h5>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="leave_comment_box px-4 mt-1">
+                                            {{ form_start(formMessageGroupe, {'attr': {'class':'row g-4 needs-validation', 'novalidate':""}})}}
+                                        
+                                                <div class="col-xl-12">
+                                                    <div class="mb-2">
+                                                        <div class="form-group">
+                                                            {# {{ form_label(formMessageGroupe.messageGroupe) }} <span style="color: red !important;">*</span> #}
+                                                            {{ form_widget(formMessageGroupe.messageGroupe, {'attr': {'class': 'form-control'}}) }}
+                                                            {{ form_errors(formMessageGroupe.messageGroupe) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1">
+                                                    <div class="col-md-8" style="margin-bottom: 15px !important;">
+                                                        <div class="form-group">
+                                                            {# {{ form_label(formMessageGroupe.fichierMessageGroupes) }} #}
+                                                            <div id="fichiers-collection" data-prototype="{{ form_widget(formMessageGroupe.fichierMessageGroupes.vars.prototype)|e('html_attr') }}">
+                                                                {% for fichier in formMessageGroupe.fichierMessageGroupes %}
+                                                                    <div class="fichier-entree" 
+                                                                        style="display: block !important;">
+                                                                        {{ form_widget(formMessageGroupe.fichierMessageGroupes, {'attr': {'class': 'form-control form-control-sm'}}) }}
+                                                                        <button type="button" class="btn btn-danger btn-sm supprimer-fichier">{% trans %}Supprimer{% endtrans %}</button>
+                                                                    </div>
+                                                                {% endfor %}
+                                                                
+                                                            </div>
+                                                            {{ form_errors(formMessageGroupe.fichierMessageGroupes) }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" >
+                                                            <button type="button" class="btn btn-primary btn-sm" id="ajout-fichier"><i class="fa fa-plus me-2"></i>{% trans %}Ajouter une fichier{% endtrans %}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="main_btn">
+                                                    <button type="submit" class="main_btn">
+                                                        {% trans %}Envoyer mon message{% endtrans %}
+                                                    </button>
+                                                    <div class="scrolldown-btn">
+                                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px"
+                                                            height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                                            xml:space="preserve">
+                                                            <path class="first-path" fill="#000"
+                                                                d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                            </path>
+                                                            <path class="second-path" fill="#000"
+                                                                d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            {{ form_end(formMessageGroupe)}}
+                                            {# Mon javascript pour gérer l'ajout des fichier  #}
+                                            <script>
+                                                document.getElementById('ajout-fichier').addEventListener('click', function () {
+                                                    var collectionHolder = document.getElementById('fichiers-collection');
+                                                    var newForm = collectionHolder.dataset.prototype.replace(/__name__/g, collectionHolder.children.length);
+
+                                                    var newDiv = document.createElement('div');
+                                                    newDiv.classList.add('fichier-entree');
+                                                    newDiv.innerHTML = newForm + '<button type="button" class="btn btn-danger btn-sm supprimer-fichier">{% trans %}Supprimer{% endtrans %}</button>';
+                                                    collectionHolder.appendChild(newDiv);
+
+                                                    //ajoutBoutonSupprimer(newDiv.querySelector('.supprimer-fichier'));
+                                                    ajoutBoutonSupprimer();
+                                                });
+
+                                                function ajoutBoutonSupprimer() {
+                                                    document.querySelectorAll('.supprimer-fichier').forEach(function (bouton) {
+                                                        bouton.addEventListener('click', function () {
+                                                        bouton.closest('.fichier-entree').remove();
+                                                        });
+                                                    });
+                                                    
+                                                }
+
+                                                //document.querySelectorAll('.supprimer-fichier').forEach(function (bouton) {
+                                                //    ajoutBoutonSupprimer(bouton);
+                                                //});
+                                                ajoutBoutonSupprimer()
+                                            </script>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {# {% endif %} #}
+                                {# {% set messagesGroupe = groupe.messageGroupes|filter(messageGroupe => messageGroupe.supprime == 0) %} #}
+
+                                {% import "includes/_comment_macros.html.twig" as commentaireForm %}
+
+                                {% for message in messagesGroupe %}
+                                    {% if message.supprime == 0 %}
+                                        <div class="create-post mb-4">
+                                            <div class="lab-inner">
+                                                <div class="thumb-inner d-flex align-items-center gap-3">
+                                                    <div class="thumb-img">
+                                                        <div class="border_rounder"></div>
+                                                        <img src="{{ message.auteur.photoProfile ? asset ('images/photoProfils/' ~ message.auteur.photoProfile ) : ('images/photoProfils/default.png')}}" alt="img">
+                                                    </div>
+                                                    <div class="thumb-content">
+                                                        <h5>{{ message.auteur.nom }}</h5>
+                                                        <h6 class="d-flex align-items-center">
+                                                            <i class="fa-solid fa-clock"></i>
+                                                            <p class="mb-0">
+                                                                {% trans %}Ce message a été publié il y'a : {% endtrans %} {{ message.creeLeAt|tempsPublication }}
+                                                            </p>
+                                                        </h6>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="lab-content">
+                                                <form action="#" class="post-form">
+                                                    <div class=" px-4 mx-2 py-4">
+                                                        <p class="main_text">
+                                                            {{ message.messageGroupe }}
+                                                        </p>
+                                                        {% if message.fichierMessageGroupes|length != 0 %}
+                                                            <div class="row ml-5">
+                                                                {% for fichier in message.fichierMessageGroupes %}
+                                                                    {% if fichier.supprime == 0 %}
+                                                                        <div class="col-xl-6 col-lg-6 col-md-6 mt-3">
+                                                                            <img src="{{ asset ('images/photoMessageGroupe/' ~ fichier.fichierMessageGroupe )}}" class="w-100"
+                                                                                alt="futulove" width="350" height="240">
+                                                                            
+                                                                            {% if app.user.id == fichier.messageGroupe.auteur.id %}
+                                                                                <a href="{{ path ('supprimer_fichier_message_groupe', {'slugFichierMessageGroupe': fichier.slug, 'slugGroupe': message.groupe.slug }) }}" class="btn btn-danger btn-sm mt-2"><i class="fa fa-trash me-2"></i> {% trans %}Supprimer{% endtrans %}</a>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                    {% endif %}
+                                                                
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% endif %}
+                                                    
+                                                    </div>
+                                                    <div class="content-type py-3">
+                                                        {% if app.user %}
+                                                            {% if message.auteur.id == app.user.id %}
+                                                                
+                                                                    <button class="btn btn-primary btn-sm edit-message" data-bs-target="#edit-message-modal" data-bs-toggle="modal" href="" data-id="{{ message.id }}">
+                                                                        <i class="fa fa-edit me-2"></i>
+                                                                        {% trans %}Modifier{% endtrans %}
+                                                                    </button>
+                                                                    <a href="{{ path ('supprimer_message_groupe', {'slugMessageGroupe': message.slug, 'slugGroupe': message.groupe.slug }) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash me-2"></i> {% trans %}Supprimer{% endtrans %}</a>
+                                                                
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    </div>
+                                                    
+                                                    <div class="content-type">
+                                                        <ul class="content-list list-unstyled d-flex align-items-center p-0 m-0">
+                                                            <li class="ps-0">
+                                                                {% if app.user %}
+                                                                    <a href="#" class="like-button me-5 {{ message.estAimeParUser(app.user) ? 'aime' : '' }}" 
+                                                                    data-url="{{ path ('aime_message_groupe', { id: message.id })}}"
+                                                                    data-csrf-token="{{ csrf_token }}">
+                                                                    {% else %}
+                                                                    <a href="javascript:void(0);" class="like-button me-5" >
+                                                                {% endif %}
+                                                                    <i class="fa fa-thumbs-up"></i>
+                                                                    <span class="like-count" id="like-count">
+                                                                        {{ message.aimeMessageGroupes|length|number_format }}
+                                                                    </span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                {% if app.user %}
+                                                                    <a href="#" class="adore-button me-5 {{ message.estAdoreParUser(app.user) ? 'adore' : '' }}" 
+                                                                        data-url="{{ path ('adore_message_groupe', { id: message.id })}}"
+                                                                        data-csrf-token="{{ csrf_token }}">
+                                                                        {% else %}
+                                                                        <a href="javascript:void(0);" class="like-button me-5" >
+                                                                {% endif %}
+                                                                        <i class="fa-solid fa-heart"></i> 
+                                                                        <span class="like-count">{{ message.adoreMessageGroupes|length|number_format }}</span>
+                                                                    </a>
+                                                            </li>
+                                                            <li class="attach-file">
+                                                                <div class="reply_btn">
+                                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#replyModal-{{ message.id }}">
+                                                                        <i class="fa-solid fa-reply-all"></i>
+                                                                        {% trans %}Répondre{% endtrans %}
+                                                                    </a>
+                                                                </div>
+                                                            </li>
+                                                            <li class="justify-content-end d-flex p-0 ">
+                                                                <a href="#">
+                                                                    {{ message.messageGroupes|length|number_format }} {% trans %}Commentaire(s){% endtrans %}
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                        {% if message.messageGroupes is not null %}
+                                            {% for reponse in message.messageGroupes %}
+                                                {% if reponse.supprime == 0 %}
+                                                    <div class="create-post mb-4 mt-0" style="margin-left: 100px !important;">
+                                                        <div class="lab-inner">
+                                                            <div class="thumb-inner d-flex align-items-center gap-3">
+                                                                <div class="thumb-img h-100">
+                                                                    <div class="border_rounder"></div>
+                                                                    <img src="{{ reponse.auteur.photoProfile ? asset ('images/photoProfils/' ~ reponse.auteur.photoProfile ) : ('images/photoProfils/default.png')}}" alt="img">
+                                                                </div>
+                                                                <div class="thumb-content">
+                                                                    <h5>{{ reponse.auteur.nom }}</h5>
+                                                                    <h6 class="d-flex align-items-center">
+                                                                        <i class="fa-solid fa-clock"></i>
+                                                                        <p class="mb-0">
+                                                                            {% trans %}Ce message a été publié il y'a : {% endtrans %} {{ reponse.creeLeAt|tempsPublication }}
+                                                                        </p>
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                            
+                                                        <div class="lab-content">
+                                                            <form action="#" class="post-form">
+                                                                <p class="main_text px-4 py-4">
+                                                                    {{ reponse.messageGroupe }}
+                                                                </p>
+                                                                <div class="content-type py-3">
+                                                                    {% if app.user %}
+                                                                        {% if reponse.auteur.id == app.user.id %}
+                                                                            
+                                                                                <button class="btn btn-primary btn-sm edit-message" data-bs-target="#edit-message-modal" data-bs-toggle="modal" href="" data-id="{{ reponse.id }}">
+                                                                                    <i class="fa fa-edit me-2"></i>
+                                                                                    {% trans %}Modifier{% endtrans %}
+                                                                                </button>
+                                                                                <a href="{{ path ('supprimer_message_groupe', {'slugMessageGroupe': reponse.slug, 'slugGroupe': groupe.slug }) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash me-2"></i> {% trans %}Supprimer{% endtrans %}</a>
+                                                                            
+                                                                        {% endif %}
+                                                                    {% endif %}
+                                                                </div>
+                                                                <div class="content-type">
+                                                                    <ul class="content-list list-unstyled d-flex align-items-center p-0 m-0">
+                                                                        <li class="ps-0">
+                                                                            {% if app.user %}
+                                                                                <a href="#" class="like-button me-5 {{ reponse.estAimeParUser(app.user) ? 'aime' : '' }}" 
+                                                                                data-url="{{ path ('aime_message_groupe', { id: reponse.id })}}"
+                                                                                data-csrf-token="{{ csrf_token }}">
+                                                                                {% else %}
+                                                                                <a href="javascript:void(0);" class="like-button me-5" >
+                                                                            {% endif %}
+                                                                                <i class="fa fa-thumbs-up"></i>
+                                                                                <span class="like-count">{{ reponse.aimeMessageGroupes|length|number_format }}</span>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li>
+                                                                            {% if app.user %}
+                                                                                <a href="#" class="adore-button me-5 {{ reponse.estAdoreParUser(app.user) ? 'adore' : '' }}" 
+                                                                                    data-url="{{ path ('adore_message_groupe', { id: reponse.id })}}"
+                                                                                    data-csrf-token="{{ csrf_token }}">
+                                                                                    {% else %}
+                                                                                    <a href="javascript:void(0);" class="like-button me-5" >
+                                                                            {% endif %}
+                                                                                    <i class="fa-solid fa-heart"></i> 
+                                                                                    <span class="like-count">{{ reponse.adoreMessageGroupes|length|number_format }}</span>
+                                                                                </a>
+                                                                        </li>
+                                                                        <li class="attach-file">
+                                                                            <div class="reply_btn">
+                                                                                <a href="#" data-bs-toggle="modal" data-bs-target="#replyModal-{{ reponse.id }}">
+                                                                                    <i class="fa-solid fa-reply-all"></i>
+                                                                                    {% trans %}Répondre{% endtrans %}
+                                                                                </a>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="justify-content-end d-flex p-0 ">
+                                                                            <a href="#">
+                                                                                {{ message.messageGroupes|length|number_format }} {% trans %}Commentaire(s){% endtrans %}
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+
+                                                    </div>
+
+                                                    {% if reponse.messageGroupes is not null %}
+                                                        {% for sousReponse in reponse.messageGroupes %}
+                                                            {% if sousReponse.supprime == 0 %}
+                                                                <div class="create-post mb-4 mt-0" style="margin-left: 150px !important;">
+                                                                    <div class="lab-inner">
+                                                                        <div class="thumb-inner d-flex align-items-center gap-3">
+                                                                            <div class="thumb-img h-100">
+                                                                                <div class="border_rounder"></div>
+                                                                                <img src="{{ sousReponse.auteur.photoProfile ? asset ('images/photoProfils/' ~ reponse.auteur.photoProfile ) : ('images/photoProfils/default.png')}}" alt="img">
+                                                                            </div>
+                                                                            <div class="thumb-content">
+                                                                                <h5>{{ sousReponse.auteur.nom }}</h5>
+                                                                                <h6 class="d-flex align-items-center">
+                                                                                    <i class="fa-solid fa-clock"></i>
+                                                                                    <p class="mb-0">
+                                                                                        {% trans %}Ce message a été publié il y'a : {% endtrans %} {{ sousReponse.creeLeAt|tempsPublication }}
+                                                                                    </p>
+                                                                                </h6>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                        
+                                                                    <div class="lab-content">
+                                                                        <form action="#" class="post-form">
+                                                                            <p class="main_text px-4 py-4">
+                                                                                {{ sousReponse.messageGroupe }}
+                                                                            </p>
+                                                                            <div class="content-type py-3">
+                                                                                {% if app.user %}
+                                                                                    {% if sousReponse.auteur.id == app.user.id %}
+                                                                                        
+                                                                                            <button class="btn btn-primary btn-sm edit-message" data-bs-target="#edit-message-modal" data-bs-toggle="modal" href="" data-id="{{ sousReponse.id }}">
+                                                                                                <i class="fa fa-edit me-2"></i>
+                                                                                                {% trans %}Modifier{% endtrans %}
+                                                                                            </button>
+                                                                                            <a href="{{ path ('supprimer_message_groupe', {'slugMessageGroupe': sousReponse.slug, 'slugGroupe': groupe.slug }) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash me-2"></i> {% trans %}Supprimer{% endtrans %}</a>
+                                                                                        
+                                                                                    {% endif %}
+                                                                                {% endif %}
+                                                                            </div>
+                                                                            <div class="content-type">
+                                                                                <ul class="content-list list-unstyled d-flex align-items-center p-0 m-0">
+                                                                                    <li class="ps-0">
+                                                                                        {% if app.user %}
+                                                                                            <a href="#" class="like-button me-5 {{ sousReponse.estAimeParUser(app.user) ? 'aime' : '' }}" 
+                                                                                            data-url="{{ path ('aime_message_groupe', { id: sousReponse.id })}}"
+                                                                                            data-csrf-token="{{ csrf_token }}">
+                                                                                            {% else %}
+                                                                                            <a href="javascript:void(0);" class="like-button me-5" >
+                                                                                        {% endif %}
+                                                                                            <i class="fa fa-thumbs-up"></i>
+                                                                                            <span class="like-count">{{ sousReponse.aimeMessageGroupes|length|number_format }}</span>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        {% if app.user %}
+                                                                                            <a href="#" class="adore-button me-5 {{ sousReponse.estAdoreParUser(app.user) ? 'adore' : '' }}" 
+                                                                                                data-url="{{ path ('adore_message_groupe', { id: sousReponse.id })}}"
+                                                                                                data-csrf-token="{{ csrf_token }}">
+                                                                                                {% else %}
+                                                                                                <a href="javascript:void(0);" class="like-button me-5" >
+                                                                                        {% endif %}
+                                                                                                <i class="fa-solid fa-heart"></i> 
+                                                                                                <span class="like-count">{{ sousReponse.adoreMessageGroupes|length|number_format }}</span>
+                                                                                            </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+
+                                                                </div>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+                                    
+                                    {% if message.messageGroupes is not null %}
+                                        {# //////   FENETRE MODALE //// #}
+                                        {% set messagesGroupes = message.messageGroupes|filter(messageGroupe => messageGroupe.supprime == 0) %}
+
+                                        {% for reponse in messagesGroupes %}
+                                            <div class="modal fade" id="replyModal-{{ reponse.id }}" tabindex="-1" aria-labelledby="replyModalLabel-{{ reponse.id }}" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="replyModalLabel-{{ reponse.id }}">{% trans %}Saisissez votre commentaire{% endtrans %}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{ path ('ajout_message_groupe', {'slugMessage': reponse.slug, 'slugGroupe': groupe.slug } )}}" method="post">
+                                                                <div class="mb-3">
+                                                                    {# <label class="form-label">{% trans %}Votre commentaire{% endtrans %}</label> #}
+                                                                    <input type="hidden" name="parent" value="{{ groupe.slug }}">
+                                                                    <textarea class="form-control" id="commentContent-{{ reponse.id }}" name="commentaire" rows="3" placeholder="{% trans %}Votre commentaire{% endtrans %}" required></textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-danger" data-bs-dismiss="modal" type="button"><i class="fa-solid fa-close me-2"></i>{% trans %}Annuler{% endtrans %}</button>
+                                                                    <button type="submit" name="envoyer" class="btn btn-primary"> <i class="fa-solid fa-paper-plane me-2"></i>{% trans %}Envoyer{% endtrans %}</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                {% endfor %}
+
+                                {# //////   FENETRE MODALE //// #}
+                                {% for message in messagesGroupe %}
+                                    <div class="modal fade" id="replyModal-{{ message.id }}" tabindex="-1" aria-labelledby="replyModalLabel-{{ message.id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="replyModalLabel-{{ message.id }}">{% trans %}Saisissez votre commentaire{% endtrans %}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ path ('ajout_message_groupe', {'slugMessage': message.slug, 'slugGroupe': message.groupe.slug } )}}" method="post">
+                                                        <div class="mb-3">
+                                                            {# <label class="form-label">{% trans %}Votre commentaire{% endtrans %}</label> #}
+                                                            <input type="hidden" name="parent" value="{{ message.groupe.slug }}">
+                                                            <textarea class="form-control" id="commentContent-{{ message.id }}" name="commentaire" rows="3" placeholder="{% trans %}Votre commentaire{% endtrans %}" required></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-danger" data-bs-dismiss="modal" type="button"><i class="fa-solid fa-close me-2"></i>{% trans %}Annuler{% endtrans %}</button>
+                                                            <button type="submit" name="envoyer" class="btn btn-primary"> <i class="fa-solid fa-paper-plane me-2"></i>{% trans %}Envoyer{% endtrans %}</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                                
+                                
+                                {# Modale pour l'édition du poste  #}
+                                <div id="modal-overlay" style="display: none;"></div>
+                                <div class="modal fade" id="edit-message-modal">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content modal-content-demo">
+                                            <div class="modal-header">
+                                                <h6 class="modal-title">{% trans %}Modification du message{% endtrans %}</h6>
+                                                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+                                                    {# <span aria-hidden="true">&times;</span> #}
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="edit-message-form">
+                                                    <input type="hidden" value="{{ csrf_token }}" name="csrf" id="csrf_token">
+                                                    <textarea class="form-control" id="edit-message-textarea" name="content" rows="4" required></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-danger" data-bs-dismiss="modal" type="button"><i class="fa-solid fa-close me-2"></i>{% trans %}Annuler{% endtrans %}</button>
+                                                        <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane me-2"></i>{% trans %}Envoyer les modifications{% endtrans %}</button> 
+                                                    </div>
+                                                </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Home tab end -->
+
+                            <!-- Members tab start -->
+                            <div class="tab-pane fade " id="membres-tab-pane" role="tabpanel"
+                                aria-labelledby="membres-tab" tabindex="0">
+                                <div class="row profile_tabs-main">
+                                    {# {% set membreGroupes = groupe.membreGroupes|filter(membre => membre.supprime == 0) %}
+                                    {% set membreGroupes = membreGroupes|filter(membre => membre.etatDemande == 1) %} #}
+                                    
+                                    {% for membreGroupe in lesMembresDuGroupe %}
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-0" id="demandeGroupe">
+                                            <div class="acamic_img">
+                                                <a href="{{ path ('afficher_profil', {'slug': membreGroupe.membre.slug })}}">
+                                                    <img src="{{ asset ('images/photoProfils/' ~ membreGroupe.membre.photoProfile ) }}" height="300" alt="futulove">
+                                                </a>
+                                                <div class="customer_details">
+                                                    <h4>{{ membreGroupe.membre.nom }} </h4>
+                                                    <p>
+                                                        <i class="fa-solid fa-flag"></i> 
+                                                        <img src="{{ membreGroupe.membre.pays ? asset ('images/drapeaux/' ~ membreGroupe.membre.pays.drapeau ) : "" }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                        <i class="fa-solid fa-globe"></i> {{ membreGroupe.membre.pays.pays }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                                {% if (app.user.id == groupe.createur.id) and (membreGroupe.groupe.createur.id != membreGroupe.membre.id) %}
+                                                    <div class="mt-2">
+                                                        {% if membreGroupe.etatDemande == 1 %}
+                                                            {% if membreGroupe.bloque == 0 %}
+                                                                <button id="btn-bloquer-membre-groupe" class="btn btn-danger btn-sm me-2"
+                                                                    data-membreGroupe-id="{{ membreGroupe.id }}"
+                                                                    data-request-status="bloquer"
+                                                                    data-csrf-token="{{ csrf_token }}">
+                                                                    <p class="mb-0 text-white">
+                                                                        <i id="icon" class="fa fa-lock me-2"></i>
+                                                                        {% trans %}Bloquer{% endtrans %}
+                                                                    </p>
+                                                                </button>
+                                                            {% endif %}
+
+                                                            {% if membreGroupe.bloque == 1 %}
+                                                                <button id="btn-debloquer-membre-groupe" class="btn btn-success btn-sm me-2"
+                                                                    data-membreGroupe-id="{{ membreGroupe.id }}"
+                                                                    data-request-status="debloquer"
+                                                                    data-csrf-token="{{ csrf_token }}">
+                                                                    <p class="mb-0 text-white">
+                                                                        <i id="icon" class="fa fa-unlock me-2"></i>
+                                                                        {% trans %}Débloquer{% endtrans %}
+                                                                    </p>
+                                                                </button>
+                                                            {% endif %}
+                                                            
+                                                          
+                                                            <button id="btn-retirer-membre-groupe" class="btn btn-danger btn-sm me-2"
+                                                                data-membreGroupe-id="{{ membreGroupe.id }}"
+                                                                data-request-status="retirer"
+                                                                data-csrf-token="{{ csrf_token }}">
+                                                                <i class="fa fa-trash me-2"></i>{% trans %}Retirer{% endtrans %}
+                                                            </button>
+                                                            
+
+                                                        {% endif %}
+                                                    </div>
+                                                {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                    
+                                    
+                                </div>
+                            </div>
+                            <!-- Members tab start -->
+
+                            <!-- Members demandes tab start -->
+                            <div class="tab-pane fade " id="friends-demande-tab-pane" role="tabpanel"
+                                aria-labelledby="friends-tab" tabindex="0">
+                                <div class="row profile_tabs-main">
+                                    {# {% set membreGroupes = groupe.membreGroupes|filter(membre => membre.supprime == 0) %} #}
+                                    {% for membreGroupe in demandesAdhesions %}
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-0" id="demandeAjoutGroupe-{{ membreGroupe.id }}">
+                                            <div class="acamic_img">
+                                                <a href="{{ path ('afficher_profil', {'slug': membreGroupe.membre.slug })}}">
+                                                    <img src="{{ asset ('images/photoProfils/' ~ membreGroupe.membre.photoProfile ) }}" height="300" alt="futulove">
+                                                </a>
+                                                <div class="customer_details">
+                                                    <h4>{{ membreGroupe.membre.nom }} </h4>
+                                                    <p>
+                                                        <i class="fa-solid fa-flag"></i> 
+                                                        <img src="{{ membreGroupe.membre.pays ? asset ('images/drapeaux/' ~ membreGroupe.membre.pays.drapeau ) : "" }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                        <i class="fa-solid fa-globe"></i> {{ membreGroupe.membre.pays.pays }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            {% if (app.user.id == groupe.createur.id) and (membreGroupe.groupe.createur.id != membreGroupe.membre.id) %}
+                                                <div class="mt-2 d-flex">
+                                                    
+                                                    <button id="friend-request-btn-accepter-groupe" class="btn btn-success btn-sm me-2"
+                                                        data-membreGroupe-id="{{ membreGroupe.id }}"
+                                                        data-request-status="accepter"
+                                                        data-csrf-token="{{ csrf_token }}">
+                                                        <p class="mb-0 text-white">
+                                                            <i id="icon" class="fa fa-check me-2"></i>
+                                                            {% trans %}Accepter{% endtrans %}
+                                                        </p>
+                                                    </button>
+                                                     <button id="friend-request-btn-refuser-groupe" class="btn btn-danger btn-sm me-2"
+                                                        data-membreGroupe-id="{{ membreGroupe.id }}"
+                                                        data-request-status="refuser"
+                                                        data-csrf-token="{{ csrf_token }}">
+                                                        <p class="mb-0 text-white">
+                                                            <i id="icon" class="fa fa-close me-2"></i>
+                                                            {% trans %}Refuer{% endtrans %}
+                                                        </p>
+                                                    </button>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                    
+                                    
+                                </div>
+                            </div>
+                            <!-- Members demandes tab start -->
+
+                            <!-- friends invitation groupe tab start -->
+                            <div class="tab-pane fade " id="friends-tab-pane" role="tabpanel"
+                                aria-labelledby="friends-tab" tabindex="0">
+                                <div class="row profile_tabs-main">
+                                    
+                                    {% for ami in amis %}
+                                    
+                                        {% if ami.demandePar.id != profil.id %}
+                                            <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-2">
+                                                <div class="acamic_img">
+                                                    <a href="{{ path ('afficher_profil', {'slug': ami.demandePar.slug}) }}">
+                                                        <img src="{{ ami.demandePar.photoProfile ? asset ('images/photoProfils/' ~ ami.demandePar.photoProfile ) : ('images/photoProfils/default.png')}}" alt="futulove" style="height :300px !important">
+                                                    </a>
+                                                    <div class="customer_details">
+                                                        <h4>{{ ami.demandePar.nom }}</h4>
+                                                        <p>
+                                                            <i class="fa-solid fa-flag"></i> 
+                                                            <img src="{{ ami.demandePar.pays ? asset ('images/drapeaux/' ~ ami.demandePar.pays.drapeau ) : asset ('images/drapeaux/default.jpeg' ) }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                            <i class="fa-solid fa-globe"></i> {{ ami.demandePar.pays ? ami.demandePar.pays.pays :"" }}
+                                                        </p>
+
+                                                        <p style="display: flex !important;">
+                                                            {% if app.user.id == profil.id %}
+                                                                {% if ami.bloque == 0 %}
+                                                                    {% if groupe.estDejaInvite(ami.demandePar) %}
+                                                                        <button class="btn btn-danger btn-sm annuler-invitation" 
+                                                                            data-groupe-id="{{ groupe.id }}" 
+                                                                            data-user-id="{{ ami.demandePar.id }}"
+                                                                            data-csrf-token="{{ csrf_token }}">
+                                                                            {% trans %}Annuler l'invitation{% endtrans %}
+                                                                        </button>
+                                                                        {% else %}
+                                                                        <button class="btn btn-success btn-sm envoyer-invitation" 
+                                                                            data-groupe-id="{{ groupe.id }}" 
+                                                                            data-user-id="{{ ami.demandePar.id }}"
+                                                                            data-csrf-token="{{ csrf_token }}">
+                                                                            {% trans %}Inviter{% endtrans %}
+                                                                        </button>
+
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            {% if ami.demandeA.id != profil.id  %}
+                                                <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-0">
+                                                    <div class="acamic_img">
+                                                        <a href="{{ path ('afficher_profil', {'slug': ami.demandeA.slug}) }}">
+                                                            <img src="{{ ami.demandeA.photoProfile ? asset ('images/photoProfils/' ~ ami.demandeA.photoProfile ) : ('images/drapeaux/default.png')}}" style="height :300px !important" alt="futulove">
+                                                        </a>
+                                                        <div class="customer_details">
+                                                            <h4>{{ ami.demandeA.nom }}</h4>
+                                                            <p>
+                                                                <i class="fa-solid fa-flag"></i> 
+                                                                <img src="{{ ami.demandeA.pays ? asset ('images/drapeaux/' ~ ami.demandeA.pays.drapeau ) : asset ('images/drapeaux/default.jpeg') }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                                <i class="fa-solid fa-globe"></i> {{ ami.demandeA.pays ? ami.demandeA.pays.pays : "" }}
+                                                            </p>
+                                                            <p style="display: flex !important;">
+                                                                {% if app.user.id == profil.id %}
+                                                                    {% if ami.bloque == 0 %}
+                                                                        {% if groupe.estDejaInvite(ami.demandeA) %}
+                                                                            <button class="btn btn-danger btn-sm annuler-invitation" 
+                                                                                data-groupe-id="{{ groupe.id }}" 
+                                                                                data-user-id="{{ ami.demandePar.id }}"
+                                                                                data-csrf-token="{{ csrf_token }}">
+                                                                                {% trans %}Annuler l'invitation{% endtrans %}
+                                                                            </button>
+                                                                            {% else %}
+                                                                            <button class="btn btn-success btn-sm envoyer-invitation" 
+                                                                                data-groupe-id="{{ groupe.id }}" 
+                                                                                data-user-id="{{ ami.demandePar.id }}"
+                                                                                data-csrf-token="{{ csrf_token }}">
+                                                                                {% trans %}Inviter{% endtrans %}
+                                                                            </button>
+                                                                        {% endif %}
+                                                                    {% endif %}
+                                                                {% endif %}
+
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                        
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                            <!-- friends invitation groupe tab start -->
+
+                            <!-- Media tab header start -->
+                            <div class="tab-pane fade main_mediatab" id="profile-tab-pane" role="tabpanel"
+                                aria-labelledby="profile-tab" tabindex="0">
+                                <div class="all_media_tab_s pb-5">
+                                    <div class="media_title">
+                                        <h3 class="mb-0">Media Gallery</h3>
+                                    </div>
+                                    <div class="upload_media px-4 mt-4">
+                                        <h5 class="mb-0"><i class="fa-solid fa-arrow-up-from-bracket"></i> Upload</h5>
+                                        <input type="file">
+                                    </div>
+                                    <div class="row px-4 mt-4">
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-1.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-2.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-3.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-4.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-5.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-6.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-7.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-8.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-4 col-md-6 mt-3">
+                                            <div class="upload_media_img">
+                                                <img src="{{ asset ('assets/images/home/member-9.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Media tab header end -->
+
+                        </div>
+                        <!-- all tab section end -->
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-5">
+                    <div class="search-widget_post active-group  mt-1">
+                        <div class="search-title">
+                            <h5>{% trans %}Autres groupes{% endtrans %}</h5>
+                        </div>
+                        <div class="widget-content">
+                            {% for groupe in groupes %}
+                                <div class="group-item lab-item pb-4">
+                                    <div class="lab-inner d-flex flex-wrap align-items-center">
+                                        <div class="lab-content w-100 mt-1">
+                                            <h6 class="mb-3">{{ groupe.nomGroupe }}</h6>
+                                            <p>{{ groupe.description|truncate_40 }}</p>
+                                            {% set membreGroupes = groupe.membreGroupes|filter(membre => membre.supprime == 0) %}
+                                            {% set lesMembres = membreGroupes|filter(membre => membre.etatDemande == 1) %}
+                                            <ul class="img-stack d-flex p-0">
+                                                {% for membreGroupe in lesMembres|slice(0, 6) %}
+                                                    
+                                                    <li>
+                                                        <img src="{{ asset ('images/photoProfils/' ~ membreGroupe.membre.photoProfile ) }}" style="height: 50px; width:50px; border-radius: 50%; object-fit: cover;" alt="member-img">
+                                                    </li>
+                                                {% endfor %}
+                                                    <li class=" mt-2" style="background-color: #FF1182;">{{ membreGroupes|length - membreGroupes|slice(0, 6)|length }}+</li>
+                                            </ul>
+                                            <div class="main_btn mt-4">
+                                                <a href="{{ path ('afficher_groupe', {'slug': groupe.slug })}}" class="main_btn">
+                                                    <i class="fa fa-users me-2"></i> {% trans %}Afficher le groupe{% endtrans %}
+                                                </a>
+                                                <div class="scrolldown-btn">
+                                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                        width="12px" height="50px" viewBox="0 0 50 80"
+                                                        enable-background="new 0 0 50 80" xml:space="preserve">
+                                                        <path class="first-path" fill="#000"
+                                                            d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                        </path>
+                                                        <path class="second-path" fill="#000"
+                                                            d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                        </path>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- tab activity section end -->
+
+    
+
+    {# <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js'></script>  #}
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="{{ asset ('js/axios.min.js') }}"></script> 
+    <script src="{{ asset ('js/demandeAjoutGroupe.js') }}"></script> 
+    <script src="{{ asset ('js/accepterDemandeAjoutGroupe.js') }}"></script> 
+    <script src="{{ asset ('js/refuserDemandeAjoutGroupe.js') }}"></script> 
+    <script src="{{ asset ('js/invitationGroupe.js') }}"></script> 
+    <script src="{{ asset ('js/bloquerMembreGroupe.js') }}"></script> 
+    <script src="{{ asset ('js/debloquerMembreGroupe.js') }}"></script> 
+    <script src="{{ asset ('js/retirerMembreGroupe.js') }}"></script> 
+    <script src="{{ asset ('js/signalerCompte.js') }}"></script> 
+    <script src="{{ asset ('js/favori.js') }}"></script>
+    <script src="{{ asset ('js/suspendreCompte.js') }}"></script>
+    <script src="{{ asset ('js/accepterAmitie.js') }}"></script>
+    <script src="{{ asset ('js/refuserAmitie.js') }}"></script>
+    {# <script src="{{ asset ('js/supprimerPhotoMessageGroupe.js')}}"></script> #}
+    <script src="{{ asset ('js/modificationMessageGroupe.js') }}"></script>
+    <script src="{{ asset ('js/adoreMessageGroupe.js') }}"></script>
+    <script src="{{ asset ('js/aimeMessageGroupe.js') }}"></script>
+
+{% endblock %}
+
+

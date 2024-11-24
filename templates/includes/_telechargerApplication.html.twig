@@ -1,0 +1,107 @@
+{% block stylesheets %}
+    
+    <style>
+        .download-section {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .download-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .download-section p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: #0073e6;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-btn img {
+            width: 24px;
+            margin-right: 10px;
+        }
+
+        .download-btn.playstore {
+            background-color: #3dba53;
+        }
+
+        .download-btn.appstore {
+            background-color: #000;
+        }
+
+        .download-btn:hover {
+            opacity: 0.8;
+        }
+
+        
+    </style>
+{% endblock %}
+<section class="download-section mt-4">
+    <h3>{% trans %}Téléchargez notre application{% endtrans %}</h3>
+    <p>{% trans %}Disponible sur toutes les plateforme{% endtrans %}</p>
+    <div class="button-container">
+        <a href="#playstore" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" class="btn download-btn playstore">
+            <img src="{{ asset ('images/logoApplications/playStore1.png') }}" alt="Playstore"> Playstore
+        </a>
+        <a href="#appleStore" data-bs-effect="effect-super-scaled" data-bs-toggle="modal" class="btn download-btn appstore">
+            <img src="{{ asset ('images/logoApplications/appleStore1.png') }}" alt="Appstore"> Appstore
+        </a>
+    </div>
+</section>
+
+    <!-- MODAL EFFECTS -->
+    <div class="modal fade" id="playstore">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">{% trans %}Disponible bientôt{% endtrans %}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset ('images/logoApplications/playStore1.png') }}" alt="Playstore" width="100" height="100">
+                    <h6>{% trans %}Restez à l'affût... Votre application playstore arrive.{% endtrans %}</h6>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-bs-dismiss="modal" type="button"><i class="fa fa-close me-2"></i> {% trans %}Fermer{% endtrans %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="appleStore">
+        <div class="modal-dialog modal-dialog-centered text-center" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">{% trans %}Disponible bientôt{% endtrans %}</h6><button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset ('images/logoApplications/appleStore1.png') }}" alt="Playstore" width="100" height="100">
+                    <h6>{% trans %}Restez à l'affût... Votre application appstore arrive.{% endtrans %}</h6>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-bs-dismiss="modal" type="button"><i class="fa fa-close me-2"></i> {% trans %}Fermer{% endtrans %}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page -->

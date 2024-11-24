@@ -1,0 +1,62 @@
+<!-- Aside Part -->
+<div class="col-xl-4">
+    <aside class="mt-5 mt-xl-0">
+        <div class="widget search-widget">
+            <div class="widget-inner">
+                <div class="widget-title">
+                    <h5>Filtre des membres</h5>
+                </div>
+                <div class="widget-content">
+                    <p>Rencontres sérieuses avec <strong>DueLove </strong><br>
+                        La correspondance est à portée de clic.</p>
+                    <form method="post" action="{{ path('liste_membres') }}" class="banner-form">
+                        <div class="gender">
+                            <div class="custom-select right w-100">
+                                <select name="jeSuis" id="jeSuis" class="" required>
+                                    <option value="">Je suis</option>
+                                    {% for sexe in sexes %}
+                                        <option value="{{ sexe.id }}"> {{ sexe.sexe }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <div class="custom-select right w-100">
+                                <select name="jeCherche" id="jeCherche" class="" required>
+                                    <option value="">Je cherche</option>
+                                    {% for sexe in sexes %}
+                                        <option value="{{ sexe.id }}"> {{ sexe.sexe }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="age">
+                            <div
+                                class="right d-flex justify-content-between w-100">
+                                <div class="custom-select">
+                                    <select name="ageDebut" id="age" required>
+                                        <option value="">Âge</option>
+                                        {% for age in ages %}
+                                            <option value="{{ age.id }}">{{ age.age }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="custom-select">
+                                    <select name="ageFin" id="age-two" required>
+                                        <option value="">Âge limite</option>
+                                        {% for age in ages %}
+                                            <option value="{{ age.id }}">{{ age.age }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="" type="submit" name="jeTrouveMonPartenaire">Chercher votre partenaire</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </aside>
+</div>

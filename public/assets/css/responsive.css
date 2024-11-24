@@ -1,0 +1,581 @@
+@media only screen and (min-width: 1400px) and (max-width: 1430px){
+    .hero_img img {
+        width: 80%;
+    }
+}
+@media only screen and (min-width: 1200px) and (max-width: 1399px){
+    .features_content h6 {
+        font: normal normal 500 14px Inter;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .footer_quick_links h5, .footer_contact h5, .customer_details p {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .about_img img{
+        width: 100%;
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    .hero_img img {
+        width: 88%;
+    }
+
+    .form_section .main_btn a, .form_section .main_btn button {
+        font-size: 12px;
+        padding: 10px 7px;
+    }
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px){
+
+    header .navbar-nav .nav-item .nav-link {
+        padding: 0 10px;
+    }
+
+    .about_img img{
+        width: 100%;
+    }
+
+    .hero_content h1 {
+        font-size: 37px;
+    }
+
+    .about_img img{
+        width: 100%;
+    }
+
+    .main_next_prev .swiper-button-prev {
+        width: 165%;
+    }
+
+    .main_next_prev .swiper-button-next {
+        right: 11px;
+    }
+
+.customer_details p {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    .about_img img{
+        width: 100%;
+    }
+
+    
+
+    .services_box p {
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    .services_box h4 {
+        transition: 0.5s;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .main_btn {
+        padding: 11px 36px 11px 5px;
+    }
+
+    .customer_details p {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        font-size: 13px;
+    }
+
+    #navbar-wrapper{
+        display: flex;
+        position: fixed;
+        right: 0;
+        justify-content: end;
+        z-index: 1000;
+        top: 5px;
+    }
+
+    
+    .hero_content h1 {
+        font-size: 37px;
+    }
+    .container {
+        max-width: 820px;
+    }
+    .main_next_prev .swiper-button-prev {
+        width: 159%;
+    }
+
+    .news_latter_text h5{
+        display: none;
+    }
+
+    .main_tab_list_header .nav-tabs .nav-link {
+        padding: 10px 8px;
+    }
+
+
+   
+    
+}
+
+@media only screen and (min-width: 540px) and (max-width: 767px){
+    .about_img img{
+        width: 100%;
+    }
+
+    .main_member_profile .profile_name .profile_img{
+        display: flex;
+        justify-content: center;
+    }
+
+  .main_member_profile .profile_name .profile_img img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-position: top;
+        margin: auto;
+        position: relative;
+    }
+
+    .profile_main_border {
+        display: flex;
+        height: 330px;
+        width: 330px;
+        position: absolute;
+        border: 1px dashed #fff;
+        border-radius: 50%;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        animation: slideDas 10s infinite linear;
+    }
+
+    .profile_main_border:before, .profile_main_border:after {
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        background: #fff;
+        content: '';
+        border-radius: 50%;
+    }
+    
+    .profile_main_border:before {
+        left: 0;
+        top: 100px;
+    }
+    
+    .profile_main_border:after {
+        right: 0;
+        bottom: 105px;
+    }
+
+    .main_member_profile .profile_name::before {
+        content: none !important;
+    }
+
+    .profile_content{
+        position: unset;
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .hero_content h1 {
+        font-size: 40px;
+    }
+
+    .main_next_prev .swiper-button-prev {
+        width: 25%;
+    }
+
+    .news_latter_text h5{
+        display: none;
+    }
+
+
+    .main_hero_img{
+        display: none;
+    }
+
+    .our_customer_section  .main_heading {
+        top: 0px; 
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .user_message_links ul{
+        justify-content: center
+    }
+
+   
+
+    #navbar-wrapper{
+        display: flex;
+        position: fixed;
+        right: 0;
+        justify-content: end;
+        z-index: 1000;
+        top: 5px;
+    }
+
+    header .navbar-brand img {
+        max-width: 240px;
+    }
+
+    .like-widget_post .widget-content .image-thumb a img {
+        width: 100%;
+    }
+
+    .sec-title .title {
+        font-size: 25px;
+        line-height: 28px;;
+    }
+
+    .contact_contect_main h2 {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 539px){
+  
+    .main_next_prev  {
+       display: none;
+    }
+
+    .contact_contect_main h2 {
+        font-size: 25px;
+    }
+
+    .like-widget_post .widget-content .image-thumb a img {
+        width: 100%;
+    }
+
+    .main_member_profile .profile_name .profile_img{
+        display: flex;
+        justify-content: center;
+    }
+
+  .main_member_profile .profile_name .profile_img img {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        object-position: top;
+        margin: auto;
+        position: relative;
+    }
+
+    .profile_main_border {
+        display: flex;
+        height: 330px;
+        width: 330px;
+        position: absolute;
+        border: 1px dashed var(--main-color);
+        border-radius: 50%;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        animation: slideDas 10s infinite linear;
+    }
+
+    .profile_main_border:before, .profile_main_border:after {
+        position: absolute;
+        height: 15px;
+        width: 15px;
+        background: var(--main-color);
+        content: '';
+        border-radius: 50%;
+    }
+    
+    .profile_main_border:before {
+        left: 0;
+        top: 100px;
+    }
+    
+    .profile_main_border:after {
+        right: 0;
+        bottom: 105px;
+    }
+
+    .main_member_profile .profile_name::before {
+        content: none !important;
+    }
+
+    .profile_content{
+        position: unset;
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .hero_content h1 {
+        font-size: 40px;
+    }
+
+    .news_latter_text h5{
+        display: none;
+    }
+
+   
+
+    .main_hero_img{
+        display: none;
+    }
+
+    .our_customer_section  .main_heading {
+        top: 0px; 
+        text-align: center;
+    }
+
+    .about_img img{
+        width: 100%;
+    }
+
+    .counter_main {
+        padding: 15px 1px 15px 0px;
+    }
+
+    .counter_main ul li h3 {
+        font: normal normal 800 30px Inter;
+    }
+
+    .coll_btn{
+
+        display: none !important;
+    }
+
+    .main_heading h2{
+        font-size: 25px;
+    }
+
+    .about_content h2 {
+        font-size: 25px;
+    }
+
+    .about_content h3{
+        font-size: 18px;
+    }
+
+    .our_customer_section .acamic_img img, .profile_tabs-main .acamic_img img, .search-widget_post .widget-content .acamic_img .profile_img img {
+        object-position: 100% 6%;
+        height: 400px;
+    }
+
+    .main_heading img{
+        width: 100%;
+    }
+
+    .hero_animation{
+        width: 230vw;
+        transform: rotate(38deg);
+        left: -50%;
+        bottom: -160px;
+    }
+
+    .main_tab_list_header .nav-tabs {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    .main_tab_list_header .nav-tabs .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 20px 20px
+    }
+
+    .main_tab_list_header {
+        padding-bottom: 0px;
+        margin-bottom: 0;
+        margin-top: 20px !important;
+    }
+
+    .main_tab_list_header .nav-tabs .nav-link.active:before {
+        bottom: -19px;
+    }
+
+    .user_message_links ul,  .content-type ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .user_message_links ul{
+        gap: 5px !important;
+    }
+
+    .user_message_links li {
+        margin: 0px 8px;
+    }
+
+    .content-type {
+        padding: 15px 15px;
+    }
+
+    .content-type .content-list .post-submit{
+        margin: auto !important;
+    }
+
+    .content-type .content-list li {
+        padding: 0px 10px;
+    }
+
+    .profile_main .info-card-content li .info-name {
+        width: 40%;
+    }
+
+    .profile_main .info-card-content li p {
+        display: flex;
+    }
+
+    #Groups-tab-pane .group-item.lab-item {
+        margin-top: 25px;
+    }
+
+    #Groups-tab-pane .search-widget_post .widget-content .acamic_img .profile_img img {
+        object-position: 100% 40%;
+        height: 250px;
+    }
+
+    .login_box .login-other-item span {
+        display: none;
+    }
+
+    .group_section .search-widget_post .widget-content .acamic_img .profile_img img {
+        height: 300px;
+        object-position: 70% 20%;
+    }
+
+    .post_thumb img {
+        height: 200px;
+        object-fit: cover;
+    }
+    .embed-responsive iframe {
+        height: 250px;
+    }
+
+    .post_content h3 a {
+        font: normal normal 700 20px Inter;
+    }
+
+    .blog_wrapper .footer_box {
+        display: none;
+    }
+
+    #navbar-wrapper{
+        display: flex;
+        position: fixed;
+        right: 0;
+        justify-content: end;
+        z-index: 1000;
+        top: 5px;
+    }
+
+    header .navbar-brand img {
+        max-width: 200px;
+    }
+
+    .main_heading p br{
+        display: none;
+    }
+
+    .banner__list .row .col-xl-3, .banner__list .row .col {
+        margin-top: 15px;
+    }
+
+    .about_content .col-xl-4.col-lg-4.col-md-4.col-sm-4.col-6:first-child {
+        display: none;
+    }
+
+    .about_work {
+        text-align: center;
+    }
+
+    .our_customer_section .mySwiper {
+        padding: 0px 7px;
+    }
+
+    .sec-title .title {
+        font-size: 25px;
+        line-height: 28px;;
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 375px){
+    .profile_main_border {
+        height: 290px;
+        width: 290px;
+    }
+
+    .other:before, .other:after {
+        width: 30%;
+    }
+
+    .main_member_profile .profile_name .profile_img img {
+        width: 260px;
+        height: 260px;
+    }
+
+    .profile_main_border:before {
+        top: 90px;
+    }
+
+    .profile_main_border:after {
+        bottom: 90px;
+    }
+
+    .create-post .lab-inner {
+        padding: 0px 25px;
+    }
+
+    .create-post .lab-content .post-form input {
+        padding: 40px 25px;
+    }
+
+    .create-post .thumb-content h6 p {
+        padding-left: 15px;
+    }
+
+    .counter_main ul li h3 {
+        font: normal normal 800 27px Inter;
+    }
+
+    .counter_main ul li {
+        padding: 0px 15px;
+    }
+
+    .counter_main ul li span {
+        font: normal normal 600 27px Inter;
+    }
+
+    .counter_main ul li {
+        border-left: 1px solid #eeeeee4a;
+        padding: 0px 15px;
+    }
+
+    .hero_section {
+        height: 97vh;
+    }
+}
+

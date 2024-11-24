@@ -1,0 +1,99 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Comptes gratuits{% endblock %}
+
+{% block body %}
+    <!-- App-Content -->
+    <div class="hor-content main-content">
+        <div class="container">
+
+            <!--Page header-->
+            <div class="page-header">
+                <div class="page-leftheader">
+                    <h4 class="page-title mb-0 text-primary">Comptes gratuits</h4>
+                </div>
+                <div class="page-rightheader">
+                    <div class="btn-list">
+                        <button class="btn btn-outline-primary"><i class="fe fe-download me-2"></i>
+                            Import</button>
+                        <a href="javascript:void(0);"  class="btn btn-primary btn-pill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-calendar me-2 fs-14"></i> Search By Date</a>
+                        <div class="dropdown-menu border-0">
+                                <a class="dropdown-item" href="javascript:void(0);">Today</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Yesterday</a>
+                                <a class="dropdown-item active" href="javascript:void(0);">Last 7 days</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Last 30 days</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Last 6 months</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Last year</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Page header-->
+
+            <!--Row-->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="card border-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Comptes</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered card-table table-vcenter text-nowrap" id="datatable">
+                                    <thead>
+                                        <tr>
+                                            <th>N°</th>
+                                            <th>Photo</th>
+                                            <th scope="row">Nom utilisateur</th>
+                                            <th>Nom</th>
+                                            <th>Email</th>
+                                            <th>Signalé</th>
+                                            <th>Bloqué</th>
+                                            <th>Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% set i = 1 %}
+                                        {% for compte in comptes %}
+                                            <tr>
+                                                <td>
+                                                    {{ i }}
+                                                </td>
+                                                <td> <img src="{{ compte.photoProfile ? asset('images/photoProfils/' ~ compte.photoProfile ) : asset ('images/photoProfils/default.png') }}" class="avatat avatar-md brround me-2" alt="member-img">
+                                                </td>
+                                                <td>{{ compte.nomUtilisateur }}</td>
+                                                <td>{{ compte.nom }}</td>
+                                                <td>{{ compte.email }}</td>
+                                                <td>{{ compte.compteSignale|length }}</td>
+                                                <td>
+                                                    <span class="badge bg-success-light border-success fs-11">Paid</span>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <a href="javascript:void(0);" class="btn btn-light btn-sm" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Options <i class="fa fa-angle-down"></i></a>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="fe fe-eye me-2"></i> Afficher le compte</a>
+                                                            <a class="dropdown-item" href="{{ path ('envoyer_massage_prive', {'idCompte': compte.id }) }}"><i class="fe fe-share me-2"></i> Envoyer un message</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="fe fe-edit me-2"></i> Editer</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="fe fe-trash me-2"></i> Suspendre le compte</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% set i = i + 1 %}
+                                        {% endfor %}
+                                            
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End app-content-->
+{% endblock %}

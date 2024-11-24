@@ -3,3 +3,16 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+supprimer_photo_temoignage:
+    path: /temoignage/supprimer-photo-temoignage
+    controller: App\Controller\Temoignage\SupprimerPhotoTemoignageController::supprimerPhotoTemoignage
+    methods: ['POST']
+bloquer_amitie:
+    path: /amitie/bloquer-amitie
+    controller: App\Controller\Amitie\BloquerAmitieController::bloquerAmitie
+    methods: ['POST']
+debloquer_amitie:
+    path: /amitie/debloquer-amitie
+    controller: App\Controller\Amitie\DebloquerAmitieController::debloquerAmitie
+    methods: ['POST']

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Valide site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+
+{% block body %}
+<body style="background-color: #161a2d;">
+	<!-- login section start -->
+	<section class="mt-5 pt-5 login_section mb-5">
+		<div class="container">
+		
+			<div class="row justify-content-center">
+				<div class="col-xl-8 col-lg-8 col-md-10">
+					<div class="main_heading text-center mt-4 mb-5">
+						<h2 class="text-white">{% trans %}Email vérifiée avec succès !{% endtrans %}</h2>
+					</div>
+					<div class="login_box text-center">
+						
+						<a href="{{ path ('login')}}" class="border-0 w-100 login_btn mt-4 me-2">
+							<i class="fa-solid fa-arrow-trend-up me-2"></i>Connexion
+						</a>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- login section end -->
+{% endblock %}

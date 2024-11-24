@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mot de passe oublié{% endblock %}
+
+{% block body %}
+
+<!-- ==========Forgot password Section start Here========== -->
+    <div class="login-section" style="margin-top: 110px;">
+        <div class=" container">
+            <div class="account-wrapper">
+                {{form_start(modifierPwForm , {'attr': {'class':'row g-3 needs-validation'}})}}
+                    <div class="form-group"></div>
+                    <div class="input-group mb-4">
+                        <div class="input-group" id="Password-toggle">
+                            <a href="" class="input-group-text border-primary">
+                                <i class="fe fe-eye" aria-hidden="true"></i>
+                            </a>
+                            {{form_widget(modifierPwForm.plainPassword,{'attr':{'class':'form-control border-primary','id':'validationTooltip05'}})}}
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center mb-3">
+                        <button class="btn btn-primary btn-lg w-100 br-7" name="modifier">{% trans %}Modifier{% endtrans %}</button>
+                    </div>
+
+                {{form_end(modifierPwForm)}}
+                
+            </div>
+        </div>
+    </div>
+    <!-- ==========Forgot password Section ends Here========== -->
+{% endblock %}

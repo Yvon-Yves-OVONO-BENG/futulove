@@ -1,0 +1,43 @@
+<div class="widget_side mt-1 widget_category">
+    <div class="widget_header">
+        <h5>{% trans %}Actualité{% endtrans %}</h5>
+    </div>
+    <ul class="list-unstyled p-0 m-0">
+        <li>
+            <a href="{{ path ('mes_temoignages', {'a': 1 })}}">
+                <span>{% trans %}Mes témoignages{% endtrans %}</span>
+                <span>{{ mesTemoignages|length|number_format }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>{% trans %}Demandes d'amitié{% endtrans %}</span>
+                <span>{{ demandesAmitie|length|number_format }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>{% trans %}Mes favoris{% endtrans %}</span>
+                <span>{{ mesFavoris|length|number_format }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>{% trans %}Je suis leur favori{% endtrans %}</span>
+                <span>{{ jeSuisLeurFavori|length|number_format }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>{% trans %}Vos groupes{% endtrans %}</span>
+                <span>{{ mesGroupes|length|number_format }}</span>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <span>{% trans %}Membres bloqués{% endtrans %}</span>
+                <span>{{ amisBloques|length|number_format }}</span>
+            </a>
+        </li>
+    </ul>
+</div>

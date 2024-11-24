@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Nos Politiques De Confidentialité site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+{% block stylesheets %}
+	<style>
+		.paragraphe {
+			margin-left: 40px;
+		}
+
+		.puce {
+			margin-left: 70px;
+		}
+
+
+		p {
+			color: #000000 ;
+			text-align: justify !important;
+		}
+	</style>
+{% endblock %}
+{% block body %}
+  	<!-- breadcrumb section start -->
+    <section class="breadcrumb_section">
+		<div class="container">
+			<div class="row">
+				<div class="breadcrumb_content">
+					<div class="row">
+						<div class="col-xl-12 col-lg-12">
+							<div class="breadcrumb_heading">
+								<h2>{% trans %}Nos Politiques De Confidentialité{% endtrans %}</h2>
+								<p class="text-white mt-3">{% trans %}Confidentialité et sécurité assurées, confiance gangée.{% endtrans %}</p>
+							</div>
+						</div>
+						<div class="col-xl-6 col-lg-6">
+							<div class="breadcrumb_list">
+								<ul class="d-flex list-unstyled p-0 m-0">
+									<li><a href="{{ path ('accueil')}}">{% trans %}Accueil{% endtrans %}</a></li>
+									<li>
+									<div class="scrolldown-btn">
+										<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+										x="0px" y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+										xml:space="preserve">
+											<path class="first-path" fill="#ff1182"
+												d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+											</path>
+											<path class="second-path" fill="#ff1182"
+												d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+											</path>
+										</svg>
+									</div>
+									</li>
+									<li>{% trans %}Nos Politiques De Confidentialité{% endtrans %}</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </section>
+    <!-- breadcrumb section end -->
+
+  	<!-- pricing plan section start -->
+  	<section class="mt-5">
+    	<div class="container">
+      		<div class="main_heading text-center">
+        		<h2>{% trans %}Politiques De Confidentialité de futulove.com{% endtrans %}</h2>
+        		<img src="{{ asset ('assets/images/home/heading-img.png')}}" alt="futulove">
+      		</div>
+      		<div class="row mt-4">
+				<p>{% trans %}Dernière mise à jour : 19 août 2024{% endtrans %}</p>
+
+				<p >{% trans %}Chez Futulove.com, nous respectons votre vie privée et nous nous engageons à protéger les informations personnelles que vous partagez avec nous. Cette politique de confidentialité décrit comment nous collectons, utilisons, stockons, partageons et protégeons vos informations personnelles lorsque vous utilisez notre site de rencontres.{% endtrans %}</p>
+
+				<p><b>{% trans %}1. Collecte des Informations{% endtrans %}</b> </p>
+
+				<p class="paragraphe">{% trans %}Nous collectons les informations suivantes lorsque vous utilisez notre site :{% endtrans %}</p>
+				<p>
+					<ul class="puce">
+						<li>
+							<b>{% trans %}Informations personnelles{% endtrans %}</b>:  {% trans %}telles que votre nom, adresse e-mail, date de naissance, sexe, et informations de paiement lorsque vous vous inscrivez ou utilisez nos services.{% endtrans %}
+						</li>
+						<li>
+							<b>{% trans %}Informations de profil{% endtrans %}</b> :  {% trans %}telles que vos photos, préférences, centres d'intérêt, et autres informations que vous choisissez de partager sur votre profil.{% endtrans %}
+						</li>
+						<li>
+							<b>{% trans %}Données d'utilisation{% endtrans %}</b> : {% trans %}y compris les informations sur votre activité sur le site, telles que vos interactions avec d'autres membres, les messages échangés, et les pages visitées.{% endtrans %}
+						</li>
+						<li>
+							<b>{% trans %}Informations techniques{% endtrans %}</b> : {% trans %}comme l'adresse IP, le type de navigateur, et les identifiants de l'appareil que vous utilisez pour accéder à notre site.{% endtrans %}
+						</li>
+					</ul>
+				</p>
+				
+				<p><b>{% trans %}2. Utilisation des Informations{% endtrans %}</b> </p>
+
+				<p class="paragraphe">{% trans %}Nous utilisons les informations que nous collectons pour :{% endtrans %}</p>
+				<p>
+					<ul class="puce">
+						<li>
+							<b>{% trans %}Fournir et améliorer nos services{% endtrans %}</b> : {% trans %}pour vous permettre d'utiliser les fonctionnalités du site, améliorer l'expérience utilisateur, et personnaliser les suggestions de partenaires.{% endtrans %}</p>
+						</li>
+						<li>
+							<b>{% trans %}Gérer votre compte{% endtrans %}</b> : {% trans %}pour créer et maintenir votre profil, traiter vos paiements, et vous envoyer des notifications importantes.{% endtrans %}</p>
+						</li>
+						<li>
+							<b>{% trans %}Assurer la sécurité{% endtrans %}</b> : {% trans %}pour détecter, prévenir, et enquêter sur les activités frauduleuses ou illégales sur le site.{% endtrans %}</p>
+						</li>
+						<li>
+							<b>{% trans %}Communiquer avec vous{% endtrans %}</b>: {% trans %}pour répondre à vos questions, vous informer des mises à jour, et vous envoyer des offres promotionnelles si vous avez consenti à les recevoir.{% endtrans %}</p>
+						</li>
+					</ul>
+				</p>
+
+				<p><b>{% trans %}3. Partage des Informations{% endtrans %}</b> </p>
+
+				<p class="paragraphe">{% trans %}Nous ne partageons pas vos informations personnelles avec des tiers, sauf dans les cas suivants :{% endtrans %}</p>
+				<p>
+					<ul class="puce">
+						<li>
+							<b>{% trans %}Avec votre consentement{% endtrans %}</b> : {% trans %}lorsque vous nous autorisez à partager vos informations.{% endtrans %}
+						</li>
+						<li>
+							<b>{% trans %}Pour des raisons légales{% endtrans %}</b> : {% trans %}si la loi nous y oblige, ou si nous devons répondre à une demande légale, protéger nos droits ou ceux de nos utilisateurs.{% endtrans %}
+						</li>
+						<li>
+							<b>{% trans %}Avec des prestataires de services{% endtrans %}</b> : {% trans %}qui nous aident à exploiter le site, comme les services d'hébergement, de paiement, ou d'analyse, sous réserve qu'ils respectent la confidentialité de vos informations.{% endtrans %}
+						</li>
+					</ul>
+				</p>
+
+
+				<p><b>{% trans %}4. Stockage et Sécurité des Informations{% endtrans %}</b> </p>
+
+				<p class="paragraphe">{% trans %}Nous prenons des mesures raisonnables pour protéger vos informations personnelles contre la perte, le vol, l'accès non autorisé, et la divulgation. Les informations personnelles sont stockées sur des serveurs sécurisés et nous utilisons des technologies de cryptage pour les protéger. Cependant, aucune méthode de transmission sur Internet ou de stockage électronique n'est entièrement sécurisée, et nous ne pouvons pas garantir la sécurité absolue de vos informations.{% endtrans %}</p>
+
+				<p><b>{% trans %}5. Vos Droits{% endtrans %}</b> </p>
+
+				<p class="paragraphe">{% trans %}Vous avez le droit de :{% endtrans %}</p>
+				<p>
+					<ul class="puce">
+						<li>
+							<b>{% trans %}Accéder à vos informations{% endtrans %}</b> : {% trans %}pour consulter les informations personnelles que nous détenons à votre sujet.{% endtrans %}
+						</li>
+						<li>
+							<b>{% trans %}Modifier ou supprimer vos informations{% endtrans %}</b> : {% trans %}en mettant à jour votre profil ou en demandant la suppression de votre compte.{% endtrans %}
+						</li>
+						<li>
+							<b>{% trans %}Refuser les communications marketing{% endtrans %}</b> : {% trans %}en vous désabonnant de nos e-mails promotionnels à tout moment.{% endtrans %}
+						</li>
+					</ul>
+				</p>
+
+				<p><b>{% trans %}6. Cookies et Technologies Similaires{% endtrans %}</b> </p>
+
+				<p class="paragraphe">{% trans %}Nous utilisons des cookies pour améliorer votre expérience sur notre site. Les cookies sont de petits fichiers stockés sur votre appareil qui nous permettent de reconnaître vos préférences, de personnaliser votre expérience, et d'analyser l'utilisation du site. Vous pouvez gérer vos préférences de cookies via les paramètres de votre navigateur.{% endtrans %}</p>
+
+				<p><b>{% trans %}7. Modifications de cette Politique{% endtrans %}</b> </p>
+
+				<p class="paragraphe">{% trans %}Nous pouvons mettre à jour cette politique de confidentialité de temps en temps pour refléter les changements dans nos pratiques ou les exigences légales. Nous vous informerons de toute modification importante en publiant la nouvelle politique sur notre site et en vous envoyant une notification.{% endtrans %}</p>
+
+				<p><b>{% trans %}8. Contactez-nous{% endtrans %}</b> </p>
+
+				<p class="paragraphe">{% trans %}Si vous avez des questions ou des préoccupations concernant cette politique de confidentialité, vous pouvez nous contacter à {% endtrans %} <a href="{{ path ('contact')}}">[adresse e-mail ou formulaire de contact]</a>.</p>
+
+      		</div>
+    	</div>
+  	</section>
+  	<!-- pricing plan section end -->
+{% endblock %}

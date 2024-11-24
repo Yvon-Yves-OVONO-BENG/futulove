@@ -1,0 +1,287 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Accueil site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+
+{% block body %}
+    
+    <!-- hero section start -->
+    <section class="hero_section d-flex align-items-center">
+        <div class="hero_animation">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-xl-6 col-lg-6 col-md-7">
+                    <div class="hero_content">
+                        {# <h5 class="mb-4">{% trans %}Bienvenue sur FUTU LOVE{% endtrans %}</h5> #}
+                        <h1 class="text-white">{% trans %}Trouvez votre moitié,{% endtrans %} <span>un clic à la fois</span></h1>
+                        {# <p class="text-white mt-4" style="text-align: justify !important;">{% trans %}Notre site de rencontres est conçu pour connecter des personnes
+                            qui partagent des valeurs et des intérêts communs. Avec une interface intuitive et des fonctionnalités 
+                            innovantes, nous vous aidons à trouver des relations authentiques, que vous cherchez une amitié sincère, 
+                            un amour durable ou simplement de nouvelles rencontres. Ici, chaque intéraction est une opportunité de 
+                            découvir quelqu'un de spécial. Rejoignez-nous et commencez votre aventure vers des connexion significatives.{% endtrans %}</p> #}
+                            <p class="text-white mt-4" style="text-align: justify !important;">{% trans %}Sécurisé et conviviale, futulove permet à des personnes partageant les mêmes intérêts de se connecter. Grâce à des profils détaillés et la recherche avancée, les utilisateurs peuvent trouver des correspondances compatibles. Les groupes d'intérêts facilitent les interactions authentiques. Nos plans tarifaires flexibles s'adaptent à tous les besoins. Rejoignez-nous et commencez votre aventure vers des connexion significatives.{% endtrans %}</p>
+                        <div class="d-flex align-items-center mt-5 gap-5">
+                        <div class="main_btn">
+                            <a href="{{ path ('register') }}" class="main_btn">{% trans %}Enregistrez-vous{% endtrans %}</a>
+                            <div class="scrolldown-btn">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                x="0px" y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                xml:space="preserve">
+                                <path class="first-path" fill="#000"
+                                d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                </path>
+                                <path class="second-path" fill="#000"
+                                d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                </path>
+                            </svg>
+                            </div>
+                        </div>
+                        <div class="coll_btn d-flex gap-3 align-items-center">
+                            <div class="call_bg">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </div>
+                            <div>
+                            <p class="mb-0">MAIL</p>
+                            <a href="mailto:futulove@futulove.com">futulove.com</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-5 h-100 d-none d-md-block">
+                    <div class="main_hero_img h-100">
+                        <div class="wating_img">
+                            <img src="{{ asset ('assets/images/home/ask-img.png') }}" alt="futulove">
+                        </div>
+                        <div class="hero_img">
+                            <img src="{{ asset ('assets/images/home/hero.png') }}" alt="futulove">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="counter_main">
+            <div class="counter_main_box" id="counter">
+                <ul class="list-unstyled p-0 m-0 d-flex">
+                {% set relation = temoignages|filter(temoignage => temoignage.createdBy.photoProfile is not null ) %}
+                <li class="border-0">
+                    <div class="d-flex align-items-center gap-1">
+                    <h3 class="count mb-0" data-number="{{ relation|length }}">{{ relation|length }}</h3>
+                    <span>+</span>
+                    </div>
+                    <p class="mb-0">{% trans %}Relations{% endtrans %}</p>
+                </li>
+                {% set enLigne = lesMembres|filter(membre => membre.enLigne == 1 ) %}
+                <li>
+                    <div class="d-flex align-items-center gap-1">
+                    <h3 class="count mb-0" data-number="{{ enLigne|length }}">{{ enLigne|length }}</h3>
+                    <span>+</span>
+                    </div>
+                    <p class="mb-0">{% trans %}Membres en ligne{% endtrans %}</p>
+                </li>
+                
+                <li>
+                    <div class="d-flex align-items-center gap-1">
+                    <h3 class="count mb-0" data-number="{{ lesMembres|length }}">{{ lesMembres|length }}</h3>
+                    <span>+</span>
+                    </div>
+                    <p class="mb-0">{% trans %}Membres{% endtrans %}</p>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!-- hero section end -->
+
+    {# # Formulaire recherche ame soeur  #}
+    {% include "includes/_chercherAmeSoeur.html.twig" %}
+    {# # Formulaire recherche ame soeur  #}
+
+    <!-- our happy customer section start -->
+    <section class="our_customer_section mt-5 ">
+        <div class="container">
+            <div class="main_heading ">
+                <h2>{% trans %}Rencontrer nos nouveaux membres{% endtrans %}</h2>
+                <img src="{{ asset ('assets/images/home/heading-img.png') }}" alt="futulove">
+            </div>
+
+            <div class="swiper mySwiper py-5">
+                    <div class="swiper-wrapper pt-4">
+                        {% for membre in lesDixDerniersmembres %}
+                            
+                            <div class="swiper-slide">
+                                <div class="acamic_img">
+                                    <a href="{{ path ('afficher_profil', {'slug': membre.slug}) }}">
+                                        {% if membre.sexe %}
+                                            {% if membre.sexe.id == 1 %}
+                                                <img src="{{ membre.photoProfile ? asset ('images/photoProfils/' ~ membre.photoProfile ) : ('images/photoProfils/femme.jpg')}}" alt="{{ membre.nom ?  membre.nom :"" }}" style="height :300px !important">
+                                            {% else %}
+                                                <img src="{{ membre.photoProfile ? asset ('images/photoProfils/' ~ membre.photoProfile ) : ('images/photoProfils/homme.jpg')}}" alt="{{ membre.nom ?  membre.nom :"" }}" style="height :300px !important">
+                                            {% endif %}
+                                        {% endif %}
+                                            
+                                    </a>
+                                    <div class="customer_details">
+                                        <h4>{{ membre.nom ?  membre.nom : "anonyme" }}</h4>
+                                        <p>
+                                            <i class="fa-solid fa-flag"></i> 
+                                            <img src="{{ membre.pays ? asset ('images/drapeaux/' ~ membre.pays.drapeau ) : asset ('images/drapeaux/default.jpeg')  }}" alt="{{ membre.nom ?  membre.nom :"" }}" style="width: 30px; height :30px !important">
+                                            <i class="fa-solid fa-globe"></i> {{ membre.pays ? membre.pays.pays :"Pas défini" }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        {% endfor %}
+                    </div>
+                
+
+                <div class="main_next_prev">
+                    <div class="swiper-button-next">
+                        <div class="main_btn">
+                            <a href="#" class="main_btn">{% trans %}Sui.{% endtrans %}</a>
+                            <div class="scrolldown-btn">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                xml:space="preserve">
+                                <path class="first-path" fill="#000"
+                                    d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                </path>
+                                <path class="second-path" fill="#000"
+                                    d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev">
+                        <div class="main_btn">
+                            <div class="scrolldown-btn">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                xml:space="preserve">
+                                <path class="first-path" fill="#000"
+                                    d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                </path>
+                                <path class="second-path" fill="#000"
+                                    d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                </path>
+                                </svg>
+                            </div>
+                            <a href="#" class="main_btn">{% trans %}Préc.{% endtrans %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- our happy customer section end -->
+
+    <!-- download applications  -->
+    {% include "includes/_telechargerApplication.html.twig" %}
+    <!-- download applications end -->
+
+    <!-- clients review section start -->
+    <section class="mt-5 pt-4 review_section">
+        <div class="container">
+            <div class="main_heading text-center">
+                <h2>{% trans %}Témoignages{% endtrans %}</h2>
+                <img src="{{ asset ('assets/images/home/heading-img.png') }}" alt="futulove">
+                <p class="mt-2">{% trans %}Découvrez les histoires qui ont commencé ici{% endtrans %}</p>
+            </div>
+            <div class="row">
+                <div class="swiper mySwiper py-5">
+                    <div class="swiper-wrapper pt-4">
+
+                        {% for temoignage in temoignages %}
+                            {% if temoignage.createdBy.photoProfile %}
+                                <div class="swiper-slide">
+                                    <div class="review_box">
+                                        <div class="review_img">
+                                            <div class="rounder"></div>
+                                            <img src="{{ temoignage.createdBy.photoProfile ? asset ('images/photoProfils/' ~ temoignage.createdBy.photoProfile ) : ('images/photoProfils/default.png')}}" alt="futulove">
+                                        </div>
+                                        <div class="review_content text-center">
+                                            <h4><a href="{{ path ('afficher_profil', {'slug': temoignage.createdBy.slug }) }}" style="color: #FF1182 !important">{{ temoignage.createdBy.nom }}</a></h4>
+                                            <p> 
+                                                <img src="{{ temoignage.createdBy.pays ? asset ('images/drapeaux/' ~ temoignage.createdBy.pays.drapeau ) : "" }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                {{ temoignage.createdBy.pays ? temoignage.createdBy.pays.pays : "" }}
+                                            </p>
+                                            <h6>{{ temoignage.titreTemoignage }}</h6>
+                                            <p>{{ temoignage.temoignage|truncate_40 }}
+
+                                            <div class="read_more">
+                                                <a href="{{ path ('afficher_temoignage', {'slug': temoignage.slug }) }}">{% trans %}Lire la suite{% endtrans %}
+                                                    <div class="scrolldown-btn">
+                                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            x="0px" y="0px" width="10px" height="40px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                                            xml:space="preserve">
+                                                            <path class="first-path" fill="#ff1182"
+                                                            d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                            </path>
+                                                            <path class="second-path" fill="#ff1182"
+                                                            d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                            </path>
+                                                        </svg>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                            
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- clients review section end -->
+
+{% endblock %}

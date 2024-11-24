@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Nouveau mot de passe site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+
+{% block body %}
+
+<body style="background-color: #161a2d;">
+
+    <!-- login section start -->
+    <section class="mt-5 pt-5 login_section mb-1">
+        <div class="container">
+            <div class="main_heading text-center mt-4">
+                <h2 class="text-white">
+					<p class="text-center fs-18 text-white">
+						{% trans %}Veuillez saisir le nouveau mot de passe{% endtrans %}
+					</p>
+				</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-10">
+					<div class="login_box">
+						
+						{{form_start(modifierPwForm , {'attr': {'class':'row g-4 needs-validation'}})}}
+                            <div class="form-group" id="Password-toggle">
+                                {{form_row(modifierPwForm.plainPassword,{'attr':{'class':'form-control border-primary'}})}}
+                            
+                                {{form_row(modifierPwForm.confirmPassword,{'attr':{'class':'form-control border-primary'}})}}
+                            </div>
+
+                            <div id="password-message"></div>
+                                
+                            <div class="form-group text-center mb-3">
+                                <button type="submit" id="submit-button" class="btn btn-primary btn-lg w-100 br-7">
+                                    <i class="fa fa-unlock me-2"></i> {% trans %}Réinitialiser{% endtrans %}
+                                </button>
+                            </div>
+                        {{form_end(modifierPwForm)}}
+
+                        <script>
+                            document.addEvenListener('DOMContentLoaded', function() {
+                                const password = document.getElementById('modifier_password_plainPassword');
+                                const confirmPassword = document.getElementById('modifier_password_confirmPassword');
+                                const message = document.getElementById('password-message');
+                                const submitButton = document.getElementById('submit-button');
+                                console.log(password);
+                                function comparaisonMotDePasses() 
+                                {
+                                    if (password.value === confirmPassword.value) {
+                                        message.textContent = "Les mots de passe correspondent.";
+                                        message.style.color = "green";
+                                        submitButton.disabled = false;
+                                    }
+                                    else 
+                                    {
+                                        message.textContent = "Les  mots de passe nr correspondent pas.";
+                                        message.style.color = "red";
+                                        submitButton.disabled = true;
+                                    }
+                                }
+
+                                password.addEvenListener('input', comparaisonMotDePasses);
+                                confirmPassword.addEvenListener('input', comparaisonMotDePasses);
+                            });
+                        </script>
+                        <!-- Show Password -->
+                        <script src="{{ asset ('js/bootstrap-show-password.min.js') }}"></script>
+        
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>>
+		
+{% endblock %}

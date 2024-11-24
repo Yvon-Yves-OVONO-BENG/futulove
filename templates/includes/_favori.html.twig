@@ -1,0 +1,52 @@
+<div class="search-widget_post like-widget_post mt-4">
+    <div class="search-title">
+        <h5>
+            
+            {% trans %}Mes favoris{% endtrans %}
+            
+        </h5>
+    </div>
+    <div class="widget-content">
+        <div class="row row-cols-3 row-cols-sm-auto g-3">
+
+            {% for favori in favoris %}
+                <div class="col">
+                    <div class="image-thumb">
+                        <a href="{{ path ('afficher_profil', {'slug': favori.favori.slug }) }}">
+                            <img src="{{ favori.favori.photoProfile ? asset ('images/photoProfils/' ~ favori.favori.photoProfile ) : ('images/photoProfils/default.png')}}" width="50" height="50" alt="img">
+                        </a>
+                    </div>
+                    {% if app.user.id == profil.id %}
+                        <a href="{{ path ('supprimer_favori', {'id': favori.id }) }}" class="main-btn btn-sm text-danger">
+                            <i class="fa fa-trash me-2"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+
+    <div class="search-title mt-4">
+        <h5>
+            
+            {% trans %}Je suis leur favori{% endtrans %}
+            
+        </h5>
+    </div>
+    <div class="widget-content">
+        <div class="row row-cols-3 row-cols-sm-auto g-3">
+
+            {% for membre in jeSuisLeurFavori %}
+                <div class="col">
+                    <div class="image-thumb">
+                        <a href="{{ path ('afficher_profil', {'slug': membre.moi.slug }) }}">
+                            <img src="{{ membre.moi.photoProfile ? asset ('images/photoProfils/' ~ membre.moi.photoProfile ) : ('images/photoProfils/default.png')}}" width="50" height="50" alt="img">
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>

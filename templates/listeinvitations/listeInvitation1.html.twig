@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des invitations{% endblock %}
+
+{% block body %}
+    {% block stylesheets %}
+            {# <!--Bootstrap css -->
+            <link href="{{ asset ('build/assetsAzea/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+            <link href="{{ asset ('build/assetsAzea/css/style.css')}}" rel="stylesheet" /> #}
+    {% endblock %}
+ <section class="blog-section padding-tb">
+<!-- App-Content -->
+    <div class="hor-content main-content">
+        <div class="container">
+
+            <!--Page header-->
+            <div class="page-header">
+                <div class="page-leftheader">
+                    <h4 class="page-title mb-0 text-primary">Invitations</h4>
+                </div>
+                <div class="page-rightheader">
+                    <div class="btn-list">
+                        
+                        <a href="javascript:void(0);"  class="btn btn-primary btn-pill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-calendar me-2 fs-14"></i> Search By Date</a>
+                        <div class="dropdown-menu border-0">
+                             
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Page header-->
+
+            <!-- Row -->
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-lg-5 col-xl-4">
+                        <div class="overflow-hidden mb-0 mb-lg-0">
+                            <div class="card-body p-0">
+                                <div class="main-content-left main-content-left-chat">
+                                    <div class="p-4 pb-0 border-bottom">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control  " placeholder="Search Friends...">
+                                                <button type="button" class="btn btn-primary ">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                        </div>
+                                    </div>
+                                       {% set i = 0 %}
+                                        {% for membre in membres %} 
+                                            {% if membre.enLigne == 1 %}
+                                                {% set i = i + 1 %}
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    <div class="main-chat-contacts-wrapper">
+                                        <label class="form-label mb-2 fs-13">En ligne ({{i}})</label>
+                                        <div class="main-chat-contacts" id="chatActiveContacts">
+                                        {% set i = 0 %}
+                                        {% for membre in membres %} 
+                                            {% if membre.enLigne == 1 %}
+                                                {% if i < 8  %}
+                                                <div>
+                                                    <div class="main-img-user online"><img alt="futulove" src="{{ membre.photoProfile ? asset('images/photoProfils/' ~ membre.photoProfile) : asset('build/assetsAzea/images/users/8.jpg')}}" class="avatar avatar-md brround"></div><small>{{ membre.nom }}</small>
+                                                </div>
+                                                {% endif %}
+                                                {% set i = i + 1 %}
+                                            {% endif %}
+                                        {% endfor %}
+                                            <div>
+                                                {% if i > 8 %}
+                                                <div class="main-chat-contacts-more">
+                                                    {{ i - 8}}
+                                                </div><small>More</small>
+                                                {% endif %}
+                                            </div>
+                                        </div><!-- main-active-contacts -->
+                                    </div><!-- main-chat-active-contacts -->
+                                    <div class="main-chat-list" id="ChatList">
+                                        {% for membre in membres %} 
+                                            {% if membre.enLigne == 1 %}
+                                            <a href="javascript:void(0);">
+                                            <div class="media new">
+                                                <div class="main-img-user online">
+                                                    <img alt="futulove" src="{{ membre.photoProfile ? asset('images/photoProfils/' ~ membre.photoProfile) : asset('build/assetsAzea/images/users/8.jpg')}}" class="avatar avatar-md brround"><span>2</span>
+                                                </div>
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <div class="media-contact-name">
+                                                                <span>{{membre.nom}}</span>
+                                                            </div>
+                                                        </div>
+                                                         <div class="col-lg-4">
+                                                            <button type="button" class="btn btn-success  mt-1 mb-1 me-3">
+                                                                <span>Accepter</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger  mt-1 mb-1 me-3">
+                                                                <span>Refuser</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <p>Afficher le profil</p>
+                                                </div>
+                                            </div>
+                                            </a>
+                                            {% else %}
+                                                 <a href="javascript:void(0);">
+                                            <div class="media new">
+                                                <div class="main-img-user">
+                                                    <img alt="futulove" src="{{ membre.photoProfile ? asset('images/photoProfils/' ~ membre.photoProfile) : asset('build/assetsAzea/images/users/8.jpg')}}" class="avatar avatar-md brround"><span>1</span>
+                                                </div>
+                                                <div class="media-body">
+                                                     <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <div class="media-contact-name">
+                                                                <span>{{membre.nom}}</span>
+                                                            </div>
+                                                        </div>
+                                                         <div class="col-lg-4">
+                                                           <button type="button" class="btn btn-success  mt-1 mb-1 me-3">
+                                                                <span>Accepter</span>
+                                                            </button>
+                                                            <button type="button" class="btn btn-danger  mt-1 mb-1 me-3">
+                                                                <span>Refuser</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <p>Afficher le profil</p>
+                                                </div>
+                                            </div>
+                                             </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                       
+                                    </div>
+                                    <div class="main-chat-footer">
+                                    </div><!-- main-chat-list -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-xl-8">
+                        <div class="border-start">
+                            <div class="main-content-body main-content-body-chat">
+                                <div class="main-chat-header bg-light">
+                                    <div class="main-img-user"><img alt="futulove" src="{{ asset ('build/assetsAzea/images/users/2.jpg')}}" class="avatar avatar-md brround"></div>
+                                    <div class="main-chat-msg-name">
+                                        <h6>Patrenna</h6><small>Last seen: 1 minute ago</small>
+                                    </div>
+                                   
+                                </div><!-- main-chat-header -->
+                                <div class="main-chat-body" id="ChatBody">
+                                    <div class="content-inner">
+                                        
+
+                                    </div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Row -->
+
+        </div>
+    </div><!-- right app-content-->
+</section>
+{% endblock %}

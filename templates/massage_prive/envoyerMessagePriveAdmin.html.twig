@@ -1,0 +1,55 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Envoie Massage Privé site de rencontre sérieux des célibataires - Futulove{% endblock %}
+
+{% block body %}
+<!-- App-Content -->
+				<div class="hor-content main-content">
+					<div class="container">
+
+						<!--Page header-->
+						<div class="page-header">
+							<div class="page-leftheader">
+								<h4 class="page-title mb-0 text-primary">Envoie Massage Privé</h4>
+							</div>
+							<div class="page-rightheader">
+								<div class="btn-list">
+									<button class="btn btn-outline-primary"><i class="fe fe-download me-2"></i>
+										Import</button>
+									<a href="javascript:void(0);"  class="btn btn-primary btn-pill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="fa fa-calendar me-2 fs-14"></i> Search By Date</a>
+									<div class="dropdown-menu border-0">
+											<a class="dropdown-item" href="javascript:void(0);">Today</a>
+											<a class="dropdown-item" href="javascript:void(0);">Yesterday</a>
+											<a class="dropdown-item active" href="javascript:void(0);">Last 7 days</a>
+											<a class="dropdown-item" href="javascript:void(0);">Last 30 days</a>
+											<a class="dropdown-item" href="javascript:void(0);">Last Month</a>
+											<a class="dropdown-item" href="javascript:void(0);">Last 6 months</a>
+											<a class="dropdown-item" href="javascript:void(0);">Last year</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--End Page header-->
+
+						<!-- Row -->
+						<div class="row row-cards">
+							<div class="col-md-12">
+								<div class="card border-primary">
+									<div class="card-header">
+										<h3 class="card-title">Vous écrivez à : {{  membre.nom }}</h3>
+									</div>
+                                    <form action="{{ path ('envoyer_massage_prive', {'idCompte': membre.id }) }}" method="post">
+									    <div class="card-body">
+										    <textarea class="content" name="messagePrive" required="required"></textarea>
+									    </div>
+                                        <button class="btn btn-outline-primary" name="envoyerMessage">Envoyer</button>
+                                    </form>
+                                </div>
+							</div>
+						</div>
+						<!-- End Row -->
+					</div>
+				</div><!-- right app-content-->
+			</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+<div class="search-widget_post like-widget_post mt-4">
+    <div class="search-title">
+        <h5>
+            
+            {% trans %}Mes correspondances{% endtrans %}
+            
+        </h5>
+    </div>
+    <div class="widget-content">
+        <div class="row row-cols-3 row-cols-sm-auto g-3">
+            {% if correspondances|length != 0 %}
+                {% for correspondance in correspondances %}
+                    <div class="col">
+                        <div class="image-thumb">
+                            <a href="{{ path ('afficher_profil', {'slug': correspondance.slug }) }}">
+                                <img src="{{ correspondance.photoProfile ? asset ('images/photoProfils/' ~ correspondance.photoProfile ) : ('images/photoProfils/default.png')}}" width="50" height="50" alt="img">
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% else %}
+                {% trans %}Veuillez renseigner vos préférences{% endtrans %}
+            {% endif %}
+            
+            
+        </div>
+    </div>
+
+</div>

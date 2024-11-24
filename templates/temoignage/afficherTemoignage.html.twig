@@ -1,0 +1,435 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% trans %}Témoignage de : {% endtrans %}
+    {{ temoignage.createdBy.nom }} - {{ temoignage.titreTemoignage }} 
+    {% trans %}site de rencontre sérieux des célibataires - Futulove{% endtrans %}
+{% endblock %}
+
+{% block body %}
+    <!-- breadcrumb section start -->
+    <section class="breadcrumb_section">
+        <div class="container">
+            <div class="row">
+                <div class="breadcrumb_content">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="breadcrumb_heading">
+                                <h3 style="color: #ffffff !important">
+                                    {% trans %}Témoignage de : {% endtrans %}
+                                    {{ temoignage.createdBy.nom }} - {{ temoignage.titreTemoignage }} 
+                                </h3>
+                                <p class="text-white mt-3"></p>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="breadcrumb_list">
+                                <ul class="d-flex list-unstyled p-0 m-0">
+                                    <li><a href="{{ path ('accueil')}}">{% trans %}Accueil{% endtrans %}</a></li>
+                                    <li>
+                                        <div class="scrolldown-btn">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px"
+                                                height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                                xml:space="preserve">
+                                                <path class="first-path" fill="#ff1182"
+                                                    d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                </path>
+                                                <path class="second-path" fill="#ff1182"
+                                                    d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </li>
+                                    <li>{% trans %}témoignage{% endtrans %}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb section end -->
+
+    <!-- blog section start -->
+    <section class="py-5 blog_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-7">
+                    <div class="blog_wrapper">
+                        <div class="post_item mt-1">
+                            <div class="post_item_inner">
+                                <div class="post_thumb">
+                                    <a href="#">
+
+                                        {% for photo in photos|slice(0, 1) %}
+
+                                            <img src="{{ asset ('images/photoTemoignages/' ~ photo.photoTemoignage ) }}" height="300" alt="futulove">
+                                        
+                                        {% endfor %}
+                                        
+                                    </a>
+                                </div>
+                                <div class="post_content">
+                                    <span class="meta">{% trans %}Par : {% endtrans %} 
+                                        <a href="#">{{ temoignage.createdBy.nom }}</a> 
+                                        - {{ temoignage.createdAt|date('d M Y H:i:s') }}
+                                        <i class="me-2"></i>
+                                        <i class="fa fa-eye me-2"></i> {{ temoignage.nombreVues }}
+                                    </span>
+                                    <h3 class="mt-3">{{ temoignage.titreTemoignage}}</h3>
+                                    <blockquote>
+                                        <p>{{ temoignage.temoignage }}</p>
+                                    </blockquote>
+                                </div>
+                                <div class="content-type py-3">
+                                    <ul class="content-list list-unstyled justify-content-between d-flex align-items-center p-0 m-0">
+                                        <li class="ps-0">
+                                            
+                                            {% if app.user %}
+                                                <a href="#" class="like-temoignage-button me-5 {{ temoignage.estAimeParUser(app.user) ? 'aime' : '' }}" 
+                                                data-url="{{ path ('aime_temoignage', { id: temoignage.id })}}"
+                                                data-csrf-token="{{ csrf_token }}">
+                                                {% else %}
+                                                <a href="#" class="like-button me-5" >
+                                            {% endif %}
+                                                <i class="fa fa-thumbs-up"></i>
+                                                <span class="like-count">{{ temoignage.aimeTemoignages|length|number_format }}</span>
+                                            </a>
+
+                                            {% if app.user %}
+                                            <a href="#" class="adore-temoignage-button me-5 {{ temoignage.estAdoreParUser(app.user) ? 'adore' : '' }}" 
+                                                data-url="{{ path ('adore_temoignage', { id: temoignage.id })}}"
+                                                data-csrf-token="{{ csrf_token }}">
+                                                {% else %}
+                                                <a href="#" class="like-button me-5" >
+                                            {% endif %}
+                                                <i class="fa-solid fa-heart"></i> 
+                                                <span class="like-count">{{ temoignage.adoreTemoignages|length|number_format }}</span>
+                                            </a>
+                                                {# <i class="fa-regular fa-face-smile"></i>  #}
+                                        </li>
+                                    
+                                        <li>
+                                            {% set sesCommentaires = commentaires|filter(commentaire => commentaire.supprime == 0) %}
+                                            <a href="#"><i class="fa-solid fa-comments"></i>{{ sesCommentaires|length }} {% trans %}Commentaires{% endtrans %}</a>
+                                        </li>
+                                        <li class="attach-file">
+                                            <a href="#"><i class="fa-solid fa-share-nodes"></i>{% trans %}Partager{% endtrans %}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        {% import "includes/_comment_macros.html.twig" as commentaireForm %}
+                        <div class="create-post mt-4 pt-0">
+                            <div class="info-card-title px-4">
+                                {% set sesCommentaires = commentaires|filter(commentaire => commentaire.supprime == 0) %}
+                                <h6 class="m-0">{{ sesCommentaires|length }} {% trans %}Commentaires{% endtrans %}</h6>
+                            </div>
+
+                            {% if sesCommentaires|length > 0 %}
+                                <div class="lab-inner mt-5">
+                                    {% for commentaire in sesCommentaires %}
+                                        {% if commentaire.supprime == 0 %}
+                                            <div class="thumb-inner d-flex gap-3">
+                                                <div class="thumb-img h-100">
+                                                    <div class="border_rounder"></div>
+                                                    <img src="{{ commentaire.auteur.photoProfile ? asset ('images/photoProfils/' ~ commentaire.auteur.photoProfile ) : ('images/photoProfils/default.png')}}" alt="img">
+                                                </div>
+                                                <div class="thumb-content reply_box pb-2 mb-5">
+                                                    <div class="d-flex align-items-center justify-content-between">
+                                                        <div>
+                                                            <h5><a href="{{ path ('afficher_profil', {'slug': commentaire.auteur.slug }) }}" style="color: #FF1182 !important;">{{ commentaire.auteur.nom }}</a> </h5>
+                                                            <p class="mb-0"> {{ commentaire.commenteLeAt|date('d M Y') }} </p>
+                                                        </div>
+                                                        <div class="reply_btn">
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#replyModal-{{ commentaire.id }}">
+                                                                <i class="fa-solid fa-reply-all"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mt-4" id="comment-{{ commentaire.id }}">{{ commentaire.commentaire }}</p>
+                                                    {% if app.user %}
+                                                        {% if commentaire.auteur.id == app.user.id %}
+
+                                                            <button class="btn btn-sm edit-comment" data-bs-target="#edit-comment-modal" data-bs-toggle="modal" href="" data-id="{{ commentaire.id }}">
+                                                                <i class="fa fa-edit me-2"></i>{% trans %}Modifier{% endtrans %}
+                                                            </button>
+                            
+                                                            <a href="{{ path ('supprimer_commentaire', {'slugCommentaire': commentaire.slug, 'slugTemoignage': temoignage.slug }) }}" class="main-btn btn-sm">
+                                                                <i class="fa fa-trash me-2"></i> 
+                                                                {% trans %}Supprimer{% endtrans %}
+                                                            </a>
+
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    
+
+                                                    <div class="content-type py-3">
+                                                        <ul class="content-list list-unstyled justify-content-between d-flex align-items-center p-0 m-0">
+                                                            <li class="ps-0">
+                                                                {% if app.user %}
+                                                                <a href="#" class="like-button me-5 {{ commentaire.estAimeParUser(app.user) ? 'aime' : '' }}" 
+                                                                    data-url="{{ path ('aime_commentaire', { id: commentaire.id })}}"
+                                                                    data-csrf-token="{{ csrf_token }}">
+                                                                    {% else %}
+                                                                    <a href="#" class="like-button me-5" >
+                                                                {% endif %}
+                                                                    <i class="fa fa-thumbs-up"></i>
+                                                                    <span class="like-count">{{ commentaire.aimeCommentaires|length|number_format }}</span>
+                                                                </a>
+
+                                                                {% if app.user %}
+                                                                    <a href="#" class="adore-button me-5 {{ commentaire.estAdoreParUser(app.user) ? 'adore' : '' }}" 
+                                                                        data-url="{{ path ('adore_commentaire', { id: commentaire.id })}}"
+                                                                        data-csrf-token="{{ csrf_token }}">
+                                                                        {% else %}
+                                                                        <a href="#" class="adore-button me-5" >
+                                                                {% endif %}
+                                                                    <i class="fa-solid fa-heart"></i> 
+                                                                    <span class="adore-count">{{ commentaire.adoreCommentaires|length|number_format }}</span>
+                                                                </a>
+                                                                    
+                                                            </li>
+                                                        
+                                                            <li>
+                                                                {% set sesSousCommentaire = commentaire.reponse|filter(commentaire => commentaire.supprime == 0) %}
+                                                                <a href="#"><i class="fa-solid fa-comments"></i>{{ sesSousCommentaire|length }}</a>
+                                                            </li>
+                                                            <li class="attach-file">
+                                                                <a href="#"><i class="fa-solid fa-share-nodes"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+
+                                            {% if commentaire.reponse is not null %}
+                                                {% for reponse in commentaire.reponse %}
+                                                    {% if reponse.supprime == 0 %}
+                                                        <div class="thumb-inner d-flex gap-3 ps-md-5">
+                                                            <div class="thumb-img h-100">
+                                                                <div class="border_rounder"></div>
+                                                                <img src="{{ reponse.auteur.photoProfile ? asset ('images/photoProfils/' ~ reponse.auteur.photoProfile ) : ('images/photoProfils/default.png')}}" alt="img">
+                                                            </div>
+                                                            <div class="thumb-content reply_box mb-4 border-0">
+                                                                <div class="d-flex align-items-center justify-content-between">
+                                                                    <div>
+                                                                        <h5><a href="{{ path ('afficher_profil', {'slug': reponse.auteur.slug }) }}" style="color: #FF1182 !important;">{{ reponse.auteur.nom }}</a></h5>
+                                                                        <p class="mb-0"> {{ reponse.commenteLeAt|date('d M Y') }}  </p>
+                                                                    </div>
+                                                                    <div class="reply_btn">
+                                                                        {# <a href="#" data-bs-toggle="modal" data-bs-target="#replyModa-{{ reponse.id }}">
+                                                                            <i class="fa-solid fa-reply-all"></i>
+                                                                        </a> #}
+                                                                    </div>
+                                                                </div>
+                                                                <p class="mt-4" id="comment-{{ reponse.id }}">{{ reponse.commentaire }}</p>
+                                                                
+                                                                {% if app.user %}
+                                                                    {% if reponse.auteur.id == app.user.id %}
+
+                                                                        <button class="btn btn-sm edit-comment" data-bs-target="#edit-comment-modal" data-bs-toggle="modal" href="" data-id="{{ reponse.id }}">
+                                                                            <i class="fa fa-edit me-2"></i>{% trans %}Modifier{% endtrans %}
+                                                                        </button>
+                                                                        <a href="{{ path ('supprimer_commentaire', {'slugCommentaire': reponse.slug, 'slugTemoignage': temoignage.slug }) }}" class="main-btn btn-sm"><i class="fa fa-trash me-2"></i> {% trans %}Supprimer{% endtrans %}</a>
+
+                                                                    {% endif %}
+                                                                {% endif %}
+
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endif %}
+                                        
+                                    {% endfor %}
+                                </div>
+
+                                {# //////   FENETRE MODALE //// #}
+                                {% for commentaire in commentaires %}
+                                    <div class="modal fade" id="replyModal-{{ commentaire.id }}" tabindex="-1" aria-labelledby="replyModalLabel-{{ commentaire.id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="replyModalLabel-{{ commentaire.id }}">{% trans %}Saisissez votre commentaire{% endtrans %}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    {{ commentaireForm.comment_form( path ('ajout_commentaire', {'id': commentaire.id, 'idTemoignage': commentaire.temoignage.id }), commentaire.id)}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                               
+                            {% endif %}
+                            
+                        </div>
+
+                        
+                        {# Modale pour l'édition de commentaire  #}
+                        <div id="modal-overlay" style="display: none;"></div>
+                        <div class="modal fade" id="edit-comment-modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content modal-content-demo">
+                                    <div class="modal-header">
+                                        <h6 class="modal-title">{% trans %}Modification du commentaire{% endtrans %}</h6>
+                                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+                                            {# <span aria-hidden="true">&times;</span> #}
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="edit-comment-form">
+                                            <textarea class="form-control" id="edit-comment-textarea" name="content" rows="4" required></textarea>
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" data-bs-dismiss="modal" type="button"><i class="fa-solid fa-close me-2"></i>{% trans %}Annuler{% endtrans %}</button>
+                                        <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane me-2"></i>{% trans %}Envoyer les modifications{% endtrans %}</button> 
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="create-post mt-4 pb-4 pt-0">
+                            <div class="info-card-title px-4">
+                                <h6 class="m-0">{% trans %}Laisser un commentaire{% endtrans %}
+                                    {% if app.user is null %}
+                                        <span class="text-danger" style="font-size: 10px !important;">
+                                            ({% trans %}Connectez-vous pour commenter{% endtrans %})
+                                        </span>
+                                    {% endif %}
+                                </h6>
+                            </div>
+                            {% if app.user %}
+                                <div class="leave_comment_box px-4 mt-5">
+                                    <form action="{{ path ('ajout_commentaire', {'idTemoignage': temoignage.id }) }}" method="post">
+                                        <div class="col-xl-12">
+                                            <div class="mb-4">
+                                                <textarea name="commentaire" rows="5" 
+                                                    placeholder="{% trans %}Saisissez votre commentaire ici{% endtrans %}" required></textarea>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="main_btn">
+                                            <button type="submit" name="envoyer" class="main_btn">{% trans %}J'envoie mon commentaire{% endtrans %}</button>
+                                            <div class="scrolldown-btn">
+                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px"
+                                                    height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                                    xml:space="preserve">
+                                                    <path class="first-path" fill="#000"
+                                                        d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                    </path>
+                                                    <path class="second-path" fill="#000"
+                                                        d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                    </path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-5">
+                    <aside>
+                        
+                        <div class="search-widget_post like-widget_post mt-1">
+                            <div class="search-title">
+                                <h5>{% trans %}Photos du témoignage{% endtrans %}</h5>
+                            </div>
+                            <div class="widget-content">
+                                <div class="row row-cols-3 row-cols-sm-auto g-3">
+
+                                    <div class="glide">
+                                        <div class="glide__track" data-glide-el="track">
+                                            <ul class="glide__slides">
+                                                {% for photo in temoignage.photoTemoignages %}
+                                                    {% if photo.supprime == 0 %}
+                                                        <li class="glide__slide text-center">
+                                                            <img src="{{ asset ('images/photoTemoignages/' ~ photo.photoTemoignage ) }}" height="200" width="300" alt="Photo du témoignage">
+                                                            
+                                                            <a class="btn btn-primary btn-sm mt-1" href="{{ asset ('images/photoTemoignages/' ~ photo.photoTemoignage ) }}" download="{{ photo.photoTemoignage }}"><i class="fa fa-download me-2"></i> {% trans %}Télécharger{% endtrans %}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+
+                                        <!-- Boutons de contrôle -->
+                                        <div class="glide__arrows text-center" data-glide-el="controls">
+                                            <button class="btn btn-primary btn-sm glide__arrow glide__arrow--left" data-glide-dir="<">
+                                                <i class="fa fa-angle-double-left me-2"></i> {% trans %}Prec{% endtrans %}
+                                            </button>
+                                            <button class="btn btn-primary btn-sm glide__arrow glide__arrow--right" data-glide-dir=">">
+                                                {% trans %}Suiv{% endtrans %} <i class="fa fa-angle-double-right me-2"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                new Glide('.glide').mount();
+                            });
+                        </script>
+
+                        <div class="widget_side mt-1 widget_post">
+                            <div class="widget_header">
+                                <h5>{% trans %}Autres témoignages{% endtrans %}</h5>
+                            </div>
+                            <ul class="list-unstyled p-0 m-0">
+                                {% for autreTemoignage in autresTemoignages %}
+                                    {% if autreTemoignage.createdBy.photoProfile %}
+                                        <li class="d-flex justify-content-between align-items-center">
+                                            <div class="post_thumb_sie">
+                                                {% set photos = autreTemoignage.photoTemoignages|filter(photo => photo.supprime == 0) %}
+                                                
+                                                {% for photo in photos|slice(0, 1) %}
+                                                    <a href="{{ path ('afficher_temoignage', {'slug': autreTemoignage.slug })}}">
+                                                        <img src="{{ asset ('images/photoTemoignages/' ~ photo.photoTemoignage ) }}" alt="futulove">
+                                                    </a>
+                                                {% endfor %}
+                                                    
+
+                                            </div>
+                                            <div class="post-content ps-4">
+                                                <a href="{{ path ('afficher_temoignage', {'slug': autreTemoignage.slug })}}">
+                                                    <h6>{{ autreTemoignage.titreTemoignage }}</h6>
+                                                </a>
+                                                <p class="mb-0">{{ autreTemoignage.createdAt|date('d M Y H:i:s') }}</p>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                                
+
+                            </ul>
+                        </div>
+
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blog section end -->
+    <script src="{{ asset ('js/adoreCommentaire.js') }}"></script>
+    <script src="{{ asset ('js/adoreTemoignage.js') }}"></script>
+    <script src="{{ asset ('js/aimeCommentaire.js') }}"></script>
+    <script src="{{ asset ('js/aimeTemoignage.js') }}"></script>
+    <script src="{{ asset ('js/modificationCommentaire.js') }}"></script>
+{% endblock %}

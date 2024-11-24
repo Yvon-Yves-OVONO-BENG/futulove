@@ -1,0 +1,198 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Modification du profil site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .step {
+            display: block;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        #multi-step-form button {
+            margin-top: 20px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+    <!-- breadcrumb section start -->
+    <section class="breadcrumb_section">
+        <div class="container">
+            <div class="row">
+                <div class="breadcrumb_content">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="breadcrumb_heading">
+                                <h2>{% trans %}Modification du profil{% endtrans %}</h2>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6">
+                            <div class="breadcrumb_list">
+                                <ul class="d-flex list-unstyled p-0 m-0">
+                                    <li><a href="{{ path ('accueil')}}">{% trans %}Accueil{% endtrans %}</a></li>
+                                    <li>
+                                        <div class="scrolldown-btn">
+                                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px"
+                                                height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                                xml:space="preserve">
+                                                <path class="first-path" fill="#ff1182"
+                                                    d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                </path>
+                                                <path class="second-path" fill="#ff1182"
+                                                    d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                </path>
+                                            </svg>
+                                        </div>
+                                    </li>
+                                    <li>{% trans %}Modification du profil{% endtrans %}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb section end -->
+
+    <!-- blog section start -->
+    <section class="py-5 blog_section">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">{% trans %}Remplissage du profil{% endtrans %}</h3>
+                        </div>
+                        <div class="card-body">
+                            {{ form_start(profilForm) }}
+                                <div id="multi-step-form" >
+
+                                    <!-- Étape 1: Informations personnelles -->
+                                    <div class="step" id="step-1">
+                                        <h4>{% trans %}Informations personnelles{% endtrans %}</h4>
+                                        {{ form_row(profilForm.nom) }}
+                                        {{ form_row(profilForm.sexe) }}
+                                        {{ form_row(profilForm.aLaRechercheDe) }}
+                                        {{ form_row(profilForm.statutMatrimonial) }}
+                                        {{ form_row(profilForm.dateNaissanceAt) }}
+                                        {{ form_row(profilForm.contact) }}
+                                        {{ form_row(profilForm.adresse) }}
+                                        {{ form_row(profilForm.pays) }}
+                                        <button type="button" class="next-step">{% trans %}Suivant{% endtrans %}</button>
+                                    </div>
+
+                                    <!-- Étape 2: Description -->
+                                    <div class="step" id="step-2" style="display:none;">
+                                        <h2>{% trans %}Description{% endtrans %}</h2>
+                                        {{ form_row(profilForm.description) }}
+                                        <button type="button" class="prev-step">{% trans %}Précédent{% endtrans %}</button>
+                                        <button type="button" class="next-step">{% trans %}Suivant{% endtrans %}</button>
+                                    </div>
+
+                                    <!-- Étape 3: Style de vie -->
+                                    <div class="step" id="step-3" style="display:none;">
+                                        <h2>{% trans %}Style de vie{% endtrans %}</h2>
+                                        {{ form_row(profilForm.animauxDeCompagnie) }}
+                                        {{ form_row(profilForm.lieuVacancePrefere) }}
+                                        {{ form_row(profilForm.pour) }}
+                                        {{ form_row(profilForm.fume) }}
+                                        {{ form_row(profilForm.boisson) }}
+                                        {{ form_row(profilForm.langue) }}
+                                        <button type="button" class="prev-step">{% trans %}Précédent{% endtrans %}</button>
+                                        <button type="button" class="next-step">{% trans %}Suivant{% endtrans %}</button>
+                                    </div>
+
+                                    <!-- Étape 4: Informations Physiques -->
+                                    <div class="step" id="step-4" style="display:none;">
+                                        <h2>Photos</h2>
+                                        {{ form_row(profilForm.taille) }}
+                                        {{ form_row(profilForm.poids) }}
+                                        {{ form_row(profilForm.teint) }}
+                                        {{ form_row(profilForm.couleurCheveux) }}
+                                        {{ form_row(profilForm.couleurYeux) }}
+                                        {{ form_row(profilForm.corpulance) }}
+                                        <button type="button" class="prev-step">{% trans %}Précédent{% endtrans %}</button>
+                                        <button type="button" class="next-step">Suivant</button>
+                                    </div>
+
+                                    <!-- Étape 5: Description -->
+                                    <div class="step" id="step-5" style="display:none;">
+                                        <h2>Description</h2>
+                                        {{ form_row(profilForm.photoProfile) }}
+                                        <button type="button" class="prev-step">{% trans %}Précédent{% endtrans %}</button>
+                                        <button type="submit">{% trans %}Soumettre{% endtrans %}</button>
+                                    </div>
+
+                                </div>
+                            {{ form_end(profilForm) }}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12">
+                    <div class="blog_wrapper">
+                        <div class="create-post mt-1 pb-4 pt-0">
+                            <div class="info-card-title px-4">
+                                <h6 class="m-0">{% trans %}Remplissage du profil{% endtrans %}</h6>
+                            </div>
+                            <div class="leave_comment_box px-4 mt-5">
+                                <div class="row">
+                                    <div class="col-xl-6 col-lg-6 col-md-6">
+                                        <div class="mb-4">
+                                            <input type="text" name="name" placeholder="Full Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-lg-6 col-md-6">
+                                        <div class="mb-4">
+                                            <input type="email" name="email" placeholder="Your Email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="mb-4">
+                                        <input type="text" name="subject" placeholder="Your Subject">
+                                    </div>
+                                </div>
+                                <div class="col-xl-12">
+                                    <div class="mb-4">
+                                        <textarea name="message" rows="5" placeholder="Type Here Message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="main_btn">
+                                    <a href="#" class="main_btn">{% trans %}Mettre à jour{% endtrans %}</a>
+                                    <div class="scrolldown-btn">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12px"
+                                            height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                            xml:space="preserve">
+                                            <path class="first-path" fill="#000"
+                                                d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                            </path>
+                                            <path class="second-path" fill="#000"
+                                                d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                            </path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blog section end -->
+
+    <script src="{{asset('build/js/remplissageProfil.js')}}"></script>
+{% endblock %}

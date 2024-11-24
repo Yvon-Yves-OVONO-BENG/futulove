@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Vérification email site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+
+{% block body %}
+<body style="background-color: #161a2d;">
+	<!-- login section start -->
+	<section class="mt-5 pt-5 login_section mb-5">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xl-6 col-lg-6 col-md-10">
+					<div class="login_box mt-5">
+						<div>
+							<p class="text-center fs-18 text-black">
+								{% trans %}Nous vous avons envoyé un{% endtrans %}
+								<span class="fw-bold">
+									{% trans %}mail de vérification{% endtrans %}
+								</span>
+								{% trans %}
+								à l'adresse{% endtrans %}
+								<span class="fw-bold">
+								{% set user = app.request.session.get('user') %}
+									{{user.email}}
+								</span>
+							</p>
+						</div>
+						<div>
+							{% if notification == true %}
+								<p class="text-center fs-18 text-danger">
+									{% trans %}Code incorrect !{% endtrans %}
+								</p>
+							{% endif %}
+							<form id="form" novalidate action="{{ path ('validation_code')}}" method="post">
+								
+								<div class="mb-4">
+									{# <label for="Email">Code <span>*</span></label> #}
+									<input type="text" class="form-control" data-validation="text" name="code" id="code"
+									data-content="Code" placeholder="{% trans %}Veuiller saisir le code ici{% endtrans %}" required>
+								</div>
+								
+								<button type="submit" class="border-0 w-100 login_btn mt-4"><i class="fa-solid fa-arrow-trend-up me-2"></i>{% trans %}Vérifier{% endtrans %}</button>
+							</form>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- login section end -->
+{% endblock %}

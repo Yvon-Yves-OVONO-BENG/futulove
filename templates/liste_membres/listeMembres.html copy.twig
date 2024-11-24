@@ -1,0 +1,211 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Membres{% endblock %}
+
+{% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <script>
+                alert('{{ message }}');
+            </script>
+            {# <div class="alert alert-{{ label }} alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert-message">
+                    {{ message|raw }}
+                </div>
+            </div> #}
+        {% endfor %}
+    {% endfor %}
+
+    <!-- ==========Page Header Section Start Here========== -->
+    <section class="page-header-section style-1" 
+        style="background:url({{ asset ('build/assets/images/page-header.jpg')}});"
+        >
+        <div class="container">
+            <div class="page-header-content">
+                <div class="page-header-inner">
+                    <div class="page-title">
+                        <h2>Les Members</h2>
+                    </div>
+                    <ol class="breadcrumb">
+                        <li><a href="{{ path('accueil') }}">Accueil</a></li>
+                        <li class="active">Membres</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Page Header Section Ends Here========== -->
+
+
+    <!-- ==========Member page Section Start Here========== -->
+    <section class="member-page-section">
+        <div class="container">
+            <div class="member-filter">
+                <div class="member-filter-inner">
+                    <form method="post" action="{{ path('liste_membres') }}" class="filter-form">
+                        <div class="gender">
+                            <div class="custom-select right w-100">
+                                <select name="jeSuis" id="jeSuis" class="" required>
+                                    <option value="">Je suis</option>
+                                    {% for sexe in sexes %}
+                                        <option value="{{ sexe.id }}"> {{ sexe.sexe }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <div class="custom-select right w-100">
+                                <select name="jeCherche" id="jeCherche" class="" required>
+                                    <option value="">Je cherche</option>
+                                    {% for sexe in sexes %}
+                                        <option value="{{ sexe.id }}"> {{ sexe.sexe }} </option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="age">
+                            <div class="right d-flex justify-content-between w-100">
+                                <div class="custom-select">
+                                    <select name="ageDebut" id="age">
+                                        <option value="">Âge</option>
+                                        {% for age in ages %}
+                                            <option value="{{ age.id }}">{{ age.age }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="custom-select">
+                                    <select name="ageFin" id="age-two">
+                                        <option value="">Âge limite</option>
+                                        {% for age in ages %}
+                                            <option value="{{ age.id }}">{{ age.age }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="lab-btn" type="submit" name="jeTrouveMonPartenaire">Chercher <i class="icofont-search-2"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="member-wrapper">
+                <ul class="member-info mb-4">
+                    <li class="all-member">
+                        <p>Tous nos membres</p>
+                        {% set effectif = 0 %}
+                        {% for membre in membres %}
+                            {% if (membre.roles[0] == 'ROLE_MEMBRE') and membre.id != id %}
+                                {% set effectif = effectif + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                        <p>{{ effectif }}</p>
+                    </li>
+                    {# <li class="member-cat">
+                        <div class="custom-select right w-100">
+                            <select name="member" id="member-cat" class="">
+                                <option value="0">Nouveaux</option>
+                                <option value="1">Anciens</option>
+                                <option value="2">Populaires</option>
+                                <option value="3">Très Actifs</option>
+                            </select>
+                        </div>
+                    </li> #}
+                </ul>
+                <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center">
+                    {% for membre in pagination %}
+                        {% if (membre.roles[0] == 'ROLE_MEMBRE') and membre.id != id %}
+                            <div class="col" >
+                                <div class="lab-item member-item style-1 style-2">
+                                    <div class="lab-inner">
+                                        <div class="lab-thumb">
+                                            <a href="{{ path('afficher_profil', {'id': membre.id }) }}">
+                                                <img src="{{ membre.photoProfile ? asset('images/photoProfils/' ~ membre.photoProfile) : asset('images/photoProfils/default.png') }}" alt="member-img">
+                                            </a> 
+                                        </div>
+                                        <div class="lab-content">
+                                            <h6>
+                                                {% if membre.formule.formule == 'GRATUIT' %}
+                                                    <img src="{{ asset('images/formules/gratuit.png') }}" alt="formule gratuite" width="60" heigth="60" >
+                                                    {% else %}
+                                                    {% if membre.formule.formule == 'PREMIUM' %}
+                                                        <img src="{{ asset('images/formules/premium.png') }}" alt="formule premium" width="60" heigth="60">
+                                                        {% else %}
+                                                    <img src="{{ asset('images/formules/vip.png') }}" alt="formule vip" width="60" heigth="60">
+
+                                                    {% endif %}
+                                                {% endif %}
+                                            </h6>
+                                            <h6>
+                                                <a href="{{ path('afficher_profil', {'id': membre.id }) }}">{{ membre.nom }}
+                                                </a> 
+                                            </h6>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        
+                    {% endfor %}
+                    
+                    
+                </div>
+                <div class="paginations">
+                    <ul class="lab-ul d-flex flex-wrap justify-content-center mb-1">
+                        {{ knp_pagination_render(pagination) }}
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==========Member page Section Ends Here========== -->
+
+    <!-- ================ App Section start Here =============== -->
+    <section class="app-section bg-theme">
+        <div class="container">
+            <div class="section-wrapper padding-tb">
+                <div class="app-content">
+                    <h4>Download App Our Duelove</h4>
+                    <h2>Easy Connect to Everyone</h2>
+                    <p>You find us, finally, and you are already in love. More than 5.000.000 around
+                        the world already shared the same experience andng ares uses our system
+                        Joining us today just got easier!</p>
+                    <ul class="app-download d-flex flex-wrap">
+                        <li><a href="#" class="d-flex flex-wrap align-items-center">
+                                <div class="app-thumb">
+                                    <img src="{{ asset('build/assets/images/app/apple.png')}}" alt="apple">
+                                </div>
+                                <div class="app-content">
+                                    <p>Disponible sur</p>
+                                    <h4>App Store</h4>
+                                </div>
+                            </a></li>
+                        <li class="d-inline-block">
+                            <a href="#" class="d-flex flex-wrap align-items-center">
+                                <div class="app-thumb">
+                                    <img src="{{ asset('build/assets/images/app/playstore.png')}}" alt="playstore">
+                                </div>
+                                <div class="app-content">
+                                    <p>Disponible sur</p>
+                                    <h4>Google Play</h4>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="mobile-app">
+                    <img src="{{ asset('build/assets/images/app/mobile-view.gif')}}" alt="mbl-view">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ App Section end Here =============== -->
+
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="{{ asset ('build/js/axios.min.js') }}"></script> 
+    <script src="{{ asset ('build/js/demandeAmities.js') }}"></script> 
+    <script src="{{ asset ('build/js/favoris.js') }}"></script>
+{% endblock %}

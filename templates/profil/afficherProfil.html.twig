@@ -1,0 +1,1189 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {% if slug %}
+        {% trans %}Profil de{% endtrans %} : {{ profil.nom }}
+        {% else %}
+        {% trans %}Mon Profil{% endtrans %}
+    {% endif %}
+    {% trans %}site de rencontre sérieux des célibataires - Futulove{% endtrans %}
+{% endblock %}
+
+{% block body %}
+
+    <!-- profile section start -->
+    <section class="profile_section our_customer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-5 main_member_profile">
+                    <div class="profile_name acamic_img">
+                        <div class="profile_img">
+                            <div class="profile_main_border"></div>
+                            <img src="{{ profil.photoProfile ? asset ('images/photoProfils/' ~ profil.photoProfile ) : ('images/photoProfils/femme.jpg')}}" alt="{{ profil.nom ?  profil.nom :"" }}" >
+                        </div>
+                        {% if app.user.id == profil.id %}
+                            <div class="edite_profile">
+                                <h5><i class="fa-solid fa-camera-retro"></i>{% trans %}Modifier{% endtrans %}</h5>
+                                <input type="file" name="" id="">
+                            </div>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-8 col-md-7 mt-5 ps-md-4">
+                    <div class="profile_content">
+                        <div>
+                            <div class="user_name">
+                                <h3 class="text-white">{{ profil.nom }}</h3>
+                                <p class="acitve_time"><i class="fa-solid fa-clock"></i> {% trans %}En ligne il y'a : {% endtrans %}</p>
+                                <p class="text-white">{{ profil.sloganDevise }}</p>
+                            </div>
+                            <div class="user_message_links">
+                                <ul class="d-flex list-unstyled p-0 m-0">
+
+                                    {% if app.user.id != profil.id %}
+                                        <li class="ms-0">
+                                        
+                                            {% if (amitie is not null) and amitie.statut == 1 %}
+                                                <button id="friend-request-btn" class="btn btn-danger"
+                                                    data-member-id="{{ profil.id }}"
+                                                    data-request-status="sent"
+                                                    data-csrf-token="{{ csrf_token }}">
+                                                    <p class="mb-0 text-white">{% trans %}Annuler la demande{% endtrans %}</p>
+                                                </button>
+                                            {% endif %}
+                                                
+                                            {% if amitie is null %}
+                                                <button id="friend-request-btn" class="btn btn-success"
+                                                    data-member-id="{{ profil.id }}"
+                                                    data-request-status="not_sent"
+                                                    data-csrf-token="{{ csrf_token }}">
+                                                    <p class="mb-0 text-white">{% trans %}Demande d'amitié{% endtrans %}</p>
+                                                </button>
+                                            {% endif %}
+                                            
+                                        </li>
+
+                                        <li class="ms-0">
+                                            {% if favori is null %}
+                                                <button id="favori-request-btn" class="btn btn-success"
+                                                    data-member-id="{{ profil.id }}"
+                                                    data-request-status="ajouterFavori"
+                                                    data-csrf-token="{{ csrf_token }}">
+                                                    <p class="mb-0 text-white">{% trans %}Ajouter dans mes favoris{% endtrans %}</p>
+                                                </button>
+                                                {% else %}
+                                                {% if favori.etatFavori == true %}
+                                                    <button id="favori-request-btn" class="btn btn-danger"
+                                                        data-member-id="{{ profil.id }}"
+                                                        data-request-status="supprimerFavori"
+                                                        data-csrf-token="{{ csrf_token }}">
+                                                        <p class="mb-0 text-white">{% trans %}Supprimer de mes favoris{% endtrans %}</p>
+                                                    </button>
+                                                {% endif %}
+
+                                                {% if favori.etatFavori == false %}
+                                                    <button id="favori-request-btn" class="btn btn-success"
+                                                        data-member-id="{{ profil.id }}"
+                                                        data-request-status="ajouterFavori"
+                                                        data-csrf-token="{{ csrf_token }}">
+                                                        <p class="mb-0 text-white">{% trans %}Ajouter dans mes favoris{% endtrans %}</p>
+                                                    </button>
+                                                {% endif %}
+                                            {% endif %}
+                                            
+                                        </li>
+
+                                        {% if (amitie is not null) and amitie.statut == 2 %}
+                                            <li class="ms-0">
+                                                {% if signalement is null %}
+                                                    <button id="signalement-request-btn" class="btn btn-danger"
+                                                        data-member-id="{{ profil.id }}"
+                                                        data-request-status="ajouterSignalement"
+                                                        data-csrf-token="{{ csrf_token }}">
+                                                        <p class="mb-0 text-white">{% trans %}Signaler{% endtrans %}</p>
+                                                    </button>
+                                                    {% else %}
+                                                    {% if signalement.etatSignalement == true %}
+                                                        <button id="signalement-request-btn" class="btn btn-success"
+                                                            data-member-id="{{ profil.id }}"
+                                                            data-request-status="supprimerSignalement"
+                                                            data-csrf-token="{{ csrf_token }}">
+                                                            <p class="mb-0 text-white">{% trans %}Annuler le signalement{% endtrans %}</p>
+                                                        </button>
+                                                    {% endif %}
+
+                                                    {% if signalement.etatSignalement == false %}
+                                                        <button id="signalement-request-btn" class="btn btn-danger"
+                                                            data-member-id="{{ profil.id }}"
+                                                            data-request-status="ajouterSignalement"
+                                                            data-csrf-token="{{ csrf_token }}">
+                                                            <p class="mb-0 text-white">{% trans %}Signaler{% endtrans %}</p>
+                                                        </button>
+                                                    {% endif %}
+                                                {% endif %}
+                                                
+                                            </li>
+                                        {% endif %}
+                                    {% endif %}
+
+
+                                    {% if app.user.id == profil.id %}
+                                        <li>
+                                            <a href="#" class="d-flex align-items-center gap-3">
+                                                <div class="icon"><i class="fa-solid fa-envelope"></i></div>
+                                                <div class="text">
+                                                    <p class="mb-0 text-white">{% trans %}Message public{% endtrans %}</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="d-flex align-items-center gap-3">
+                                                <div class="icon"><i class="fa-solid fa-reply-all"></i></div>
+                                                <div class="text">
+                                                    <p class="mb-0 text-white">{% trans %}Message privé{% endtrans %}</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="main_tab_list_header mt-5">
+                            <ul class="nav nav-tabs border-0" id="myTab" role="tablist">
+                            
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="profile-tab" data-bs-toggle="tab"
+                                        data-bs-target="#profile-tab-pane" type="button" role="tab"
+                                        aria-controls="profile-tab-pane" aria-selected="true">{% trans %}Profil{% endtrans %}</button>
+                                </li>
+
+                                {# <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="activity-tab" data-bs-toggle="tab"
+                                        data-bs-target="#activity-tab-pane" type="button" role="tab"
+                                        aria-controls="activity-tab-pane" aria-selected="false">{% trans %}Activité{% endtrans %}</button>
+                                </li> #}
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="friends-tab" data-bs-toggle="tab"
+                                        data-bs-target="#friends-tab-pane" type="button" role="tab"
+                                        aria-controls="friends-tab-pane" aria-selected="false">{% trans %}Ami(e)s{% endtrans %}
+                                        <span>{{ amis|length|number_format }}</span></button>
+                                </li>
+                                {% if app.user.id == profil.id %}
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="friends-demande-tab" data-bs-toggle="tab"
+                                            data-bs-target="#friends-demande-tab-pane" type="button" role="tab"
+                                            aria-controls="friends-demande-tab-pane" aria-selected="false">{% trans %}Demande(s){% endtrans %}
+                                            <span>{{ amisDemandes|length|number_format }}</span>
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="friends-bloques-tab" data-bs-toggle="tab"
+                                            data-bs-target="#friends-bloques-tab-pane" type="button" role="tab"
+                                            aria-controls="friends-bloques-tab-pane" aria-selected="false">{% trans %}Bloqué(e)s{% endtrans %}
+                                            <span>{{ amisBloques|length|number_format }}</span>
+                                        </button>
+                                    </li>
+
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="invitation-tab" data-bs-toggle="tab"
+                                            data-bs-target="#invitation-tab-pane" type="button" role="tab"
+                                            aria-controls="invitation-tab-pane" aria-selected="false">
+                                            {% trans %}Invitation(s){% endtrans %}
+                                            <span>{{ invitationsGroupes|length|number_format }}</span>
+                                        </button>
+                                    </li>
+                                {% endif %}
+
+                                {% set groupes = profil.groupes|filter(groupe => groupe.supprime == 0) %}
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="Groups-tab" data-bs-toggle="tab"
+                                        data-bs-target="#Groups-tab-pane" type="button" role="tab"
+                                        aria-controls="Groups-tab-pane" aria-selected="false">{% trans %}Groupes{% endtrans %}
+                                        <span>{{ groupes|length|number_format }}</span></button>
+                                </li>
+                                {% set photos = profil.photos|filter(photo => photo.supprime == 0) %}
+                                {% if (amitie is not null) and amitie.statut == 2 %}
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="Photos-tab" data-bs-toggle="tab"
+                                            data-bs-target="#Photos-tab-pane" type="button" role="tab"
+                                            aria-controls="Photos-tab-pane" aria-selected="false">Photos
+                                            <span>{{ photos|length|number_format }}</span>
+                                        </button>
+                                    </li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- profile section end -->
+
+    <!-- tab activity section start -->
+    <section class="pt-5 main_tabs_section">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-xl-8 col-lg-8 col-md-7">
+                    <div class="tab_header">
+                        <!-- all tab section start -->
+                        <div class="tab-content" id="myTabContent">
+
+                            <!-- Profile tab start -->
+                            <div class="tab-pane fade show active " id="profile-tab-pane" role="tabpanel"
+                                aria-labelledby="profile-tab" tabindex="0">
+                                <div class="profile_main">
+                                    <article>
+                                        <div class="info-card create-post pt-0 mt-4 mb-4">
+                                            <div class="info-card-title px-4">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="m-0">{% trans %}Informations de base{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        {% if app.user.id == profil.id %}
+                                                            <a class="btn btn-primary btn-sm"  href="{{ path ('modification_informations_de_base')}}" >
+                                                                <i class="fa fa-edit me-2"></i>{% trans %}Modifier{% endtrans %}
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="info-card-content px-4 py-5">
+                                                <ul class="info-list  align-items-center list-unstyled">
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Nom{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.nom }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Je suis{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.sexe ? profil.sexe.sexe :"" }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Je cherche{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.aLaRechercheDe ? profil.aLaRechercheDe.sexe : "" }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Statut matrimonial{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.statutMatrimonial ? profil.statutMatrimonial.statutMatrimonial : "" }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Âge{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.age }} {% trans %}ans{% endtrans %}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Pays{% endtrans %}</p>
+                                                        
+                                                        <p class="info-details"><span>:</span>
+                                                            <img src="{{ profil.pays ? asset ('images/drapeaux/' ~ profil.pays.drapeau ) : ('images/drapeaux/default.jpeg')}}" height="20" width="60" alt="futulove">
+                        
+                                                            {{ profil.pays ? profil.pays.pays : "" }}
+                                                        </p>
+                                                    </li>
+                                                    {% if app.user.id == profil.id %}
+                                                        
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Date de naissance{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ profil.dateNaissanceAt|date(' d M Y') }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Région{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ profil.region }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Département{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ profil.departement }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Ville{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ profil.ville }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Adresse{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ profil.adresse }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Contact{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ profil.contact }}</p>
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="info-card create-post pt-0 mt-4 mb-4">
+                                            <div class="info-card-title px-4">
+                                                
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="m-0">{% trans %}Résumé de moi même{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        {% if app.user.id == profil.id %}
+                                                            <a class="btn btn-primary btn-sm"  href="{{ path ('modification_resume')}}" >
+                                                                <i class="fa fa-edit me-2"></i>{% trans %}Modifier{% endtrans %}
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="info-card-content px-4 py-4">
+                                                <p>{{ profil.description }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="info-card create-post pt-0 mt-4 mb-4">
+                                            <div class="info-card-title px-4">
+                                                
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="m-0">{% trans %}Mode de vie{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        {% if app.user.id == profil.id %}
+                                                            <a class="btn btn-primary btn-sm"  href="{{ path ('modification_mode_de_vie')}}" >
+                                                                <i class="fa fa-edit me-2"></i>{% trans %}Modifier{% endtrans %}
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="info-card-content px-4 py-5">
+                                                <ul class="info-list  align-items-center list-unstyled">
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Animaux de compagnie{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.animauxDeCompagnie }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Lieux de vacances preférés{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>
+                                                            {{ profil.lieuVacancePrefere }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Je suis sur ce site pour{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.pour }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Fume{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.fume ? profil.fume.cigaretteVin : "" }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Boisson{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.boisson ? profil.fume.cigaretteVin : "" }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Langue{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>
+                                                           
+                                                            {% if profil.langueMembres is not null %}
+                                                                {% for langueMembre in profil.langueMembres %}
+                                                                    
+                                                                    {{ langueMembre.langue.langue }},
+                                                                    
+                                                                {% endfor %}
+                                                            {% endif %}
+                                                            
+                                                        </p>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="info-card create-post pt-0 mt-4 mb-4">
+                                            <div class="info-card-title px-4">
+                                                
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h6 class="m-0">{% trans %}Informations Physiques{% endtrans %}</h6>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        {% if app.user.id == profil.id %}
+                                                            <a class="btn btn-primary btn-sm"  href="{{ path ('modification_informations_physiques')}}" >
+                                                                <i class="fa fa-edit me-2"></i>{% trans %}Modifier{% endtrans %}
+                                                            </a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="info-card-content px-4 py-5">
+                                                <ul class="info-list  align-items-center list-unstyled">
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Taille{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.taille }} cm</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Poids{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.poids }} kg</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Couleur des cheveux{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.couleurCheveux ? profil.couleurCheveux.couleurCheveux : "" }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Couleur des yeux{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.couleurYeux ? profil.couleurYeux.couleurYeux : "" }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Teint{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.teint ? profil.teint.teint : "" }}</p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="info-name">{% trans %}Corpulance{% endtrans %}</p>
+                                                        <p class="info-details"><span>:</span>{{ profil.corpulance ? profil.corpulance.corpulance : "" }}</p>
+                                                    </li>
+                                                    
+                                                </ul>
+
+                                            </div>
+                                        </div>
+
+                                        {% if app.user.id == profil.id %}
+                                            <div class="info-card create-post pt-0 mt-4 mb-4">
+                                                <div class="info-card-title px-4">
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-9">
+                                                            <h6 class="m-0">{% trans %}Je cherche un/une partenaire...{% endtrans %}</h6>
+                                                        </div>
+                                                        <div class="col-3">
+                                                            {% if app.user.id == profil.id %}
+                                                                <a class="btn btn-primary btn-sm"  href="{{ path ('preference')}}" >
+                                                                    <i class="fa fa-edit me-2"></i>{% trans %}Modifier{% endtrans %}
+                                                                </a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info-card-content px-4 py-5">
+                                                    <ul class="info-list align-items-center list-unstyled">
+                                                    
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Pays{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>
+                                                                <img src="{{ preference.pays ? asset ('images/drapeaux/' ~ preference.pays.drapeau ) : ('images/drapeaux/default.jpeg')}}" height="20" width="60" alt="futulove">
+                        
+                                                                {{ preference.pays ? preference.pays.pays : "" }}
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Région{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.region }} </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Département{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.departement }} </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Ville{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.ville }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Âge min{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.ageMin ? preference.ageMin.age: "" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Âge max{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.ageMax ? preference.ageMax.age :"" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Sexe{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.genre ? preference.genre.sexe : "" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Couleur des yeux{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.couleuryeux ? preference.couleuryeux.couleuryeux : "" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Couleur des cheveux{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.couleurcheveux ? preference.couleurcheveux.couleurcheveux : "" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Teint{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.teint ? preference.teint.teint : "" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Taille{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.taille }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Poids{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.poids }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Corpulance{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.corpulance ? preference.corpulance.corpulance : "" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Cigarette{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.cigarette ? preference.cigarette.cigaretteVin : "" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Vin{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.vin ? preference.vin.cigaretteVin : "" }}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Langue{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.langue}}</p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="info-name">{% trans %}Animaux de compagnie{% endtrans %}</p>
+                                                            <p class="info-details"><span>:</span>{{ preference.animauxDeCompagnie}}</p>
+                                                        </li>
+                                                        
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </article>
+                                </div>
+                            </div>
+                            <!-- Profile tab end -->
+
+                            <!-- activity tab start -->
+                            <div class="tab-pane fade" id="activity-tab-pane" role="tabpanel"
+                                aria-labelledby="activity-tab" tabindex="0">
+                                
+                                {% if app.user.id == profil.id %}
+                                    <div class="create-post mb-4">
+                                        <div class="lab-inner">
+                                            <div class="thumb-inner d-flex align-items-center gap-3">
+                                                
+                                                <div class="thumb-content">
+                                                    <h5>{% trans %}Créer un sujet{% endtrans %}</h5>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="lab-content">
+                                            <form action="#" class="post-form">
+                                                <input type="text" class="border-0 bg-transparent"
+                                                    placeholder="{% trans %}Saisissez votre sujet ici{% endtrans %}">
+                                                <div class="content-type">
+                                                    <ul
+                                                        class="content-list list-unstyled d-flex align-items-center p-0 m-0">
+                                                        
+                                                        <li class="image-video">
+                                                            <div class="file-btn"><i
+                                                                    class="fa-solid fa-camera-retro"></i>{% trans %}Photo/Vidéos{% endtrans %}</div>
+                                                            <input type="file">
+                                                        </li>
+                                                        <li class="attach-file">
+                                                            <div class="file-btn"><i class="fa-solid fa-link"></i>{% trans %}Fichier{% endtrans %}</div>
+                                                            <input type="file">
+                                                        </li>
+                                                        <button class="post-submit border-0">{% trans %}Créer{% endtrans %}</button>
+                                                    </ul>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                
+
+                                <div class="create-post mb-4">
+                                    <div class="lab-inner">
+                                        <div class="thumb-inner d-flex align-items-center gap-3">
+                                            <div class="thumb-img">
+                                                <div class="border_rounder"></div>
+                                                <img src="{{ asset ('assets/images/home/03.jpg')}}" alt="img">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h5>Marie</h5>
+                                                <h6 class="d-flex align-items-center"><i
+                                                        class="fa-solid fa-earth-americas"></i> Public <p class="mb-0">6
+                                                        Mintues Ago</p>
+                                                </h6>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lab-content">
+                                        <form action="#" class="post-form">
+                                            <p class="main_text px-4 py-4">Lorem ipsum dolor sit amet, consectetur
+                                                adipisicing elit. Ipsam repudiandae odit dolorum quis laudantium impedit
+                                                beatae perferendis natus, hic libero sed atque quibusdam possimus error,
+                                                voluptate est molestiae doloremque necessitatibus illum rerum sunt!</p>
+                                            <div class="content-type py-3">
+                                                <ul
+                                                    class="content-list list-unstyled justify-content-between d-flex align-items-center p-0 m-0">
+                                                    <li class="ps-0"><a href="#"><i class="fa-solid fa-thumbs-up"></i><i
+                                                                class="fa-solid fa-heart"></i> <i
+                                                                class="fa-regular fa-face-smile"></i> Julia, Petrova and
+                                                            306 like this </a></li>
+                                                    <li class="justify-content-end d-flex p-0 "><a href="#">136
+                                                            Comments</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-type">
+                                                <ul
+                                                    class="content-list list-unstyled d-flex align-items-center p-0 m-0">
+                                                    <li class="ps-0"><a href="#"><i class="fa-solid fa-heart"></i> Like
+                                                        </a></li>
+                                                    <li>
+                                                        <a href="#"><i class="fa-solid fa-comments"></i>Comment</a>
+                                                    </li>
+                                                    <li class="attach-file">
+                                                        <a href="#"><i class="fa-solid fa-share-nodes"></i>Share</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="create-post mb-4">
+                                    <div class="lab-inner">
+                                        <div class="thumb-inner d-flex align-items-center gap-3">
+                                            <div class="thumb-img">
+                                                <div class="border_rounder"></div>
+                                                <img src="{{ asset ('assets/images/home/02.jpg')}}" alt="img">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h5>Jose</h5>
+                                                <h6 class="d-flex align-items-center"><i
+                                                        class="fa-solid fa-earth-americas"></i> Public <p class="mb-0">6
+                                                        Mintues Ago</p>
+                                                </h6>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lab-content">
+                                        <form action="#" class="post-form">
+                                            <div class=" px-4 mx-2 py-4">
+                                                <p class="main_text">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                    elit. Ipsam repudiandae odit dolorum quis laudantium impedit beatae
+                                                    perferendis natus, hic libero sed atque quibusdam possimus error,
+                                                    voluptate est molestiae doloremque necessitatibus illum rerum sunt!
+                                                </p>
+                                                <img src="{{ asset ('assets/images/about/dating-post.jpg')}}" class="w-100" alt="futulove">
+                                            </div>
+                                            <div class="content-type py-3">
+                                                <ul
+                                                    class="content-list list-unstyled justify-content-between d-flex align-items-center p-0 m-0">
+                                                    <li class="ps-0"><a href="#"><i class="fa-solid fa-thumbs-up"></i><i
+                                                                class="fa-solid fa-heart"></i> <i
+                                                                class="fa-regular fa-face-smile"></i> Eleanor, Matthew
+                                                            and
+                                                            306 like this </a></li>
+                                                    <li class="justify-content-end d-flex p-0 "><a href="#">136
+                                                            Comments</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-type">
+                                                <ul
+                                                    class="content-list list-unstyled d-flex align-items-center p-0 m-0">
+                                                    <li class="ps-0"><a href="#"><i class="fa-solid fa-heart"></i> Like
+                                                        </a></li>
+                                                    <li>
+                                                        <a href="#"><i class="fa-solid fa-comments"></i>Comment</a>
+                                                    </li>
+                                                    <li class="attach-file">
+                                                        <a href="#"><i class="fa-solid fa-share-nodes"></i>Share</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="create-post mb-4">
+                                    <div class="lab-inner">
+                                        <div class="thumb-inner d-flex align-items-center gap-3">
+                                            <div class="thumb-img">
+                                                <div class="border_rounder"></div>
+                                                <img src="{{ asset ('assets/images/home/01.jpg')}}" alt="img">
+                                            </div>
+                                            <div class="thumb-content">
+                                                <h5>Jeffrey</h5>
+                                                <h6 class="d-flex align-items-center"><i
+                                                        class="fa-solid fa-earth-americas"></i> Public <p class="mb-0">6
+                                                        Mintues Ago</p>
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lab-content">
+                                        <form action="#" class="post-form">
+                                            <div class=" px-4 mx-2 py-4">
+                                                <p class="main_text">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                                    elit. Ipsam repudiandae odit dolorum quis laudantium impedit beatae
+                                                    perferendis natus, hic libero sed atque quibusdam possimus error,
+                                                    voluptate est molestiae doloremque necessitatibus illum rerum sunt!
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-xl-6 col-lg-6 col-md-6 mt-3">
+                                                        <img src="{{ asset ('assets/images/about/dating-post-1.jpg')}}" class="w-100"
+                                                            alt="futulove">
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-6 mt-3">
+                                                        <img src="{{ asset ('assets/images/about/dating-post-2.jpg')}}" class="w-100"
+                                                            alt="futulove">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="content-type py-3">
+                                                <ul
+                                                    class="content-list list-unstyled justify-content-between d-flex align-items-center p-0 m-0">
+                                                    <li class="ps-0"><a href="#"><i class="fa-solid fa-thumbs-up"></i><i
+                                                                class="fa-solid fa-heart"></i> <i
+                                                                class="fa-regular fa-face-smile"></i> Hazel, Gary and
+                                                            306 like this </a></li>
+                                                    <li class="justify-content-end d-flex p-0 "><a href="#">136
+                                                            Comments</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="content-type">
+                                                <ul
+                                                    class="content-list list-unstyled d-flex align-items-center p-0 m-0">
+                                                    <li class="ps-0"><a href="#"><i class="fa-solid fa-heart"></i> Like
+                                                        </a></li>
+                                                    <li>
+                                                        <a href="#"><i class="fa-solid fa-comments"></i>Comment</a>
+                                                    </li>
+                                                    <li class="attach-file">
+                                                        <a href="#"><i class="fa-solid fa-share-nodes"></i>Share</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- activity tab end -->
+
+                            <!-- friends tab start -->
+                            <div class="tab-pane fade " id="friends-tab-pane" role="tabpanel"
+                                aria-labelledby="friends-tab" tabindex="0">
+                                <div class="row profile_tabs-main">
+                                    
+                                    {% for ami in amis %}
+                                    
+                                        {% if ami.demandePar.id != profil.id %}
+                                            <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-2">
+                                                <div class="acamic_img">
+                                                    <a href="{{ path ('afficher_profil', {'slug': ami.demandePar.slug}) }}">
+                                                        <img src="{{ ami.demandePar.photoProfile ? asset ('images/photoProfils/' ~ ami.demandePar.photoProfile ) : ('images/photoProfils/default.png')}}" alt="futulove" style="height :300px !important">
+                                                    </a>
+                                                    <div class="customer_details">
+                                                        <h4>{{ ami.demandePar.nom }}</h4>
+                                                        <p>
+                                                            <i class="fa-solid fa-flag"></i> 
+                                                            <img src="{{ ami.demandePar.pays ? asset ('images/drapeaux/' ~ ami.demandePar.pays.drapeau ) : asset ('images/drapeaux/default.jpeg' ) }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                            <i class="fa-solid fa-globe"></i> {{ ami.demandePar.pays ? ami.demandePar.pays.pays :"" }}
+                                                        </p>
+
+                                                        <p style="display: flex !important;">
+                                                            {% if app.user.id == profil.id %}
+                                                                {% if ami.bloque == 0 %}
+                                                                    <button class="btn btn-danger btn-sm block-button" 
+                                                                        data-member-id="{{ ami.demandePar.id }}"
+                                                                        data-csrf-token="{{ csrf_token }}">
+                                                                        {% trans %}Bloquer{% endtrans %}
+                                                                    </button>
+                                                                    {% else %}
+                                                                    <button class="btn btn-success btn-sm unblock-button" 
+                                                                        data-member-id="{{ ami.demandePar.id }}"
+                                                                        data-csrf-token="{{ csrf_token }}">
+                                                                        {% trans %}Débloquer{% endtrans %}
+                                                                    </button>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% else %}
+                                            {% if ami.demandeA.id != profil.id  %}
+                                                <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-0">
+                                                    <div class="acamic_img">
+                                                        <a href="{{ path ('afficher_profil', {'slug': ami.demandeA.slug}) }}">
+                                                            <img src="{{ ami.demandeA.photoProfile ? asset ('images/photoProfils/' ~ ami.demandeA.photoProfile ) : ('images/drapeaux/default.png')}}" style="height :300px !important" alt="futulove">
+                                                        </a>
+                                                        <div class="customer_details">
+                                                            <h4>{{ ami.demandeA.nom }}</h4>
+                                                            <p>
+                                                                <i class="fa-solid fa-flag"></i> 
+                                                                <img src="{{ ami.demandeA.pays ? asset ('images/drapeaux/' ~ ami.demandeA.pays.drapeau ) : asset ('images/drapeaux/default.jpeg') }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                                <i class="fa-solid fa-globe"></i> {{ ami.demandeA.pays ? ami.demandeA.pays.pays : "" }}
+                                                            </p>
+                                                            <p style="display: flex !important;">
+                                                                {% if app.user.id == profil.id %}
+                                                                    {% if ami.bloque == 0 %}
+                                                                        <button class="btn btn-danger btn-sm block-button" 
+                                                                            data-member-id="{{ ami.demandeA.id }}"
+                                                                            data-csrf-token="{{ csrf_token }}">
+                                                                            {% trans %}Bloquer{% endtrans %}
+                                                                        </button>
+                                                                        {% else %}
+                                                                        <button class="btn btn-success btn-sm unblock-button" 
+                                                                            data-member-id="{{ ami.demandeA.id }}"
+                                                                            data-csrf-token="{{ csrf_token }}">
+                                                                            {% trans %}Débloquer{% endtrans %}
+                                                                        </button>
+                                                                    {% endif %}
+                                                                {% endif %}
+
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endif %}
+                                        
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                            <!-- friends tab start -->
+
+                            <!-- friends demande tab start -->
+                            <div class="tab-pane fade " id="friends-demande-tab-pane" role="tabpanel"
+                                aria-labelledby="friends-tab" tabindex="0">
+                                <div class="row profile_tabs-main">
+                                    
+                                    {% for ami in amisDemandes %}
+                                    
+                                        {% if ami.demandePar.id == app.user.id %}
+                                            <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-0">
+                                                <div class="acamic_img">
+                                                    <a href="{{ path ('afficher_profil', {'slug': ami.demandeA.slug}) }}">
+                                                        <img src="{{ ami.demandeA.photoProfile ? asset ('images/photoProfils/' ~ ami.demandeA.photoProfile ) : ('images/photoProfils/default.png')}}" alt="futulove" style="height :300px !important">
+                                                    </a>
+                                                    <div class="customer_details">
+                                                        <h4>{{ ami.demandeA.nom }}</h4>
+                                                        <p>
+                                                            <i class="fa-solid fa-flag"></i> 
+                                                            <img src="{{ ami.demandeA.pays ? asset ('images/drapeaux/' ~ ami.demandeA.pays.drapeau ) : "" }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                            <i class="fa-solid fa-globe"></i> {{ ami.demandeA.pays.pays }}
+                                                        </p>
+                                                        {% if app.user.id == profil.id %}
+                                                            <p style="display: flex !important;">
+                                                                <button class="btn btn-primary btn-sm">{% trans %}Accepter{% endtrans %}</button>
+                                                                <button class="btn btn-danger btn-sm me-2">{% trans %}Refuser{% endtrans %}</button>
+                                                            </p>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-0">
+                                                <div class="acamic_img">
+                                                    <a href="{{ path ('afficher_profil', {'slug': ami.demandePar.slug}) }}">
+                                                        <img src="{{ ami.demandePar.photoProfile ? asset ('images/photoProfils/' ~ ami.demandePar.photoProfile ) : ('images/drapeaux/default.png')}}" style="height :300px !important" alt="futulove">
+                                                    </a>
+                                                    <div class="customer_details">
+                                                        <h4>{{ ami.demandePar.nom }}</h4>
+                                                        <p>
+                                                            <i class="fa-solid fa-flag"></i> 
+                                                            <img src="{{ ami.demandePar.pays ? asset ('images/drapeaux/' ~ ami.demandePar.pays.drapeau ) : asset ('images/drapeaux/default.jpeg' ) }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                            <i class="fa-solid fa-globe"></i> {{ ami.demandePar.pays ? ami.demandePar.pays.pays : "" }}
+                                                        </p>
+                                                        <p style="display: flex !important;">
+                                                            <button id="friend-request-btn" class="btn btn-danger me-2"
+                                                                data-member-id="{{ ami.demandePar.id }}"
+                                                                data-request-status="pending"
+                                                                data-csrf-token="{{ csrf_token }}">
+                                                                <p class="mb-0 text-white">{% trans %}Refuser{% endtrans %}</p>
+                                                            </button>
+
+                                                            <button id="friend-request-btn-accepter" class="btn btn-success"
+                                                                data-member-id="{{ ami.demandePar.id }}"
+                                                                data-request-status="accepter"
+                                                                data-csrf-token="{{ csrf_token }}">
+                                                                <p class="mb-0 text-white">{% trans %}Accepter{% endtrans %}</p>
+                                                            </button>
+                                                            
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                            <!-- friends demande tab start -->
+
+                            <!-- friends bloques tab start -->
+                            <div class="tab-pane fade " id="friends-bloques-tab-pane" role="tabpanel"
+                                aria-labelledby="friends-tab" tabindex="0">
+                                <div class="row profile_tabs-main">
+                                    
+                                     {% for ami in amisBloques %}
+                                    
+                                        {% if ami.demandePar.id == app.user.id %}
+                                            <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-2">
+                                                <div class="acamic_img">
+                                                    <a href="{{ path ('afficher_profil', {'slug': ami.demandeA.slug}) }}">
+                                                        <img src="{{ ami.demandeA.photoProfile ? asset ('images/photoProfils/' ~ ami.demandeA.photoProfile ) : ('images/photoProfils/default.png')}}" alt="futulove" style="height :300px !important">
+                                                    </a>
+                                                    <div class="customer_details">
+                                                        <h4>{{ ami.demandeA.nom }}</h4>
+                                                        <p>
+                                                            <i class="fa-solid fa-flag"></i> 
+                                                            <img src="{{ ami.demandeA.pays ? asset ('images/drapeaux/' ~ ami.demandeA.pays.drapeau ) : "" }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                            <i class="fa-solid fa-globe"></i> {{ ami.demandeA.pays.pays }}
+                                                        </p>
+
+                                                        <p style="display: flex !important;">
+                                                            {% if app.user.id == profil.id %}
+                                                                {% if ami.bloque == 0 %}
+                                                                    <button class="btn btn-danger btn-sm block-button" 
+                                                                        data-member-id="{{ ami.demandeA.id }}"
+                                                                        data-csrf-token="{{ csrf_token }}">
+                                                                        {% trans %}Bloquer{% endtrans %}
+                                                                    </button>
+                                                                    {% else %}
+                                                                    <button class="btn btn-success btn-sm unblock-button" 
+                                                                        data-member-id="{{ ami.demandeA.id }}"
+                                                                        data-csrf-token="{{ csrf_token }}">
+                                                                        {% trans %}Débloquer{% endtrans %}
+                                                                    </button>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mt-md-0">
+                                                <div class="acamic_img">
+                                                    <a href="{{ path ('afficher_profil', {'slug': ami.demandePar.slug}) }}">
+                                                        <img src="{{ ami.demandePar.photoProfile ? asset ('images/photoProfils/' ~ ami.demandePar.photoProfile ) : ('images/drapeaux/default.png')}}" style="height :300px !important" alt="futulove">
+                                                    </a>
+                                                    <div class="customer_details">
+                                                        <h4>{{ ami.demandePar.nom }}</h4>
+                                                        <p>
+                                                            <i class="fa-solid fa-flag"></i> 
+                                                            <img src="{{ ami.demandePar.pays ? asset ('images/drapeaux/' ~ ami.demandePar.pays.drapeau ) : "" }}" alt="futulove" style="width: 30px; height :30px !important">
+                                                            <i class="fa-solid fa-globe"></i> {{ ami.demandePar.pays.pays }}
+                                                        </p>
+                                                        <p style="display: flex !important;">
+                                                            {% if app.user.id == profil.id %}
+                                                                {% if ami.bloque == 0 %}
+                                                                    <button class="btn btn-danger btn-sm block-button" 
+                                                                        data-member-id="{{ ami.demandePar.id }}"
+                                                                        data-csrf-token="{{ csrf_token }}">
+                                                                        {% trans %}Bloquer{% endtrans %}
+                                                                    </button>
+                                                                    {% else %}
+                                                                    <button class="btn btn-success btn-sm unblock-button" 
+                                                                        data-member-id="{{ ami.demandePar.id }}"
+                                                                        data-csrf-token="{{ csrf_token }}">
+                                                                        {% trans %}Débloquer{% endtrans %}
+                                                                    </button>
+                                                                {% endif %}
+                                                            {% endif %}
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        
+                                    {% endfor %}
+                                    
+                                    
+                                </div>
+                            </div>
+                            <!-- friends bloqués tab start -->
+
+                            <!-- invitations groupes tab start -->
+                            <div class="tab-pane fade " id="invitation-tab-pane" role="tabpanel"
+                                aria-labelledby="invitation-tab" tabindex="0">
+                                <div class="row profile_tabs-main">
+                                    
+                                    {% for invitationGroupe in invitationsGroupes %}
+                                        <div class="group-invitation mb-3" id="invitation-groupe-{{ invitationGroupe.groupe.id }}">
+                                            <p>{% trans %}Vous avez été invité à rejoindre le groupe{% endtrans %} : {{ invitationGroupe.groupe.nomGroupe }}</p>
+
+                                            <button class="btn btn-success accepter-invitation-groupe" 
+                                                data-groupe-id="{{ invitationGroupe.groupe.id }}"
+                                                data-user-id="{{ app.user.id }}"
+                                                data-csrf-token="{{ csrf_token }}">
+                                                {% trans %}Accepter{% endtrans %}
+                                            </button>
+                                            <button class="btn btn-danger refuser-invitation-groupe" 
+                                                data-groupe-id="{{ invitationGroupe.groupe.id }}"
+                                                data-user-id="{{ app.user.id }}"
+                                                data-csrf-token="{{ csrf_token }}">
+                                                {% trans %}Refuser{% endtrans %}
+                                            </button>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                            <!-- Invitations groupes tab start -->
+
+                            <!-- groups tabs section start -->
+                            <div class="tab-pane fade" id="Groups-tab-pane" role="tabpanel" aria-labelledby="Groups-tab"
+                                tabindex="0">
+                                {% if app.user.id == profil.id %}
+                                    <a href="{{ path ('creation_groupe') }}">
+                                        <div class="upload_media px-4 mt-4 mb-4">
+                                            <h5 class="mb-0"><i class="fa fa-users me-2"></i> {% trans %}Créer un groupe{% endtrans %}</h5>
+                                        </div>
+                                    </a>
+                                {% endif %}
+                                {% set groupes = profil.groupes|filter(groupe => groupe.supprime == 0) %}
+                                {% for groupe in groupes %}
+                                    <div class="search-widget_post active-group mb-4">
+                                        <div class="widget-content">
+                                            <div class="row align-items-center">
+                                                <div class="col-xl-5 col-lg-4 col-md-5 ">
+                                                    <div class="acamic_img">
+                                                        <div class="profile_img">
+                                                            <img src="{{ asset ('images/photoGroupes/' ~ groupe.photo)}}" alt="futulove">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-xl-7 col-lg-7 col-md-7">
+                                                    <div class="group-item lab-item border-0">
+                                                        <div class="lab-inner d-flex flex-wrap align-items-center ">
+                                                            <div class="lab-content w-100">
+                                                                <h4 class="mb-3">{{ groupe.nomGroupe }}</h4>
+                                                                <p>{{ groupe.description|truncate_40 }}...</p>
+                                                                {% set membreGroupes = groupe.membreGroupes|filter(membre => membre.supprime == 0) %}
+                                                                <ul class="img-stack d-flex p-0">
+                                                                    {% for membreGroupe in membreGroupes|slice(0, 6) %}
+                                                                        <li>
+                                                                            <img src="{{ asset ('images/photoProfils/' ~ membreGroupe.membre.photoProfile ) }}" style="height: 50px; width:50px; border-radius: 50%; object-fit: cover;" alt="member-img">
+                                                                        </li>
+                                                                    {% endfor %}
+                                                                        <li class=" mt-2" style="background-color: #FF1182;">{{ membreGroupes|length - membreGroupes|slice(0, 6)|length }}+</li>
+                                                                </ul>
+                                                                {% if ((amitie is not null) and amitie.statut == 2) or (app.user.id == profil.id) %}
+                                                                    <div class="main_btn mt-4">
+                                                                        <a href="{{ path ('afficher_groupe', {'slug': groupe.slug })}}" class="main_btn"><i
+                                                                                class="fa fa-users me-2"></i> {% trans %}Afficher le groupe{% endtrans %}</a>
+                                                                        <div class="scrolldown-btn">
+                                                                            <svg version="1.1"
+                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                x="0px" y="0px" width="12px" height="50px"
+                                                                                viewBox="0 0 50 80"
+                                                                                enable-background="new 0 0 50 80"
+                                                                                xml:space="preserve">
+                                                                                <path class="first-path" fill="#000"
+                                                                                    d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                                                                </path>
+                                                                                <path class="second-path" fill="#000"
+                                                                                    d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                                                                </path>
+                                                                            </svg>
+                                                                        </div>
+                                                                    </div>
+                                                                {% endif %}
+
+                                                                {% if app.user.id == profil.id %}
+                                                                    <div style="display: flex !important;" class="mt-2">
+                                                                    <a href="{{ path ('modifier_groupe', {'slug': groupe.slug })}}" class="btn btn-primary btn-sm me-2"><i class="fa fa-edit me-2"></i>{% trans %}Modifier{% endtrans %}</a>
+                                                                    <a href="{{ path ('supprimer_groupe', {'id': groupe.id })}}" class="btn btn-danger btn-sm"><i class="fa fa-trash me-2"></i>{% trans %}Supprimer{% endtrans %}</a>
+                                                                    </div>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                    
+
+                            </div>
+                            <!-- groups tabs section end -->
+
+                            <!-- photos tabs section start -->
+                            <div class="tab-pane fade " id="Photos-tab-pane" role="tabpanel"
+                                aria-labelledby="Photos-tab" tabindex="0">
+                                <div class="row profile_tabs-main">
+                                    <div class="main_heading text-center mb-5">
+                                        <h3>
+                                            {% if app.user.id == profil.id %}
+                                                {% trans %}Mes photos{% endtrans %}
+                                                {% else %}
+                                                {% trans %}Ses photos{% endtrans %}
+                                            {% endif %}
+                                        </h3>
+                                        <img src="{{ asset ('assets/images/home/heading-img.png')}}" alt="futulove">
+                                        {% if app.user.id == profil.id %}
+                                            <a href="{{ path ('ajouter_photo') }}">
+                                                <div class="upload_media px-4 mt-4">
+                                                    <h5 class="mb-0"><i class="fa-solid fa-arrow-up-from-bracket"></i> {% trans %}Ajouter une photo{% endtrans %}</h5>
+                                                </div>
+                                            </a>
+                                        {% endif %}
+                                        
+                                    </div>
+
+                                    {% for photo in profil.photos %}
+                                        {% if photo.supprime == 0 %}
+                                            <div class="col-xl-4 col-lg-4 col-md-6 mt-4 mb-2 mt-md-0">
+                                                <div class="acamic_img">
+                                                    <a href="member-single.html">
+                                                        <img src="{{ asset ('images/photoUsers/' ~ photo.nomPhoto ) }}" style="height :300px !important" alt="futulove">
+                                                    </a>
+                                                </div>
+                                                {% if app.user.id == profil.id %}
+                                                    <a href="{{ path ('supprimer_photo', {'idPhoto': photo.id }) }}" class="main-btn btn-sm text-danger">
+                                                        <i class="fa fa-trash me-2"></i> 
+                                                        {% trans %}Supprimer{% endtrans %}
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                            
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                    
+                                </div>
+                            </div>
+                            <!-- photos tabs section end -->
+                        </div>
+                        <!-- all tab section end -->
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-5">
+                    {% if app.user.id == profil.id %}
+                        {% include "includes/_correspondance.html.twig" %}
+                        {% include "includes/_favori.html.twig" %}
+                        {% include "includes/_actualite.html.twig" %}
+                    {% endif %}
+
+                    {% include "includes/_album.html.twig" %}
+
+                    
+
+                            
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- tab activity section end -->
+
+    {# <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js'></script>  #}
+    {# <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script> #}
+    <script src="{{ asset ('js/axios.min.js') }}"></script> 
+    <script src="{{ asset ('js/demandeAmitie.js') }}"></script> 
+    <script src="{{ asset ('js/signalerCompte.js') }}"></script> 
+    <script src="{{ asset ('js/favori.js') }}"></script>
+    <script src="{{ asset ('js/bloquerCompte.js') }}"></script>
+    <script src="{{ asset ('js/accepterInvitationGroupe.js') }}"></script>
+    <script src="{{ asset ('js/bloquerAmitie.js') }}"></script>
+    <script src="{{ asset ('js/suspendreCompte.js') }}"></script>
+    <script src="{{ asset ('js/accepterAmitie.js') }}"></script>
+    <script src="{{ asset ('js/refuserAmitie.js') }}"></script>
+
+{% endblock %}
+
+

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Nouveau mot de passe{% endtrans %}{% endblock %}
+
+{% block body %}
+
+<body style="background-color: #161a2d;">
+
+    <!-- login section start -->
+    <section class="mt-5 pt-5 login_section mb-1">
+        <div class="container">
+            <div class="main_heading text-center mt-4">
+                <h2 class="text-white">
+					<p class="text-center fs-18 text-white">
+						{% trans %}Veuillez saisir le nouveau mot de passe{% endtrans %}
+					</p>
+				</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-10">
+					<div class="login_box">
+						
+						{{form_start(modifierPwForm , {'attr': {'class':'row g-3 needs-validation'}})}}
+                            <div class="form-group"></div>
+                            <div class="input-group mb-4">
+                                <div class="input-group" id="Password-toggle">
+                                    <a href="" class="input-group-text">
+                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                    </a>
+                                    {{form_widget(modifierPwForm.plainPassword,{'attr':{'class':'form-control border-primary'}})}}
+                                </div>
+                            </div>
+
+                            <div class="form-group text-center mb-3">
+                                <button type="submit" class="btn btn-primary btn-lg w-100 br-7">
+                                    <i class="fa fa-unlock me-2"></i> {% trans %}Ré{% endtrans %}
+                                </button>
+                            </div>
+
+                        {{form_end(modifierPwForm)}}
+                        <!-- Show Password -->
+                        {# <script src="{{ asset ('js/bootstrap-show-password.min.js') }}"></script> #}
+        
+					</div>
+                </div>
+            </div>
+        </div>
+    </section>>
+		
+{% endblock %}

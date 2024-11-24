@@ -1,0 +1,471 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}A propos{% endtrans %}{% endblock %}
+
+{% block body %}
+
+    <!-- breadcrumb section start -->
+    <section class="breadcrumb_section">
+        <div class="container">
+            <div class="row">
+                <div class="breadcrumb_content">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="breadcrumb_heading">
+                                <h2>{% trans %}A propos de futulove{% endtrans %}</h2>
+                                <p class="text-white mt-3" style="font-weigth: italic !important;">{% trans %}Futulove.com : Parce que chaque rencontre peut être le début d'une belle histoire.{% endtrans %}</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12">
+                            <div class="breadcrumb_list">
+                                <ul class="d-flex list-unstyled p-0 m-0">
+                                    <li><a href="{{ path ('accueil') }}">{% trans %}Accueil{% endtrans %}</a></li>
+                                    <li>
+                                        <div class="scrolldown-btn">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                            xml:space="preserve">
+                                            <path class="first-path" fill="#ff1182"
+                                            d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                            </path>
+                                            <path class="second-path" fill="#ff1182"
+                                            d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                            </path>
+                                        </svg>
+                                        </div>
+                                    </li>
+                                    <li>{% trans %}A propos de futulove{% endtrans %}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb section end -->
+
+    <!-- services section start -->
+    <section class="pt-4 start_date_section">
+        <div class="container mt-5">
+        <div class="main_heading text-center">
+            <h2>{% trans %}Tout commence par un rendez-vous{% endtrans %}</h2>
+            <img src="{{ asset ('assets/images/home/heading-img.png') }}" alt="futulove">
+            <p class="mt-3">{% trans %}Parce que chaque grande grande aventure commence par un rendez-vous{% endtrans %}</p>
+        </div>
+        <div class="row" id="counter">
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mt-4">
+            <div class="features_box text-center">
+                <div class="features_img">
+                <img src="{{ asset ('assets/images/about/user-1.png') }}" alt="futulove">
+                </div>
+                <div class="d-flex align-items-center justify-content-center coonter">
+                {% set t = total|length %}
+                <h2 class="mb-0 text-white count" data-number="{{t ? t : 10}}">{{t ? t : 10}}</h2>
+                <span class="text-white">+</span>
+                </div>
+                <p class="mb-0">{% trans %}Membres au total{% endtrans %}</p>
+            </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mt-4">
+            <div class="features_box text-center">
+                <div class="features_img">
+                <img src="{{ asset ('assets/images/about/user-2.png') }}" alt="futulove">
+                </div>
+                <div class="d-flex align-items-center justify-content-center coonter">
+                {% set el = enligne|length %}
+                <h2 class="mb-0 text-white count" data-number="{{el ? el : 10}}">{{el ? el : 10}}</h2>
+                <span class="text-white">+</span>
+                </div>
+                <p class="mb-0">{% trans %}Membres en ligne{% endtrans %}</p>
+            </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mt-4">
+            <div class="features_box text-center">
+                <div class="features_img">
+                <img src="{{ asset ('assets/images/about/user-3.png') }}" alt="futulove">
+                </div>
+                <div class="d-flex align-items-center justify-content-center coonter">
+                {% set h = hommes|length %}
+                <h2 class="mb-0 text-white count" data-number="{{h ? h : 10}}">{{h ? h : 10}}</h2>
+                <span class="text-white">+</span>
+                </div>
+                <p class="mb-0">{% trans %}Hommes en ligne{% endtrans %}</p>
+            </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 mt-4">
+            <div class="features_box text-center">
+                <div class="features_img">
+                <img src="{{ asset ('assets/images/about/user-4.png') }}" alt="futulove">
+                </div>
+                <div class="d-flex align-items-center justify-content-center coonter">
+                {% set f = femmes|length %}
+                <h2 class="mb-0 text-white count" data-number="{{f ? f : 10}}">{{f ? f : 10}}</h2>
+                <span class="text-white">+</span>
+                </div>
+                <p class="mb-0">{% trans %}Femmes en ligne{% endtrans %}</p>
+            </div>
+            </div>
+        </div>
+    </section>
+    <!-- services section end -->
+
+    <!-- services section start -->
+    <section class="pt-4 services_section">
+        <div class="container mt-5">
+            <div class="main_heading text-center">
+                <h2>{% trans %}Un site de rencontre fiable{% endtrans %}</h2>
+                <img src="assets/images/home/heading-img.png" alt="futulove">
+                <p class="mt-3">
+                    {% trans %}Avec notre site de rencontres fiable, dites adieu aux doutes.{% endtrans %} <br>
+                    {% trans %}Grâce à des vérifications minutueuses et à une plateforme sécurisée, nous vous offrons
+                    un environnement de confiance pour nouer des relations sincères et durables.{% endtrans %}
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 mt-4">
+                    <div class="services_box">
+                        <div class="services_img">
+                            <img src="{{ asset ('assets/images/home/review.svg') }}" alt="futulove">
+                        </div>
+                        <h4 class="mt-4">{% trans %}Un communauté formidable{% endtrans %}</h4>
+                        <p class="mt-3">
+                            {% trans %}où respect, bienveillance et authenticité sont au coeur des intéractions. Ici chaque 
+                            membre contribue à créer un espace chalereux et accueillant, où de belles connexions se tissent
+                            et des relations sincères naissent. Rejoignez-nous et faites partie d'une communauté qui 
+                            valorise les rencontres vraie et enrichissantes.{% endtrans %}
+                        </p>
+                        <div class="read_more">
+                            <a href="{{ path ('register') }}">{% trans %}Rejoignez-nous{% endtrans %}
+                                <div class="scrolldown-btn">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        x="0px" y="0px" width="10px" height="40px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                        xml:space="preserve">
+                                        <path class="first-path" fill="#ff1182"
+                                        d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                        </path>
+                                        <path class="second-path" fill="#ff1182"
+                                        d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 mt-4">
+                    <div class="services_box">
+                        <div class="services_img">
+                            <img src="{{ asset ('assets/images/home/network.svg') }}" alt="futulove">
+                        </div>
+                        <h4 class="mt-4">{% trans %}Millier de membres{% endtrans %}</h4>
+                        <p class="mt-3">
+                            {% trans %}Découvrer une communauté dynamique avec des milliers de membres prêts à faire de nouvelles rencontres
+                            . Rejoignez des milliers de personnes à la recherche de connexions authentiques et trouver votre compatibiloté 
+                            parmi une vaste diversité de profils. votre prochaine grande rencontre pourrait être à un clic.{% endtrans %}
+                        </p>
+                        <div class="read_more">
+                            <a href="{{ path ('register') }}">{% trans %}Rejoignez-nous{% endtrans %}
+                                <div class="scrolldown-btn">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        x="0px" y="0px" width="10px" height="40px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                        xml:space="preserve">
+                                        <path class="first-path" fill="#ff1182"
+                                        d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                        </path>
+                                        <path class="second-path" fill="#ff1182"
+                                        d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 mt-4">
+                    <div class="services_box">
+                        <div class="services_img">
+                            <img src="{{ asset ('assets/images/home/chat.svg') }}" alt="futulove">
+                        </div>
+                        <h4 class="mt-4">{% trans %}Groupes conviviaux{% endtrans %}</h4>
+                        <p class="mt-3">
+                            {% trans %}Endroit idéal pour échanger, partager et se connecter avec
+                            d'autres membres. Que vous souhaitez discuter de sujets variés, demander des conseils, 
+                            ou simplement faire de nouvelles connaissances, nos groupes offrent un espace chalereux 
+                            et accueillant pour des conversations authentiques et respectueuses.{% endtrans %}
+                        </p>
+                        <div class="read_more">
+                            <a href="{{ path ('register') }}">{% trans %}Rejoignez-nous{% endtrans %}
+                                <div class="scrolldown-btn">
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px" y="0px" width="10px" height="40px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                    xml:space="preserve">
+                                    <path class="first-path" fill="#ff1182"
+                                    d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                    </path>
+                                    <path class="second-path" fill="#ff1182"
+                                    d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                    </path>
+                                </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- services section end -->
+
+    
+    <!-- our features section start -->
+    <section class="mt-5 features_section py-5">
+        <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 col-md-12">
+            <div class="about_content mt-5">
+                <h3 class="d-flex align-items-center">{% trans %}Rencontres{% endtrans %} <span>futulove.com</span> <img
+                    src="assets/images/home/teer-img.png" alt="futulove"></h3>
+                <h2 class="mt-3">{% trans %}Profitez de nos {% endtrans %}<br> <span>{% trans %}spéciales{% endtrans %}</span> {% trans %}caractéristiques{% endtrans %}</h2>
+                <p class="mt-3" style="text-align: justify !important;">
+                    {% trans %}Notre site de rencontres se distingue par une vérification rigoureuse des profils,
+                    assurant que chaque membre est authentique et sérieux dans sa démarche. Nous mettons un point d'honneur
+                    à offrir un environnement où la communication est fluideet agréable, avec des outils intuitifs pour échanger 
+                    et se connecter facilement avec d'autres membres.{% endtrans %}
+                </p>
+                <p style="text-align: justify !important;">
+                    {% trans %}De plus, notre plateforme propose des fonctionnalités haut de gamme pour enrichir 
+                    l'expérience utilisateur, tout en garantissant une sécurité optimale. Chaque intéraction est protégée 
+                    par des protocoles de sécurité avancés, vous permettant de vous concentrer pleinement sur vos rencontres.
+                    Rejoignez-nous une communauté dynamique et connectez-vous avec des milliers de membres prêts à faire de 
+                    nouvelles rencontres{% endtrans %}
+                </p>
+                <div class="main_btn mt-4">
+                <a href="{{ path ('register') }}" class="main_btn">{% trans %}Rejoignez-nous{% endtrans %}</a>
+                <div class="scrolldown-btn">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                    y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                    xml:space="preserve">
+                    <path class="first-path" fill="#000"
+                        d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                    </path>
+                    <path class="second-path" fill="#000"
+                        d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                    </path>
+                    </svg>
+                </div>
+                </div>
+
+            </div>
+            </div>
+            <div class="col-xl-7 col-lg-7 col-md-12">
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                <div class="row">
+                    <div class="col-xl-12  mt-4">
+                        <div class="features_box">
+                            <div class="features_img">
+                            <img src="{{ asset ('assets/images/home/authorization.png') }}" alt="futulove">
+                            </div>
+                            <h4 class="mt-3">{% trans %}Vérification du profil{% endtrans %}</h4>
+                            <p class="mt-2 mb-0">{% trans %}Chaque utilisateur est authentifié, assurant ainsi des 
+                            intéractions sûres et fiables sur la plateforme.{% endtrans %}</p>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-12  mt-4">
+                        <div class="features_box">
+                            <div class="features_img">
+                            <img src="{{ asset ('assets/images/home/speech-bubble.png') }}" alt="futulove">
+                            </div>
+                            <h4 class="mt-3">{% trans %}Communication{% endtrans %}</h4>
+                            <p class="mt-2 mb-0">{% trans %}Elle est simplifiée et intuitive, offrant divers 
+                                outils pour faciliter des échanges authentiques et fluides entre les membres{% endtrans %}</p>
+
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                <div class="row">
+                    <div class="col-xl-12 mt-4">
+                    <div class="features_box">
+                        <div class="features_img">
+                        <img src="{{ asset ('assets/images/home/quality-service.png') }}" alt="futulove">
+                        </div>
+                        <h4 class="mt-3">{% trans %}Fonctionnalités haut de gamme{% endtrans %}</h4>
+                        <p class="mt-2 mb-0">{% trans %}Elles offrent une expérience de rencontre enrichie avec des outils avancés pour maximiser vos chances de trouver le partenaire idéal.{% endtrans %}</p>
+
+                    </div>
+                    </div>
+                    <div class="col-xl-12 mt-4">
+                    <div class="features_box features_box_2">
+                        <div class="features_img">
+                        <img src="{{ asset ('assets/images/home/shield.png') }}" alt="futulove">
+                        </div>
+                        <h4 class="mt-3 text-white">{% trans %}Garantie de sécutité{% endtrans %}</h4>
+                        <p class="mt-2 mb-0">{% trans %}Assure la protection de vos données personnelles et intéractions grâce à des mesures de sécurité avancées.{% endtrans %}</p>
+
+                    </div>
+                    </div>
+                    <div class="col-xl-12 mt-4">
+                    <div class="features_box">
+                        <div class="features_img">
+                        <img src="{{ asset ('assets/images/home/connection.png') }}" alt="futulove">
+                        </div>
+                        <h4 class="mt-3">{% trans %}Se connecter avec près de {% endtrans %}</h4>
+                        <p class="mt-2 mb-0">{% trans %}Rejoignez-nous et connectez-vous avec près de 5000 membres actifs.{% endtrans %}</p>
+
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <!-- our features section end -->
+
+    <!-- about section start -->
+    <section class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12">
+                    <div class="about_img">
+                        <img src="{{ asset ('assets/images/home/guarantee-img.png')}}" alt="futulove">
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12">
+                    <div class="about_content mt-5">
+                        <h3 class="d-flex align-items-center">A propos de <span>Futulove</span> <img
+                            src="{{ asset ('assets/images/home/teer-img.png')}}" alt="futulove"></h3>
+                        <h2 class="mt-3">{% trans %}Trouvez l'amour,{% endtrans %}<span> {% trans %}créez des liens, {% endtrans %}</span> {% trans %}vivez des moments inoubliables.{% endtrans %}</h2>
+                        <p class="mt-3" style="text-align: justify !important;">{% trans %}"Futulove.com, le site de rencontres qui vous aide à trouver votre âme sœur en toute simplicité. Découvrez des profils authentiques, partagez vos passions et connectez-vous avec des personnes qui vous ressemblent. Que vous recherchiez l'amour de votre vie ou de nouvelles amitiés, Futulove est là pour vous accompagner dans cette aventure humaine et enrichissante."{% endtrans %}</p>
+
+                        <div class="row mt-5">
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6">
+                                <div class="about_work">
+                                <img src="{{ asset ('assets/images/home/cloud-computing.png')}}" alt="futulove">
+                                <h2 class="mb-0">90%</h2>
+                                <p>{% trans %}de nos membres sont satisfaits. Découvrez pourquoi !{% endtrans %}</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6">
+                                <div class="about_work">
+                                <img src="{{ asset ('assets/images/home/laptop.svg')}}" alt="futulove">
+                                <h2 class="mb-0">85%</h2>
+                                <p>{% trans %}d'histoires d'amour commencent ici. Ecrivez la vôtre{% endtrans %}</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-6">
+                                <div class="about_work">
+                                <img src="{{ asset ('assets/images/home/relationship.png')}}" alt="futulove">
+                                <h2 class="mb-0">85%</h2>
+                                <p>{% trans %}des utilisateurs ont trouvé l'amour. Vous pouvez être le prochain.{% endtrans %}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about section end -->
+
+    <!-- our happy customer section start -->
+    <section class="our_customer_section mt-5 ">
+        <div class="container">
+            <div class="main_heading ">
+                <h2>{% trans %}Rencontres réussies sur futulove{% endtrans %}</h2>
+                <img src="{{ asset ('assets/images/home/heading-img.png')}}" alt="futulove">
+            </div>
+
+            <div class="swiper mySwiper py-5">
+                <div class="swiper-wrapper pt-4">
+
+                    {% for temoignage in temoignages %}
+                        {% if temoignage.createdBy.photoProfile %}
+                            <div class="swiper-slide">
+                                <div class="acamic_img">
+                                    {% set photos = temoignage.photoTemoignages|filter(photo => photo.supprime == 0) %}
+                                    {% for photo in photos|slice(0, 1) %}
+                                        <img src="{{ asset ('images/photoTemoignages/' ~ photo.photoTemoignage)}}" alt="futulove">
+                                    {% endfor %}
+                                        
+                                    <div class="customer_details">
+                                        <a href="{{ path ('afficher_temoignage', {'slug': temoignage.slug })}}">
+                                            <h4>{{ temoignage.titreTemoignage  }}</h4>
+                                        </a>
+                                        <p><i class="fa-solid fa-calendar-days"></i> {{ temoignage.createdAt|date(' d M Y H:i:s') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                <div class="main_next_prev">
+                    <div class="swiper-button-next">
+                        <div class="main_btn">
+                        <a href="#" class="main_btn">{% trans %}Suiv.{% endtrans %}</a>
+                        <div class="scrolldown-btn">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                            xml:space="preserve">
+                            <path class="first-path" fill="#000"
+                                d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                            </path>
+                            <path class="second-path" fill="#000"
+                                d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                            </path>
+                            </svg>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="swiper-button-prev">
+                        <div class="main_btn">
+                        <div class="scrolldown-btn">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                            xml:space="preserve">
+                            <path class="first-path" fill="#000"
+                                d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                            </path>
+                            <path class="second-path" fill="#000"
+                                d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                            </path>
+                            </svg>
+                        </div>
+                        <a href="#" class="main_btn">{% trans %}Prec.{% endtrans %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- our happy customer section end -->
+
+    <!-- hello friend section start -->
+    <section class="mt-5 pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="about_content mt-5">
+                        <h3 class="d-flex align-items-center">{% trans %}Bonjour{% endtrans %}<span>{% trans %}Mon ami(e){% endtrans %}</span>
+                            <img src="{{ asset ('assets/images/home/teer-img.png') }}" alt="futulove"></h3>
+                        <h2 class="mt-3">{% trans %}Nous sommes là pour susciter l'émotion, {% endtrans %}<span>{% trans %}connecter les gens {% endtrans %}</span> {% trans %}et créer des histoires heureuses.{% endtrans %}</h2>
+                        <p class="mt-3" style="text-align: justify !important;">{% trans %}Chez Futulove.com, nous croyons en la magie des rencontres et à la puissance des connexions humaines. Notre mission est de provoquer des émotions authentiques en vous mettant en relation avec des personnes qui partagent vos passions et vos valeurs. Chaque interaction est une opportunité de créer des liens forts et de vivre des histoires mémorables. Nous sommes là pour transformer chaque rencontre en un moment de bonheur et, peut-être, en une belle histoire d'amour.{% endtrans %}</p>
+
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6">
+                    <div class="about_img datin_img">
+                        <img src="{{ asset ('assets/images/about/01.png')}}" alt="futulove">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- hello friend section end -->
+{% endblock %}

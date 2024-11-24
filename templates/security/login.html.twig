@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% trans %}Connexion site de rencontre sérieux des célibataires - Futulove{% endtrans %}{% endblock %}
+     
+{% block body %}
+<body style="background-color: #161a2d;">
+    {# {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <script>
+                alert('{{ message }}');
+            </script> #}
+            {# <div class="alert alert-{{ label }} alert-dismissible" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="alert-message">
+                    {{ message|raw }}
+                </div>
+            </div> #}
+        {# {% endfor %}
+    {% endfor %} #}
+    <!-- login section start -->
+    <section class="mt-5 pt-5 login_section mb-5">
+        <div class="container">
+            <div class="main_heading text-center mt-4 mb-5">
+                {# <h3 class="text-white">Connexion</h3> #}
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-6 col-md-10">
+                    <div class="login_box">
+                        <div id="route" data-path="{{ path ('compte_actif')}}">
+                            <div class="form-group" id="test" style="display:none;">
+                                <h4 style="color: #E21414 ; text-align: center !important">{% trans %}Votre compte n'est pas activé ! Veuillez l'activer !{% endtrans %}</h4>
+                            </div>
+                        </div>
+                        <form class="account-form" method="post" action="">
+                            {% if error %}
+                                <span style="color: #910000;">
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </span>
+                            {% endif %}
+                            <div class="mb-4">
+                                <label for="Email">Email <span>*</span></label>
+                                <input type="email" id="email" class="form-control" name="email" placeholder="mail@website.com">
+                            
+                            </div>
+                            <div class="mb-4">
+                                <label for="password">{% trans %}Mot de passe{% endtrans %} <span>*</span></label>
+                                <input type="password" name="password" class="form-control" placeholder="********">
+                                
+                            </div>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="forgot_pass">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            {% trans %}Se souvenir de moi{% endtrans %}
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="forgot_pass">
+                                    <a href="{{ path('mot_de_passe_oublie') }}">{% trans %}Mot de passe oublié ?{% endtrans %}</a>
+                                </div>
+                            </div>
+                            <button id="connexion" class="border-0 w-100 login_btn mt-4">Connexion <i class="fa-solid fa-arrow-trend-up"></i></button>
+                        </form>
+                        <div class="other">{% trans %}ou{% endtrans %}</div>
+                        <div class="login-other">
+                            <a class="login-other-item" href="{{ path ('accueil') }}">
+                                <img src="{{ asset ('assets/images/members/google.png')}}" alt="futulove">
+                                <span>Google</span>
+                            </a>
+                            <a class="login-other-item" href="javascript:void();">
+                                <img src="{{ asset ('assets/images/members/facebook.png')}}" alt="futulove">
+                                <span>Facebook</span>
+                            </a>
+                            <a class="login-other-item" href="javascript:void();">
+                                <img src="{{ asset ('assets/images/members/apple.png')}}" alt="futulove">
+                                <span>Apple</span>
+                            </a>
+                        </div>
+                        <div class="no-account text-center">{% trans %}Vous n'avez pas de compte ?{% endtrans %} 
+                            <a class="tf-color" href="{{ path('register') }}">{% trans %}Créer un compte{% endtrans %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- login section end -->
+
+{% endblock %}

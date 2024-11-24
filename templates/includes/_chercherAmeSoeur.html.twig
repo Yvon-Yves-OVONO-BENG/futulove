@@ -1,0 +1,104 @@
+<!-- main form section start -->
+    <section class="form_section mt-5 py-5">
+        <div class="container">
+            <div class="main_heading text-center">
+                <h2 class="text-white">{% trans %}Trouver votre âme-soeur{% endtrans %}</h2>
+                <img src="{{ asset ('assets/images/home/heading-img-2.png') }}" alt="futulove">
+                <p class="mt-3">
+                    {% trans %}Trouver celui ou celle qui va compléter votre histoire.{% endtrans %}
+                </p>
+            </div>
+            <div class="row mb-4">
+                <div class="main_form_box">
+                    <form action="{{ path ('chercher_ame_soeur') }}" method="POST">
+                        <div class="banner__list">
+                            <div class="row align-items-center">
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6">
+                                    <label>{% trans %}Je suis{% endtrans %} <span>*</span></label>
+                                    <div class="banner__inputlist">
+                                        <select required>
+                                            <option value="">{% trans %}Sélectionner{% endtrans %}</option>
+                                            {% for sexe in sexes %}
+                                                <option value="{{ sexe.id }}">{{ sexe.sexe }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6">
+                                    <label>{% trans %}Je cherche{% endtrans %}<span>*</span></label>
+                                    <div class="banner__inputlist" id="country" >
+                                        <select name="sexe" required>
+                                            <option value="">{% trans %}Sélectionner{% endtrans %}</option>
+                                            {% for sexe in sexes %}
+                                                <option value="{{ sexe.id }}">{{ sexe.sexe }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6">
+                                    <label>{% trans %}Âge minimum{% endtrans %} </label>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="banner__inputlist">
+                                                <select id="agemin" name="ageMinimum">
+                                                    <option value="">{% trans %}Sélectionner{% endtrans %}</option>
+                                                    {% for age in ages %}
+                                                        <option value="{{ age.id }}">{{ age.age }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6">
+                                    <label>{% trans %}Âge limite{% endtrans %} </label>
+                                    <div class="row" id="agesup" data-path="{{ path ('chercher_age_sup')}}">
+                                        <div class="col-12">
+                                            <div class="banner__inputlist">
+                                                <select id="agemax" name="ageLimite">
+                                                    <option value="">{% trans %}Sélectionner{% endtrans %}</option>
+                                                    {% for age in ages %}
+                                                        <option value="{{ age.id }}">{{ age.age }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6">
+                                    <label>{% trans %}Pays{% endtrans %} </label>
+                                    <div class="banner__inputlist">
+                                        <select id="country" name="pays">
+                                            <option>{% trans %}Sélectionner{% endtrans %}</option>
+                                            {% for pay in pays %}
+                                                <option value="{{ pay.id }}">{{ pay.pays }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-2 col-md-2">
+                                    <label></label>
+                                    <div class="main_btn Registration_btn">
+                                        <button class="main_btn" type="submit" name="chercher">{% trans %}Chercher{% endtrans %}</button>
+                                        <div class="scrolldown-btn">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            x="0px" y="0px" width="12px" height="50px" viewBox="0 0 50 80" enable-background="new 0 0 50 80"
+                                            xml:space="preserve">
+                                            <path class="first-path" fill="#000"
+                                            d="M24.752,79.182c-0.397,0-0.752-0.154-1.06-0.463L2.207,57.234c-0.306-0.305-0.458-0.656-0.458-1.057                  s0.152-0.752,0.458-1.059l2.305-2.305c0.309-0.309,0.663-0.461,1.06-0.461c0.398,0,0.752,0.152,1.061,0.461l18.119,18.119                  l18.122-18.119c0.306-0.309,0.657-0.461,1.057-0.461c0.402,0,0.753,0.152,1.059,0.461l2.306,2.305                  c0.308,0.307,0.461,0.658,0.461,1.059s-0.153,0.752-0.461,1.057L25.813,78.719C25.504,79.027,25.15,79.182,24.752,79.182z">
+                                            </path>
+                                            <path class="second-path" fill="#000"
+                                            d="M24.752,58.25c-0.397,0-0.752-0.154-1.06-0.463L2.207,36.303c-0.306-0.304-0.458-0.655-0.458-1.057                  c0-0.4,0.152-0.752,0.458-1.058l2.305-2.305c0.309-0.308,0.663-0.461,1.06-0.461c0.398,0,0.752,0.153,1.061,0.461l18.119,18.12                  l18.122-18.12c0.306-0.308,0.657-0.461,1.057-0.461c0.402,0,0.753,0.153,1.059,0.461l2.306,2.305                  c0.308,0.306,0.461,0.657,0.461,1.058c0,0.401-0.153,0.753-0.461,1.057L25.813,57.787C25.504,58.096,25.15,58.25,24.752,58.25z">
+                                            </path>
+                                        </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- main form section end -->
